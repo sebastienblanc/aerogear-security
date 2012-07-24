@@ -20,8 +20,8 @@ package org.jboss.aerogear.security.idm.authorization;
 
 import org.apache.deltaspike.security.api.Identity;
 import org.apache.deltaspike.security.api.authorization.annotation.Secures;
-import org.jboss.aerogear.controller.demo.idm.annotation.CustomSecurityBinding;
-import org.jboss.aerogear.controller.demo.idm.authentication.AuthenticatorManager;
+import org.jboss.aerogear.security.idm.annotation.CustomSecurityBinding;
+import org.jboss.aerogear.security.idm.authentication.AuthenticatorManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
