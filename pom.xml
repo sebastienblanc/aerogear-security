@@ -19,6 +19,16 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <name>Bruno Oliveira</name>
+            <email>bruno@abstractj.org</email>
+            <organization>Red Hat, Inc.</organization>
+            <organizationUrl>http://redhat.com/jboss</organizationUrl>
+            <url>http://abstractj.org</url>
+        </developer>
+    </developers>
+
     <properties>
         <!-- Explicitly declaring the source encoding eliminates the following
        message: -->
@@ -28,9 +38,76 @@
 
         <!-- Define the version of JBoss' Java EE 6 APIs we want to import. Any dependencies from org.jboss.spec will have their
              version defined by this BOM -->
-        <javaee6.bom.version>1.0.0.M3</javaee6.bom.version>
-        <deltaspike.version>0.2-incubating</deltaspike.version>
+        <javaee6.bom.version>1.0.0.Final</javaee6.bom.version>
+        <picketbox.version>5.0.0-2012Sep26</picketbox.version>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.2</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.8.1</version>
+                <configuration>
+                    <show>private</show>
+                    <nohelp>true</nohelp>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jboss.jandex</groupId>
+                <artifactId>jandex-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <execution>
+                        <id>make-index</id>
+                        <goals>
+                            <goal>jandex</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencyManagement>
         <dependencies>
@@ -49,38 +126,23 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
-                <version>1.0.0.CR7</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.1</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
+            <groupId>org.picketbox</groupId>
+            <artifactId>picketbox-core</artifactId>
+            <version>${picketbox.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.jboss.arquillian.protocol</groupId>
-            <artifactId>arquillian-protocol-servlet</artifactId>
-            <scope>test</scope>
+            <groupId>org.picketbox</groupId>
+            <artifactId>picketbox-cdi</artifactId>
+            <version>${picketbox.version}</version>
         </dependency>
 
-        <!-- Import the CDI API, we use provided scope as the API is included
-            in JBoss AS 7 -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
@@ -88,7 +150,7 @@
         </dependency>
 
         <!-- Import the Common Annotations API (JSR-250), we use provided scope
-             as the API is included in JBoss AS 7 -->
+ as the API is included in JBoss -->
         <dependency>
             <groupId>org.jboss.spec.javax.annotation</groupId>
             <artifactId>jboss-annotations-api_1.1_spec</artifactId>
@@ -96,135 +158,89 @@
         </dependency>
 
         <!-- Import the JAX-RS API, we use provided scope as the API is included
-            in JBoss AS 7 -->
+      in JBoss -->
         <dependency>
             <groupId>org.jboss.spec.javax.ws.rs</groupId>
             <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Import the JPA API, we use provided scope as the API is included
+      in JBoss -->
         <dependency>
-            <groupId>org.jboss.aerogear</groupId>
-            <artifactId>aerogear-controller</artifactId>
-            <version>1.0.0.Alpha1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <scope>provided</scope>
         </dependency>
 
+        <!-- Import the EJB API, we use provided scope as the API is included
+      in JBoss -->
         <dependency>
-            <groupId>org.jboss.spec</groupId>
-            <artifactId>jboss-javaee-6.0</artifactId>
-            <version>1.0.0.Final</version>
-            <type>pom</type>
+            <groupId>org.jboss.spec.javax.ejb</groupId>
+            <artifactId>jboss-ejb-api_3.1_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JSR-303 (Bean Validation) Implementation -->
+        <!-- Provides portable constraints such as @Email -->
+        <!-- Hibernate Validator is shipped in JBoss -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.2.0.Final</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Now we declare any tools needed -->
+
+        <!-- Annotation processor to generate the JPA 2.0 metamodel classes
+    for typesafe criteria queries -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+            <version>1.1.1.Final</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.as</groupId>
-            <artifactId>jboss-as-security</artifactId>
-            <version>7.1.1.Final</version>
+            <groupId>org.jboss.spec.javax.servlet</groupId>
+            <artifactId>jboss-servlet-api_3.0_spec</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Needed for running tests (you may also use TestNG) -->
         <dependency>
-            <groupId>org.apache.deltaspike.core</groupId>
-            <artifactId>deltaspike-core-api</artifactId>
-            <version>${deltaspike.version}</version>
-            <scope>compile</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.deltaspike.core</groupId>
-            <artifactId>deltaspike-core-impl</artifactId>
-            <version>${deltaspike.version}</version>
-            <scope>compile</scope>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.9.0</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.deltaspike.modules</groupId>
-            <artifactId>deltaspike-security-module-api</artifactId>
-            <version>${deltaspike.version}</version>
-            <scope>compile</scope>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+            <version>1.9.2</version>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.deltaspike.modules</groupId>
-            <artifactId>deltaspike-security-module-impl</artifactId>
-            <version>${deltaspike.version}</version>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>3.1.0.GA</version>
             <scope>compile</scope>
         </dependency>
 
     </dependencies>
-
-    <build>
-        <!-- Set the name of the war, used as the context root when the app
-      is deployed -->
-        <finalName>${project.artifactId}</finalName>
-        <plugins>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
-                <configuration>
-                    <!-- Java EE 6 doesn't require web.xml, Maven needs to catch
-                   up! -->
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-            <!-- JBoss AS plugin to deploy war -->
-            <plugin>
-                <groupId>org.jboss.as.plugins</groupId>
-                <artifactId>jboss-as-maven-plugin</artifactId>
-                <version>7.1.1.Final</version>
-            </plugin>
-            <!-- Compiler plugin enforces Java 1.6 compatibility and activates
-          annotation processors -->
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.1</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>com.mycila.maven-license-plugin</groupId>
-                <artifactId>maven-license-plugin</artifactId>
-                <version>1.9.0</version>
-                <configuration>
-                    <header>src/etc/license.txt</header>
-                    <includes>
-                        <include>src/**</include>
-                    </includes>
-                    <strictCheck>true</strictCheck>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
-    <profiles>
-        <profile>
-            <id>arq-jbossas-remote</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.jboss.as</groupId>
-                    <artifactId>jboss-as-arquillian-container-remote</artifactId>
-                    <version>7.1.1.Final</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.12</version>
-                        <configuration>
-                            <includes>
-                                <include>**/*IT.java</include>
-                            </includes>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-    
 </project>
