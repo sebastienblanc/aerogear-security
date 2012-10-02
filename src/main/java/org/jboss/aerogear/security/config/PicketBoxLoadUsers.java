@@ -26,6 +26,7 @@ import org.jboss.picketlink.idm.spi.IdentityStore;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
@@ -70,7 +71,7 @@ public class PicketBoxLoadUsers {
      *
      * @author <a href="mailto:psilva@redhat.com">Pedro Silva</a>
      */
-    protected IdentityStore createIdentityStore() {
+    public IdentityStore createIdentityStore() {
         JPAIdentityStore identityStore = new JPAIdentityStore();
 
         JPATemplate jpaTemplate = new JPATemplate();

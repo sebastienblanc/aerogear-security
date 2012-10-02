@@ -16,6 +16,9 @@
  */
 package org.jboss.aerogear.security.config;
 
+import org.jboss.picketlink.idm.internal.JPAIdentityStore;
+import org.jboss.picketlink.idm.internal.jpa.JPATemplate;
+import org.jboss.picketlink.idm.spi.IdentityStore;
 import org.picketbox.cdi.config.CDIConfigurationBuilder;
 import org.picketbox.core.config.ConfigurationBuilder;
 
@@ -61,5 +64,18 @@ public class PicketBoxConfigurer {
                 .inMemorySessionStore();
 
         return builder;
+    }
+
+    @Produces
+    public IdentityStore createIdentityStore() {
+        JPAIdentityStore identityStore = new JPAIdentityStore();
+
+        JPATemplate jpaTemplate = new JPATemplate();
+
+        jpaTemplate.setEntityManager(entityManager);
+
+        identityStore.setJpaTemplate(jpaTemplate);
+
+        return identityStore;
     }
 }
