@@ -6,7 +6,7 @@
 
     <groupId>org.jboss.aerogear</groupId>
     <artifactId>aerogear-security</artifactId>
-    <version>1.0.0.Alpha1-SNAPSHOT</version>
+    <version>0.0.3.M6-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>AeroGear Security</name>
 
@@ -146,7 +146,7 @@
         <dependency>
             <groupId>org.jboss.aerogear</groupId>
             <artifactId>aerogear-controller</artifactId>
-            <version>1.0.0.Alpha1-SNAPSHOT</version>
+            <version>0.0.3.M6-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
