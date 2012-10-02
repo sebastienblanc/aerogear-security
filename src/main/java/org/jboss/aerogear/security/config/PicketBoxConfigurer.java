@@ -18,6 +18,7 @@ package org.jboss.aerogear.security.config;
 
 import org.jboss.picketlink.idm.internal.JPAIdentityStore;
 import org.jboss.picketlink.idm.internal.jpa.JPATemplate;
+import org.jboss.picketlink.idm.spi.IdentityStore;
 import org.picketbox.cdi.config.CDIConfigurationBuilder;
 import org.picketbox.core.config.ConfigurationBuilder;
 
@@ -25,17 +26,19 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  * <p>Bean responsible for producing the {@link org.picketbox.cdi.config.CDIConfigurationBuilder}.</p>
  *
  * @author <a href="mailto:psilva@redhat.com">Pedro Silva</a>
- *
  */
 public class PicketBoxConfigurer {
 
     public static final int TIMEOUT_IN_MINUTES = 30;
-    @Inject
+
+    @Produces
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Inject
@@ -46,38 +49,33 @@ public class PicketBoxConfigurer {
      *
      * @return
      */
+    //TODO must be configurable by user
     @Produces
     public ConfigurationBuilder produceConfiguration() {
-        CDIConfigurationBuilder builder = new CDIConfigurationBuilder(this.beanManager);
+        CDIConfigurationBuilder builder = new CDIConfigurationBuilder(beanManager);
 
         builder
-            .authentication()
+                .authentication()
                 .idmAuthentication()
-            .identityManager()
+                .identityManager()
                 .providedStore()
-            .sessionManager()
+                .sessionManager()
                 .sessionTimeout(TIMEOUT_IN_MINUTES)
                 .inMemorySessionStore();
 
         return builder;
     }
 
-    /**
-     * <p>Produces the {@link org.jboss.picketlink.idm.internal.JPAIdentityStore} that will be used by the PicketLink IDM {@link org.jboss.picketlink.idm.IdentityManager}.</p>
-     * 
-     * @return
-     */
     @Produces
-    public JPAIdentityStore produceIdentityStore() {
+    public IdentityStore createIdentityStore() {
         JPAIdentityStore identityStore = new JPAIdentityStore();
 
-        JPATemplate template = new JPATemplate();
+        JPATemplate jpaTemplate = new JPATemplate();
 
-        template.setEntityManager(this.entityManager);
+        jpaTemplate.setEntityManager(entityManager);
 
-        identityStore.setJpaTemplate(template);
+        identityStore.setJpaTemplate(jpaTemplate);
 
         return identityStore;
     }
-    
 }

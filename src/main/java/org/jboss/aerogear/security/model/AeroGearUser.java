@@ -15,15 +15,14 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.dsl;
+package org.jboss.aerogear.security.model;
 
-import org.jboss.aerogear.security.model.AeroGearUser;
+import org.jboss.picketlink.idm.model.AbstractIdentityType;
+import org.jboss.picketlink.idm.model.User;
 
-public interface IDMHelper {
+public abstract class AeroGearUser extends AbstractIdentityType implements User {
 
-    GrantMethods grant(String... roles);
+    public abstract String getPassword();
 
-    public static interface GrantMethods {
-        void to(AeroGearUser user);
-    }
+    public abstract void setPassword(String password);
 }
