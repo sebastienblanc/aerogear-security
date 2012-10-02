@@ -52,10 +52,10 @@ public class GrantConfiguration implements IDMHelper.GrantMethods {
     @Override
     public void to(AeroGearUser user) {
 
-        User picketLinkUser = identityManager.createUser(user.getUsername());
+        User picketLinkUser = identityManager.createUser(user.getId());
         user.setEmail(picketLinkUser.getEmail());
-        user.setFirstname(picketLinkUser.getFirstName());
-        user.setLastname(picketLinkUser.getLastName());
+        user.setFirstName(picketLinkUser.getFirstName());
+        user.setLastName(picketLinkUser.getLastName());
 
         identityManager.updatePassword(picketLinkUser, user.getPassword());
 
