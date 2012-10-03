@@ -17,26 +17,26 @@
 
 package org.jboss.aerogear.security.exception;
 
-import javax.ws.rs.core.Response;
+import javax.servlet.http.HttpServletResponse;
 
 public enum ExceptionMessage {
 
-    AUTHENTICATION_FAILED("User authentication failed", Response.Status.UNAUTHORIZED);
+    AUTHENTICATION_FAILED("User authentication failed", HttpServletResponse.SC_UNAUTHORIZED);
 
     private String message;
 
-    private Response.Status status;
+    private int status;
 
     ExceptionMessage(String message) {
         this.message = message;
     }
 
-    ExceptionMessage(String message, Response.Status status) {
+    ExceptionMessage(String message, int status) {
         this.message = message;
         this.status = status;
     }
 
-    public Response.Status getStatus() {
+    public int getStatus() {
         return status;
     }
 
