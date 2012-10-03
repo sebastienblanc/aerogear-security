@@ -18,7 +18,6 @@
 package org.jboss.aerogear.security.dsl;
 
 import org.jboss.picketlink.cdi.Identity;
-import org.jboss.picketlink.cdi.credential.Credential;
 import org.jboss.picketlink.cdi.credential.LoginCredentials;
 import org.picketbox.core.authentication.credential.UsernamePasswordCredential;
 
@@ -26,7 +25,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-public class AuthenticationManagerImpl implements Credential {
+public class AuthenticationManagerImpl implements AuthenticationManager {
 
     private String username;
     private String password;

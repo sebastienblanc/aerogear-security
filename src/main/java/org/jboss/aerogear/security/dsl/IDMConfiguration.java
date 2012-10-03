@@ -17,18 +17,13 @@
 
 package org.jboss.aerogear.security.dsl;
 
+import org.jboss.aerogear.security.model.AeroGearUser;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+public interface IDMConfiguration {
 
-@ApplicationScoped
-public class IDMHelperImpl implements IDMHelper {
+    GrantMethods grant(String... roles);
 
-    @Inject
-    private GrantConfiguration grantConfiguration;
-
-    @Override
-    public GrantMethods grant(String... roles) {
-        return grantConfiguration.roles(roles);
+    public static interface GrantMethods {
+        void to(AeroGearUser user);
     }
 }

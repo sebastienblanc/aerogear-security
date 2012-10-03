@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
-public class GrantConfiguration implements IDMHelper.GrantMethods {
+public class GrantConfiguration implements IDMConfiguration.GrantMethods {
 
     @Inject
     private IdentityManager identityManager;
