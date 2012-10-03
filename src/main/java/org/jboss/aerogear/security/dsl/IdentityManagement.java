@@ -19,7 +19,7 @@ package org.jboss.aerogear.security.dsl;
 
 import org.jboss.aerogear.security.model.AeroGearUser;
 
-public interface IDMConfiguration {
+public interface IdentityManagement {
 
     GrantMethods grant(String... roles);
 

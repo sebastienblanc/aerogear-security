@@ -17,6 +17,7 @@
 
 package org.jboss.aerogear.security.dsl;
 
+import org.jboss.aerogear.security.model.AeroGearUser;
 import org.jboss.picketlink.cdi.Identity;
 import org.jboss.picketlink.cdi.credential.LoginCredentials;
 import org.picketbox.core.authentication.credential.UsernamePasswordCredential;
@@ -27,8 +28,7 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class AuthenticationManagerImpl implements AuthenticationManager {
 
-    private String username;
-    private String password;
+    private AeroGearUser user;
 
     @Inject
     private LoginCredentials credential;
@@ -36,14 +36,13 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     @Inject
     private Identity identity;
 
-    public boolean login(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public boolean login(AeroGearUser user) {
 
+        this.user = user;
         credential.setCredential(this);
-        this.identity.login();
+        identity.login();
 
-        if (!this.identity.isLoggedIn())
+        if (!identity.isLoggedIn())
 //            HttpSecurityException.violation("Invalid credentials");
             return false;
 
@@ -59,6 +58,6 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
 
     @Override
     public Object getValue() {
-        return new UsernamePasswordCredential(username, password);
+        return new UsernamePasswordCredential(user.getId(), user.getPassword());
     }
 }

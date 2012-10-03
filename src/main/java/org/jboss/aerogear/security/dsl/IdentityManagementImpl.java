@@ -22,7 +22,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-public class IDMConfigurationImpl implements IDMConfiguration {
+public class IdentityManagementImpl implements IdentityManagement {
 
     @Inject
     private GrantConfiguration grantConfiguration;
