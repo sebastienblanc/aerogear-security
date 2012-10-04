@@ -1,14 +1,10 @@
 package org.jboss.aerogear.security.exception;
 
-import org.jboss.aerogear.controller.spi.HttpSecurityException;
+import org.jboss.aerogear.controller.spi.HttpStatusAwareException;
 
-import javax.servlet.ServletException;
-
-public class AeroGearSecurityException extends ServletException implements HttpSecurityException {
+public class AeroGearSecurityException extends RuntimeException implements HttpStatusAwareException {
 
     private int status;
-
-    public AeroGearSecurityException(){}
 
     public AeroGearSecurityException(String message, int status) {
         super(message);
