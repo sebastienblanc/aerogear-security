@@ -23,7 +23,7 @@ public interface IdentityManagement {
 
     GrantMethods grant(String... roles);
 
-    public static interface GrantMethods {
+    static interface GrantMethods {
         void to(AeroGearUser user);
     }
 }

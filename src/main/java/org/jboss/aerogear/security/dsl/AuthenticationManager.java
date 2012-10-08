@@ -5,6 +5,7 @@ import org.jboss.picketlink.cdi.credential.Credential;
 
 public interface AuthenticationManager extends Credential {
 
-    public boolean login(AeroGearUser user);
-    public void logout();
+    boolean login(AeroGearUser user);
+
+    void logout();
 }

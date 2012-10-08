@@ -43,7 +43,6 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         identity.login();
 
         if (!identity.isLoggedIn())
-//            HttpSecurityException.violation("Invalid credentials");
             return false;
 
         return true;

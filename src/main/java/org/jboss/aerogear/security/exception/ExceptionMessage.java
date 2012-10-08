@@ -19,6 +19,7 @@ package org.jboss.aerogear.security.exception;
 
 import javax.servlet.http.HttpServletResponse;
 
+//TODO must be improved
 public enum ExceptionMessage {
 
     AUTHENTICATION_FAILED("User authentication failed", HttpServletResponse.SC_UNAUTHORIZED);
