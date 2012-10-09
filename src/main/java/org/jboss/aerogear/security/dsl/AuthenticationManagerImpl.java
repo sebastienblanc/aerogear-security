@@ -17,6 +17,7 @@
 
 package org.jboss.aerogear.security.dsl;
 
+import org.jboss.aerogear.security.exception.AeroGearSecurityException;
 import org.jboss.aerogear.security.model.AeroGearUser;
 import org.jboss.picketlink.cdi.Identity;
 import org.jboss.picketlink.cdi.credential.LoginCredentials;
@@ -24,6 +25,8 @@ import org.picketbox.core.authentication.credential.UsernamePasswordCredential;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+
+import static org.jboss.aerogear.security.exception.ExceptionMessage.AUTHENTICATION_FAILED;
 
 @ApplicationScoped
 public class AuthenticationManagerImpl implements AuthenticationManager {
@@ -43,7 +46,7 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         identity.login();
 
         if (!identity.isLoggedIn())
-            return false;
+            throw new AeroGearSecurityException(AUTHENTICATION_FAILED.toString(), AUTHENTICATION_FAILED.getStatus());
 
         return true;
 
