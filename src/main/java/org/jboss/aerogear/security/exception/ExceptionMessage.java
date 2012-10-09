@@ -46,4 +46,11 @@ public enum ExceptionMessage {
         return String.format("{message : %s }", message);
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void throwException() {
+        throw new AeroGearSecurityException(message, status);
+    }
 }
