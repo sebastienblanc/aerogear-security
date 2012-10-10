@@ -16,7 +16,7 @@ public class AeroGearSecurityProvider implements SecurityProvider {
     @Override
     public void isRouteAllowed(Route route) throws ServletException {
 
-        if (!user.isLoggedIn() || !user.hasRoles(route.getRoles())) {
+        if (!user.hasRoles(route.getRoles())) {
             ExceptionMessage.AUTHENTICATION_FAILED.throwException();
         }
     }

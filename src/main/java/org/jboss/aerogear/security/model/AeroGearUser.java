@@ -36,16 +36,11 @@ public abstract class AeroGearUser extends AbstractIdentityType implements User 
 
     public boolean hasRoles(Set<String> roles) {
         boolean hasRoles = false;
-        PicketBoxUser user = (PicketBoxUser) identity.getUser();
+        PicketBoxUser picketBoxUser = (PicketBoxUser) identity.getUser();
 
-        if (user != null) {
-            hasRoles = user.getSubject().getRoleNames().containsAll(roles);
+        if (picketBoxUser != null && identity.isLoggedIn()) {
+            hasRoles = picketBoxUser.getSubject().getRoleNames().containsAll(roles);
         }
         return hasRoles;
     }
-
-    public boolean isLoggedIn() {
-        return identity.isLoggedIn();
-    }
-
 }

@@ -34,8 +34,6 @@ public class AeroGearSecurityProviderTest {
         Set<String> roles = new HashSet<String>(Arrays.asList("manager", "developer"));
         when(route.getRoles()).thenReturn(roles);
         when(user.hasRoles(roles)).thenReturn(true);
-        when(user.isLoggedIn()).thenReturn(true);
-
     }
 
     @Test
@@ -47,12 +45,6 @@ public class AeroGearSecurityProviderTest {
     public void testIsRouteNotAllowed() throws Exception {
         Set<String> roles = new HashSet<String>(Arrays.asList("guest"));
         when(route.getRoles()).thenReturn(roles);
-        provider.isRouteAllowed(route);
-    }
-
-    @Test(expected = AeroGearSecurityException.class)
-    public void testUserNotLoggedIn() throws Exception {
-        when(user.isLoggedIn()).thenReturn(false);
         provider.isRouteAllowed(route);
     }
 }
