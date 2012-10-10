@@ -2,6 +2,7 @@ package org.jboss.aerogear.security.spi;
 
 import org.jboss.aerogear.controller.router.Route;
 import org.jboss.aerogear.security.exception.AeroGearSecurityException;
+import org.jboss.aerogear.security.model.AeroGearUser;
 import org.jboss.picketlink.cdi.Identity;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,29 +24,22 @@ public class AeroGearSecurityProviderTest {
     @Mock
     private Route route;
     @Mock
-    private Identity identity;
-    @Mock
-    private PicketBoxUser picketBoxUser;
-    @Mock
-    private PicketBoxCDISubject picketBoxSubject;
+    private AeroGearUser user;
     @InjectMocks
     private AeroGearSecurityProvider provider = new AeroGearSecurityProvider();
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        List<String> roles = Arrays.asList("manager", "developer");
-        when(picketBoxSubject.getRoleNames()).thenReturn(roles);
-        when(picketBoxUser.getSubject()).thenReturn(picketBoxSubject);
-        when(identity.getUser()).thenReturn(picketBoxUser);
-        when(identity.isLoggedIn()).thenReturn(true);
+        Set<String> roles = new HashSet<String>(Arrays.asList("manager", "developer"));
+        when(route.getRoles()).thenReturn(roles);
+        when(user.hasRoles(roles)).thenReturn(true);
+        when(user.isLoggedIn()).thenReturn(true);
 
     }
 
     @Test
     public void testIsRouteAllowed() throws Exception {
-        Set<String> roles = new HashSet<String>(Arrays.asList("manager"));
-        when(route.getRoles()).thenReturn(roles);
         provider.isRouteAllowed(route);
     }
 
@@ -58,7 +52,7 @@ public class AeroGearSecurityProviderTest {
 
     @Test(expected = AeroGearSecurityException.class)
     public void testUserNotLoggedIn() throws Exception {
-        when(identity.isLoggedIn()).thenReturn(false);
+        when(user.isLoggedIn()).thenReturn(false);
         provider.isRouteAllowed(route);
     }
 }

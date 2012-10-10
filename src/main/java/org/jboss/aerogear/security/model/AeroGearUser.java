@@ -17,12 +17,35 @@
 
 package org.jboss.aerogear.security.model;
 
+import org.jboss.picketlink.cdi.Identity;
 import org.jboss.picketlink.idm.model.AbstractIdentityType;
 import org.jboss.picketlink.idm.model.User;
+import org.picketbox.cdi.PicketBoxUser;
+
+import javax.inject.Inject;
+import java.util.Set;
 
 public abstract class AeroGearUser extends AbstractIdentityType implements User {
+
+    @Inject
+    private Identity identity;
 
     public abstract String getPassword();
 
     public abstract void setPassword(String password);
+
+    public boolean hasRoles(Set<String> roles) {
+        boolean hasRoles = false;
+        PicketBoxUser user = (PicketBoxUser) identity.getUser();
+
+        if (user != null) {
+            hasRoles = user.getSubject().getRoleNames().containsAll(roles);
+        }
+        return hasRoles;
+    }
+
+    public boolean isLoggedIn() {
+        return identity.isLoggedIn();
+    }
+
 }
