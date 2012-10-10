@@ -1,6 +1,7 @@
 package org.jboss.aerogear.security.spi;
 
 import org.jboss.aerogear.controller.router.Route;
+import org.jboss.aerogear.security.exception.AeroGearSecurityException;
 import org.jboss.picketlink.cdi.Identity;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,12 +11,11 @@ import org.mockito.MockitoAnnotations;
 import org.picketbox.cdi.PicketBoxCDISubject;
 import org.picketbox.cdi.PicketBoxUser;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 public class AeroGearSecurityProviderTest {
@@ -44,21 +44,20 @@ public class AeroGearSecurityProviderTest {
 
     @Test
     public void testIsRouteAllowed() throws Exception {
-        String[] roles = new String[]{"manager"};
+        Set<String> roles = new HashSet<String>(Arrays.asList("manager"));
         when(route.getRoles()).thenReturn(roles);
-        assertTrue(provider.isRouteAllowed(route));
+
     }
 
     @Test
     public void testIsRouteNotAllowed() throws Exception {
-        String[] roles = new String[]{"guest"};
+        Set<String> roles = new HashSet<String>(Arrays.asList("guest"));
         when(route.getRoles()).thenReturn(roles);
-        assertFalse(provider.isRouteAllowed(route));
     }
 
-    @Test
+    @Test(expected = AeroGearSecurityException.class)
     public void testUserNotLoggedIn() throws Exception {
         when(identity.isLoggedIn()).thenReturn(false);
-        assertFalse(provider.isRouteAllowed(route));
+        provider.isRouteAllowed(route);
     }
 }
