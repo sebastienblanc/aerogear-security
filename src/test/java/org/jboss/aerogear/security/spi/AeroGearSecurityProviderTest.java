@@ -46,13 +46,14 @@ public class AeroGearSecurityProviderTest {
     public void testIsRouteAllowed() throws Exception {
         Set<String> roles = new HashSet<String>(Arrays.asList("manager"));
         when(route.getRoles()).thenReturn(roles);
-
+        provider.isRouteAllowed(route);
     }
 
-    @Test
+    @Test(expected = AeroGearSecurityException.class)
     public void testIsRouteNotAllowed() throws Exception {
         Set<String> roles = new HashSet<String>(Arrays.asList("guest"));
         when(route.getRoles()).thenReturn(roles);
+        provider.isRouteAllowed(route);
     }
 
     @Test(expected = AeroGearSecurityException.class)

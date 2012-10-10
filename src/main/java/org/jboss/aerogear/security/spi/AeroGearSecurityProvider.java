@@ -8,7 +8,6 @@ import org.picketbox.cdi.PicketBoxUser;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
-import java.util.Set;
 
 public class AeroGearSecurityProvider implements SecurityProvider {
 
@@ -19,11 +18,19 @@ public class AeroGearSecurityProvider implements SecurityProvider {
     public void isRouteAllowed(Route route) throws ServletException {
 
         PicketBoxUser user = (PicketBoxUser) identity.getUser();
-        Set<String> roles = route.getRoles();
-        boolean hasRoles = user.getSubject().getRoleNames().containsAll(roles);
+        boolean hasRoles = hasRoles(user, route);
 
         if (!identity.isLoggedIn() || !hasRoles) {
             ExceptionMessage.AUTHENTICATION_FAILED.throwException();
         }
+    }
+
+    //TODO must to be refactored
+    private boolean hasRoles(PicketBoxUser user, Route route) {
+        boolean hasRoles = false;
+        if (user != null && route != null) {
+            hasRoles = user.getSubject().getRoleNames().containsAll(route.getRoles());
+        }
+        return hasRoles;
     }
 }
