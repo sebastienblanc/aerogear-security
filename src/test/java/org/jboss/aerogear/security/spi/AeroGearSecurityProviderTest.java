@@ -3,18 +3,14 @@ package org.jboss.aerogear.security.spi;
 import org.jboss.aerogear.controller.router.Route;
 import org.jboss.aerogear.security.exception.AeroGearSecurityException;
 import org.jboss.aerogear.security.model.AeroGearUser;
-import org.jboss.picketlink.cdi.Identity;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.picketbox.cdi.PicketBoxCDISubject;
-import org.picketbox.cdi.PicketBoxUser;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.mockito.Mockito.when;

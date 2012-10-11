@@ -16,17 +16,13 @@
  */
 package org.jboss.aerogear.security.config;
 
-import org.jboss.picketlink.idm.internal.JPAIdentityStore;
-import org.jboss.picketlink.idm.internal.jpa.JPATemplate;
-import org.jboss.picketlink.idm.spi.IdentityStore;
-import org.picketbox.cdi.config.CDIConfigurationBuilder;
+import org.picketbox.core.authentication.impl.OTPAuthenticationMechanism;
 import org.picketbox.core.config.ConfigurationBuilder;
+import org.picketlink.idm.IdentityManager;
+import org.picketlink.idm.internal.jpa.JPATemplate;
 
 import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 /**
  * <p>Bean responsible for producing the {@link org.picketbox.cdi.config.CDIConfigurationBuilder}.</p>
@@ -37,12 +33,14 @@ public class PicketBoxConfigurer {
 
     public static final int TIMEOUT_IN_MINUTES = 30;
 
-    @Produces
-    @PersistenceContext
-    private EntityManager entityManager;
+    @Inject
+    private JPATemplate jpaTemplate;
 
     @Inject
-    private BeanManager beanManager;
+    private IdentityManager identityManager;
+
+    @Inject
+    private OTPAuthenticationMechanism otpAuthenticationMechanism;
 
     /**
      * <p>Produces the {@link org.picketbox.core.config.ConfigurationBuilder}.</p>
@@ -52,30 +50,21 @@ public class PicketBoxConfigurer {
     //TODO must be configurable by user
     @Produces
     public ConfigurationBuilder produceConfiguration() {
-        CDIConfigurationBuilder builder = new CDIConfigurationBuilder(beanManager);
+        ConfigurationBuilder builder = new ConfigurationBuilder();
 
         builder
                 .authentication()
-                .idmAuthentication()
-                .identityManager()
-                .providedStore()
                 .sessionManager()
                 .sessionTimeout(TIMEOUT_IN_MINUTES)
                 .inMemorySessionStore();
 
+        builder.authentication().mechanism(otpAuthenticationMechanism);
+
+        // configure the identity manager using a JPA-based identity store.
+        builder
+                .identityManager()
+                .jpaStore().template(this.jpaTemplate);
+
         return builder;
-    }
-
-    @Produces
-    public IdentityStore createIdentityStore() {
-        JPAIdentityStore identityStore = new JPAIdentityStore();
-
-        JPATemplate jpaTemplate = new JPATemplate();
-
-        jpaTemplate.setEntityManager(entityManager);
-
-        identityStore.setJpaTemplate(jpaTemplate);
-
-        return identityStore;
     }
 }
