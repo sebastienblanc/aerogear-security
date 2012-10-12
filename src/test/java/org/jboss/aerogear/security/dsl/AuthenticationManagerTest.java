@@ -2,13 +2,13 @@ package org.jboss.aerogear.security.dsl;
 
 import org.jboss.aerogear.security.exception.AeroGearSecurityException;
 import org.jboss.aerogear.security.model.AeroGearUser;
-import org.jboss.picketlink.cdi.Identity;
-import org.jboss.picketlink.cdi.credential.LoginCredentials;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.picketbox.cdi.PicketBoxIdentity;
+import org.picketlink.cdi.credential.LoginCredentials;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
@@ -19,9 +19,9 @@ public class AuthenticationManagerTest {
     @Mock
     private AeroGearUser aeroGearUser;
     @Mock
-    private LoginCredentials loginCredentials;
+    private PicketBoxIdentity picketBoxIdentity;
     @Mock
-    private Identity identity;
+    private LoginCredentials loginCredentials;
 
     @InjectMocks
     private AuthenticationManager authenticationManager = new AuthenticationManagerImpl();
@@ -33,20 +33,20 @@ public class AuthenticationManagerTest {
 
     @Test
     public void testLogin() throws Exception {
-        when(identity.isLoggedIn()).thenReturn(true);
+        when(picketBoxIdentity.isLoggedIn()).thenReturn(true);
         assertTrue(authenticationManager.login(aeroGearUser));
     }
 
     @Test(expected = AeroGearSecurityException.class)
     public void testInvalidLogin() throws Exception {
-        when(identity.isLoggedIn()).thenReturn(false);
+        when(picketBoxIdentity.isLoggedIn()).thenReturn(false);
         authenticationManager.login(aeroGearUser);
     }
 
     @Test
     public void testLogout() throws Exception {
-        when(identity.isLoggedIn()).thenReturn(true);
+        when(picketBoxIdentity.isLoggedIn()).thenReturn(true);
         authenticationManager.logout();
-        verify(identity).logout();
+        verify(picketBoxIdentity).logout();
     }
 }

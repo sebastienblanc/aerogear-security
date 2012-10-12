@@ -1,15 +1,13 @@
 package org.jboss.aerogear.security.model;
 
-import org.jboss.picketlink.cdi.Identity;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.picketbox.cdi.PicketBoxCDISubject;
-import org.picketbox.cdi.PicketBoxUser;
+import org.picketbox.cdi.PicketBoxIdentity;
+import org.picketbox.core.UserContext;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -24,22 +22,19 @@ public class AeroGearUserTest {
     @InjectMocks
     private AeroGearUser aeroGearUser = new SampleAeroGearUser();
     @Mock
-    private PicketBoxUser picketBoxUser;
+    private PicketBoxIdentity picketBoxIdentity;
     @Mock
-    private PicketBoxCDISubject picketBoxSubject;
-    @Mock
-    private Identity identity;
+    private UserContext userContext;
 
-    private List<String> roleNames = new ArrayList<String>();
+    private List<String> roleNames = Arrays.asList("manager", "developer");
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        roleNames = Arrays.asList("manager", "developer");
-        when(picketBoxSubject.getRoleNames()).thenReturn(roleNames);
-        when(picketBoxUser.getSubject()).thenReturn(picketBoxSubject);
-        when(identity.getUser()).thenReturn(picketBoxUser);
-        when(identity.isLoggedIn()).thenReturn(true);
+
+        when(userContext.getRoleNames()).thenReturn(roleNames);
+        when(picketBoxIdentity.isLoggedIn()).thenReturn(true);
+        when(picketBoxIdentity.getUserContext()).thenReturn(userContext);
     }
 
     @Test
@@ -57,14 +52,7 @@ public class AeroGearUserTest {
     @Test
     public void testUserNotLoggedIn() throws Exception {
         Set<String> roles = new HashSet<String>(roleNames);
-        when(identity.isLoggedIn()).thenReturn(false);
-        assertFalse(aeroGearUser.hasRoles(roles));
-    }
-
-    @Test
-    public void testUserIsNull() throws Exception {
-        Set<String> roles = new HashSet<String>(roleNames);
-        when(identity.getUser()).thenReturn(null);
+        when(picketBoxIdentity.isLoggedIn()).thenReturn(false);
         assertFalse(aeroGearUser.hasRoles(roles));
     }
 }

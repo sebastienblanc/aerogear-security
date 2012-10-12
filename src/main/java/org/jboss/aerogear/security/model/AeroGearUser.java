@@ -34,11 +34,13 @@ public abstract class AeroGearUser extends AbstractIdentityType implements User 
     public abstract void setPassword(String password);
 
     public boolean hasRoles(Set<String> roles) {
+
         boolean hasRoles = false;
 
         if (identity.isLoggedIn()) {
-            hasRoles = identity.getUserContext().getRoles().containsAll(roles);
+            hasRoles = identity.getUserContext().getRoleNames().containsAll(roles);
         }
+
         return hasRoles;
     }
 }
