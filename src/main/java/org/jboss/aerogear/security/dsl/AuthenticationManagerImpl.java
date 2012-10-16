@@ -21,7 +21,8 @@ import org.jboss.aerogear.security.exception.ExceptionMessage;
 import org.jboss.aerogear.security.model.AeroGearUser;
 import org.picketbox.cdi.PicketBoxIdentity;
 import org.picketbox.core.authentication.credential.UsernamePasswordCredential;
-import org.picketlink.cdi.credential.LoginCredentials;
+import org.picketlink.credential.LoginCredentials;
+
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

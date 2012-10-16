@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.picketbox.cdi.PicketBoxIdentity;
-import org.picketlink.cdi.credential.LoginCredentials;
+import org.picketlink.credential.LoginCredentials;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
