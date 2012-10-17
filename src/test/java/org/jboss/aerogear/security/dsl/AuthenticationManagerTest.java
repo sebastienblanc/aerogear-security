@@ -1,5 +1,7 @@
 package org.jboss.aerogear.security.dsl;
 
+import org.jboss.aerogear.security.auth.AuthenticationManager;
+import org.jboss.aerogear.security.auth.AuthenticationManagerImpl;
 import org.jboss.aerogear.security.exception.AeroGearSecurityException;
 import org.jboss.aerogear.security.model.AeroGearUser;
 import org.junit.Before;

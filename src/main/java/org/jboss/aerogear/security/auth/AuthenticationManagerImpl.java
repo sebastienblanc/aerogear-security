@@ -15,9 +15,8 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.dsl;
+package org.jboss.aerogear.security.auth;
 
-import org.jboss.aerogear.security.auth.CredentialProvider;
 import org.jboss.aerogear.security.exception.ExceptionMessage;
 import org.jboss.aerogear.security.model.AeroGearUser;
 import org.picketbox.cdi.PicketBoxIdentity;
@@ -45,7 +44,6 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
 
         identity.login();
 
-        System.out.println("Ta logado? " + identity.isLoggedIn());
         if (!identity.isLoggedIn())
             ExceptionMessage.AUTHENTICATION_FAILED.throwException();
 

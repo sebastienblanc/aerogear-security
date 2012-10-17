@@ -1,4 +1,4 @@
-package org.jboss.aerogear.security.dsl;
+package org.jboss.aerogear.security.auth;
 
 import org.jboss.aerogear.security.auth.CredentialProvider;
 import org.jboss.aerogear.security.model.AeroGearUser;

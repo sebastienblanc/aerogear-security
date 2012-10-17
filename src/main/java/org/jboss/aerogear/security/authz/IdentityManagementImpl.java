@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.dsl;
+package org.jboss.aerogear.security.authz;
 
 
 import javax.enterprise.context.ApplicationScoped;
