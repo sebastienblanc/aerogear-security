@@ -6,19 +6,17 @@ import org.picketlink.credential.LoginCredentials;
 
 import javax.inject.Inject;
 
-public class OtpAuthenticationScheme implements AuthenticationScheme {
+public class OtpCredentialProvider {
 
     @Inject
     private LoginCredentials credential;
 
     private OTPCredential otpCredential;
 
-    @Override
-    public void configure(AeroGearUser user) {
+    public void credential(AeroGearUser user) {
         otpCredential = new OTPCredential(user.getId(), user.getPassword(), user.getOtp());
     }
 
-    @Override
     public Object getValue() {
         return otpCredential;
     }

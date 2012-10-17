@@ -17,13 +17,10 @@
 
 package org.jboss.aerogear.security.dsl;
 
-import org.jboss.aerogear.security.annotations.Basic;
-import org.jboss.aerogear.security.auth.AuthenticationScheme;
+import org.jboss.aerogear.security.auth.CredentialProvider;
 import org.jboss.aerogear.security.exception.ExceptionMessage;
 import org.jboss.aerogear.security.model.AeroGearUser;
 import org.picketbox.cdi.PicketBoxIdentity;
-import org.picketbox.core.authentication.credential.UsernamePasswordCredential;
-import org.picketlink.credential.LoginCredentials;
 
 
 import javax.enterprise.context.ApplicationScoped;
@@ -35,15 +32,20 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     @Inject
     private PicketBoxIdentity identity;
 
-    @Basic
-    private AuthenticationScheme authenticationScheme;
+    @Inject
+    private CredentialProvider provider;
+
+    public void configure(CredentialProvider provider){
+        this.provider = provider;
+    }
 
     public boolean login(AeroGearUser user) {
 
-        authenticationScheme.configure(user);
+        provider.credential(user);
 
         identity.login();
 
+        System.out.println("Ta logado? " + identity.isLoggedIn());
         if (!identity.isLoggedIn())
             ExceptionMessage.AUTHENTICATION_FAILED.throwException();
 

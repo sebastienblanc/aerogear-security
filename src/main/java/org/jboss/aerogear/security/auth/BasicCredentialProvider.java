@@ -6,7 +6,7 @@ import org.picketlink.credential.LoginCredentials;
 
 import javax.inject.Inject;
 
-public class BasicAuthenticationScheme implements AuthenticationScheme {
+public class BasicCredentialProvider implements CredentialProvider {
 
     @Inject
     private LoginCredentials credential;
@@ -19,7 +19,7 @@ public class BasicAuthenticationScheme implements AuthenticationScheme {
     }
 
     @Override
-    public void configure(AeroGearUser user) {
+    public void credential(AeroGearUser user) {
         credential.setCredential(this);
         usernamePasswordCredential = new UsernamePasswordCredential(user.getId(), user.getPassword());
     }
