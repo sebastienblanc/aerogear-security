@@ -5,5 +5,7 @@ import org.picketlink.credential.Credential;
 
 public interface CredentialBuilder extends Credential {
 
-    void build(AeroGearUser user);
+    void simpleCredential(AeroGearUser user);
+
+    void otpCredential(AeroGearUser user);
 }
