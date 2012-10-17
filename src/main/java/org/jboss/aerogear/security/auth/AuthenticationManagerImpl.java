@@ -20,7 +20,7 @@ package org.jboss.aerogear.security.auth;
 import org.jboss.aerogear.security.exception.ExceptionMessage;
 import org.jboss.aerogear.security.model.AeroGearUser;
 import org.picketbox.cdi.PicketBoxIdentity;
-
+import org.picketlink.credential.LoginCredentials;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -32,15 +32,16 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     private PicketBoxIdentity identity;
 
     @Inject
-    private CredentialProvider provider;
+    private LoginCredentials loginCredentials;
 
-    public void configure(CredentialProvider provider){
-        this.provider = provider;
-    }
+    @Inject
+    private CredentialBuilder credential;
 
     public boolean login(AeroGearUser user) {
 
-        provider.credential(user);
+        credential.simpleCredential(user);
+
+        loginCredentials.setCredential(credential);
 
         identity.login();
 
