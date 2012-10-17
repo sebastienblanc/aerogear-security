@@ -17,6 +17,8 @@
 
 package org.jboss.aerogear.security.dsl;
 
+import org.jboss.aerogear.security.annotations.Basic;
+import org.jboss.aerogear.security.auth.AuthenticationScheme;
 import org.jboss.aerogear.security.exception.ExceptionMessage;
 import org.jboss.aerogear.security.model.AeroGearUser;
 import org.picketbox.cdi.PicketBoxIdentity;
@@ -30,18 +32,16 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class AuthenticationManagerImpl implements AuthenticationManager {
 
-    private AeroGearUser user;
-
-    @Inject
-    private LoginCredentials credential;
-
     @Inject
     private PicketBoxIdentity identity;
 
+    @Basic
+    private AuthenticationScheme authenticationScheme;
+
     public boolean login(AeroGearUser user) {
 
-        this.user = user;
-        credential.setCredential(this);
+        authenticationScheme.configure(user);
+
         identity.login();
 
         if (!identity.isLoggedIn())
@@ -55,10 +55,5 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
         if (identity.isLoggedIn()) {
             identity.logout();
         }
-    }
-
-    @Override
-    public Object getValue() {
-        return new UsernamePasswordCredential(user.getId(), user.getPassword());
     }
 }

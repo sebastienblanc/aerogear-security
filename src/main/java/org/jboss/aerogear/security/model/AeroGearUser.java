@@ -29,8 +29,57 @@ public abstract class AeroGearUser extends AbstractIdentityType implements User 
     @Inject
     private PicketBoxIdentity identity;
 
-    public abstract String getPassword();
+    private String id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String otp;
 
+    public String getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFullName() {
+        return String.format("%s %s", firstName, lastName);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getKey() {
+        return String.format("%s%s", KEY_PREFIX, id);
+    }
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
+
+    public abstract String getPassword();
     public abstract void setPassword(String password);
 
     public boolean hasRoles(Set<String> roles) {
@@ -43,4 +92,5 @@ public abstract class AeroGearUser extends AbstractIdentityType implements User 
 
         return hasRoles;
     }
+
 }
