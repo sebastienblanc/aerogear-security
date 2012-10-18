@@ -1,5 +1,7 @@
 package org.jboss.aerogear.security.util;
 
+import org.jboss.aerogear.security.annotations.SecurityStore;
+
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.persistence.EntityManager;
@@ -8,9 +10,10 @@ import java.util.logging.Logger;
 
 public class Resources {
 
-    @Produces
-    @PersistenceContext(unitName = "security-persistence-unit")
-    private EntityManager entityManager;
+//    @Produces
+//    @SecurityStore
+//    @PersistenceContext(unitName = "security-persistence-unit")
+//    private EntityManager entityManager;
 
     @Produces
     public Logger produceLog(InjectionPoint injectionPoint) {
