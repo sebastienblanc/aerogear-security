@@ -41,6 +41,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * <p>JAX-RS Endpoint to authenticate users using otp.</p>
@@ -81,7 +82,7 @@ public class AuthenticationEndpoint {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public AuthenticationResponse login(final AuthenticationRequest authcRequest) {
+    public Response login(final AuthenticationRequest authcRequest) {
 
         credentialBuilder.otpCredential(authcRequest);
         authenticationManager.login(authcRequest);
@@ -99,7 +100,7 @@ public class AuthenticationEndpoint {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public AuthenticationResponse signin(final AuthenticationRequest authcRequest) {
+    public Response signin(final AuthenticationRequest authcRequest) {
 
         credentialBuilder.simpleCredential(authcRequest);
         authenticationManager.login(authcRequest);
@@ -116,14 +117,14 @@ public class AuthenticationEndpoint {
     @Path("/otp/secret")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public UserInfo getInfo() {
+    public Response getInfo() {
         return httpResponseBuilder.buildUserInfoResponse(secret.generate());
     }
 
     @Path("/userinfo")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public UserInfo getUserInfo() {
+    public Response getUserInfo() {
         return httpResponseBuilder.buildUserInfoResponse();
     }
 }

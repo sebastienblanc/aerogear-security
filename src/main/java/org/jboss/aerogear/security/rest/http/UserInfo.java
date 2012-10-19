@@ -30,13 +30,10 @@ public class UserInfo implements Serializable {
     private static final long serialVersionUID = 2637023097272776078L;
 
     private String id;
-    private Collection<String> roles;
-
     private String fullName;
-
     private String serial;
-
     private String b32;
+    private Collection<String> roles;
 
     public UserInfo() {
     }

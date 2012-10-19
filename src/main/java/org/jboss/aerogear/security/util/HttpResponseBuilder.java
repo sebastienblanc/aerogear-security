@@ -8,13 +8,14 @@ import org.picketbox.core.UserContext;
 import org.picketbox.core.util.Base32;
 
 import javax.inject.Inject;
+import javax.ws.rs.core.Response;
 
 public class HttpResponseBuilder {
 
     @Inject
     private PicketBoxIdentity identity;
 
-    public AuthenticationResponse createResponse(AuthenticationRequest authcRequest) {
+    public Response createResponse(AuthenticationRequest authcRequest) {
         AuthenticationResponse response = new AuthenticationResponse();
 
         response.setId(authcRequest.getId());
@@ -25,10 +26,10 @@ public class HttpResponseBuilder {
             response.setToken(identity.getUserContext().getSession().getId().getId().toString());
         }
 
-        return response;
+        return Response.ok(response).build();
     }
 
-    public UserInfo buildUserInfoResponse(String serialNumber) {
+    public Response buildUserInfoResponse(String serialNumber) {
         UserContext userContext = identity.getUserContext();
         UserInfo userInfo = new UserInfo(userContext);
 
@@ -37,11 +38,11 @@ public class HttpResponseBuilder {
             userInfo.setB32(Base32.encode(Hex.hexToAscii(serialNumber).getBytes()));
         }
 
-        return userInfo;
+        return Response.ok(userInfo).build();
     }
 
-    public UserInfo buildUserInfoResponse() {
+    public Response buildUserInfoResponse() {
         UserContext userContext = identity.getUserContext();
-        return new UserInfo(userContext);
+        return Response.ok(new UserInfo(userContext)).build();
     }
 }

@@ -29,7 +29,6 @@ public class AuthenticationResponse implements Serializable {
 
     private String id;
     private boolean loggedIn;
-
     private String token;
 
     /**
