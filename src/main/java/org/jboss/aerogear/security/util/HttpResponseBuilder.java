@@ -1,6 +1,8 @@
 package org.jboss.aerogear.security.util;
 
+import org.jboss.aerogear.security.annotations.SessionId;
 import org.jboss.aerogear.security.model.AeroGearCredential;
+import org.jboss.aerogear.security.model.Secret;
 import org.jboss.aerogear.security.rest.http.AuthenticationRequest;
 import org.jboss.aerogear.security.rest.http.AuthenticationResponse;
 import org.picketbox.cdi.PicketBoxIdentity;
@@ -14,9 +16,12 @@ public class HttpResponseBuilder {
     private PicketBoxIdentity identity;
     @Inject
     private AeroGearCredential credentials;
-
     @Inject
     private Secret secret;
+
+    @Inject
+    @SessionId
+    private String token;
 
     private static final String AUTH_HEADER = "Auth-Token";
 
@@ -52,9 +57,10 @@ public class HttpResponseBuilder {
      * @return
      */
     public Response createResponse() {
+        System.out.println("MY TOKEN MY TOKEN MY TOKEN: " + token);
 
         if (identity.isLoggedIn()) {
-            return Response.ok(credentials).header(AUTH_HEADER, credentials.getToken()).build();
+            return Response.ok(credentials).header(AUTH_HEADER, token).build();
         }
         return null;
     }

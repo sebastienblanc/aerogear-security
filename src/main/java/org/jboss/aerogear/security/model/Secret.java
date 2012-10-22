@@ -1,5 +1,6 @@
-package org.jboss.aerogear.security.util;
+package org.jboss.aerogear.security.model;
 
+import org.jboss.aerogear.security.util.Hex;
 import org.picketbox.cdi.PicketBoxIdentity;
 import org.picketbox.core.util.Base32;
 import org.picketlink.idm.IdentityManager;
