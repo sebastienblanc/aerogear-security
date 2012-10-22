@@ -26,7 +26,7 @@ import org.jboss.aerogear.security.auth.AuthenticationManager;
 import org.jboss.aerogear.security.auth.CredentialBuilder;
 import org.jboss.aerogear.security.rest.http.AuthenticationRequest;
 import org.jboss.aerogear.security.rest.http.AuthenticationResponse;
-import org.jboss.aerogear.security.rest.http.UserInfo;
+import org.jboss.aerogear.security.model.UserInfo;
 import org.jboss.aerogear.security.util.HttpResponseBuilder;
 import org.jboss.aerogear.security.util.Secret;
 import org.picketbox.cdi.PicketBoxIdentity;

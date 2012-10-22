@@ -15,34 +15,26 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.rest.http;
+package org.jboss.aerogear.security.model;
 
-import org.picketlink.idm.model.Role;
+import org.picketbox.cdi.PicketBoxIdentity;
 
+import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 
 public class AeroGearCredential implements Serializable {
 
+    @Inject
+    private PicketBoxIdentity identity;
 
     //TODO yep it's duplicated and must be refactored
     private String username;
-    private String isLogged;
     private Collection<String> roles;
 
-    public AeroGearCredential(String id, String isLogged, Collection<String> roles) {
+    public AeroGearCredential(String id, Collection<String> roles) {
         this.username = id;
-        this.isLogged = isLogged;
         this.roles = roles;
-    }
-
-    public String getLogged() {
-        return isLogged;
-    }
-
-    public void setLogged(String logged) {
-        isLogged = logged;
     }
 
     public String getUsername() {

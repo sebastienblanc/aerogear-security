@@ -31,42 +31,24 @@ public abstract class AeroGearUser extends AbstractIdentityType implements User 
 
     private String id;
     private String firstName;
-    private String lastName;
-    private String email;
     private String otp;
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public String getFirstName() {
         return firstName;
     }
 
+    @Override
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFullName() {
-        return String.format("%s %s", firstName, lastName);
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+    @Override
     public String getKey() {
         return String.format("%s%s", KEY_PREFIX, id);
     }
@@ -79,9 +61,6 @@ public abstract class AeroGearUser extends AbstractIdentityType implements User 
         this.otp = otp;
     }
 
-    public abstract String getPassword();
-    public abstract void setPassword(String password);
-
     public boolean hasRoles(Set<String> roles) {
 
         boolean hasRoles = false;
@@ -91,6 +70,36 @@ public abstract class AeroGearUser extends AbstractIdentityType implements User 
         }
 
         return hasRoles;
+    }
+
+    public abstract String getPassword();
+
+    public abstract void setPassword(String password);
+
+    //It should be removed on PicketLink IDM
+    @Override
+    public String getLastName() {
+        return null;
+    }
+
+    @Override
+    public void setLastName(String s) {
+
+    }
+
+    @Override
+    public String getFullName() {
+        return null;
+    }
+
+    @Override
+    public String getEmail() {
+        return null;
+    }
+
+    @Override
+    public void setEmail(String s) {
+
     }
 
 }

@@ -50,6 +50,7 @@ public class HttpResponseBuilderTest {
 
     @Test
     public void testBuildUserInfoResponse() throws Exception {
+
         assertNotNull(builder.createResponse());
     }
 

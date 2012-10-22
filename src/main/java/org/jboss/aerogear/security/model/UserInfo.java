@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.aerogear.security.rest.http;
+package org.jboss.aerogear.security.model;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.picketbox.core.UserContext;
@@ -30,7 +30,6 @@ public class UserInfo implements Serializable {
     private static final long serialVersionUID = 2637023097272776078L;
 
     private String id;
-    private String fullName;
     private String serial;
     private String b32;
     private Collection<String> roles;
@@ -40,7 +39,6 @@ public class UserInfo implements Serializable {
 
     public UserInfo(UserContext user) {
         this.id = user.getUser().getKey();
-        this.fullName = user.getUser().getFullName();
         this.roles = user.getRoleNames();
     }
 
@@ -78,14 +76,6 @@ public class UserInfo implements Serializable {
      */
     public void setRoles(Collection<String> roles) {
         this.roles = roles;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getFullName() {
-        return fullName;
     }
 
     public String getSerial() {
