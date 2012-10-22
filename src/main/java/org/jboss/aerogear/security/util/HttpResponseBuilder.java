@@ -1,20 +1,20 @@
 package org.jboss.aerogear.security.util;
 
 import org.jboss.aerogear.security.model.AeroGearCredential;
-import org.jboss.aerogear.security.model.UserInfo;
 import org.jboss.aerogear.security.rest.http.AuthenticationRequest;
 import org.jboss.aerogear.security.rest.http.AuthenticationResponse;
 import org.picketbox.cdi.PicketBoxIdentity;
-import org.picketbox.core.UserContext;
 
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
-import java.util.Collection;
 
 public class HttpResponseBuilder {
 
     @Inject
     private PicketBoxIdentity identity;
+    @Inject
+    private AeroGearCredential credentials;
+
     @Inject
     private Secret secret;
 
@@ -42,8 +42,7 @@ public class HttpResponseBuilder {
     }
 
     public Response buildUserInfoResponse() {
-        UserContext userContext = identity.getUserContext();
-        return Response.ok(new UserInfo(userContext)).build();
+        return Response.ok(credentials).build();
     }
 
     /**
@@ -54,16 +53,9 @@ public class HttpResponseBuilder {
      */
     public Response createResponse() {
 
-        AeroGearCredential aeroGearCredential = null;
-        String token = null;
-
         if (identity.isLoggedIn()) {
-            UserContext userContext = identity.getUserContext();
-            token = userContext.getUser().getId();
-            Collection<String> roles = userContext.getRoleNames();
-            aeroGearCredential = new AeroGearCredential(token, roles);
+            return Response.ok(credentials).header(AUTH_HEADER, credentials.getToken()).build();
         }
-
-        return Response.ok(aeroGearCredential).header(AUTH_HEADER, token).build();
+        return null;
     }
 }

@@ -18,6 +18,7 @@
 package org.jboss.aerogear.security.model;
 
 import org.picketbox.cdi.PicketBoxIdentity;
+import org.picketbox.core.session.SessionId;
 
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -28,29 +29,15 @@ public class AeroGearCredential implements Serializable {
     @Inject
     private PicketBoxIdentity identity;
 
-    //TODO yep it's duplicated and must be refactored
-    private String username;
-    private Collection<String> roles;
-
-    public AeroGearCredential(String id, Collection<String> roles) {
-        this.username = id;
-        this.roles = roles;
+    public String getId(){
+        return identity.getUserContext().getUser().getFirstName();
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public String getToken() {
+        return identity.getUserContext().getSession().getId().getId().toString();
     }
 
     public Collection<String> getRoles() {
-        return roles;
+        return identity.getUserContext().getRoleNames();
     }
-
-    public void setRoles(Collection<String> roles) {
-        this.roles = roles;
-    }
-
 }

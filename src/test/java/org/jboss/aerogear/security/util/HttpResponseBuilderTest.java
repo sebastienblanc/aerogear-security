@@ -2,6 +2,7 @@ package org.jboss.aerogear.security.util;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -49,6 +50,7 @@ public class HttpResponseBuilderTest {
     }
 
     @Test
+    @Ignore
     public void testBuildUserInfoResponse() throws Exception {
 
         assertNotNull(builder.createResponse());
