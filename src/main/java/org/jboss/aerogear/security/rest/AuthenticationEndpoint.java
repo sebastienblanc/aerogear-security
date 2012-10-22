@@ -69,9 +69,6 @@ public class AuthenticationEndpoint {
     @Inject
     private HttpResponseBuilder httpResponseBuilder;
 
-    @Inject
-    private Secret secret;
-
     /**
      * <p>Performs the authentication using the informations provided by the {@link org.jboss.aerogear.security.rest.http.AuthenticationRequest}</p>
      *
@@ -118,7 +115,7 @@ public class AuthenticationEndpoint {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getInfo() {
-        return httpResponseBuilder.buildUserInfoResponse(secret.generate());
+        return httpResponseBuilder.buildSecretUserInfoResponse();
     }
 
     @Path("/userinfo")

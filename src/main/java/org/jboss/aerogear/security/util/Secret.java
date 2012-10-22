@@ -1,6 +1,7 @@
 package org.jboss.aerogear.security.util;
 
 import org.picketbox.cdi.PicketBoxIdentity;
+import org.picketbox.core.util.Base32;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.model.User;
 
@@ -15,12 +16,16 @@ public class Secret {
     @Inject
     private IdentityManager identityManager;
 
-    public String generate() {
+    private String id;
+    private String secret;
+    private String b32;
+
+    public Secret generate() {
 
         User user = identity.getUserContext().getUser();
         User idmuser = identityManager.getUser(user.getKey());
 
-        String secret = idmuser.getAttribute("serial");
+        secret = idmuser.getAttribute("serial");
         if (secret == null) {
             //Generate serial number
             secret = UUID.randomUUID().toString();
@@ -32,6 +37,19 @@ public class Secret {
             secret = Hex.toHexString(secret.getBytes());
             idmuser.setAttribute("serial", secret);
         }
+        return this;
+    }
+
+    public String getId() {
+        return identity.getUserContext().getUser().getKey();
+    }
+
+    public String getB32() {
+        return Base32.encode(Hex.hexToAscii(secret).getBytes());
+    }
+
+    public String getSecret() {
         return secret;
     }
+
 }

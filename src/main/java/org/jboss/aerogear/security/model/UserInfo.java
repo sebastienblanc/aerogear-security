@@ -30,8 +30,6 @@ public class UserInfo implements Serializable {
     private static final long serialVersionUID = 2637023097272776078L;
 
     private String id;
-    private String secret;
-    private String b32;
     private Collection<String> roles;
 
     public UserInfo() {
@@ -40,14 +38,6 @@ public class UserInfo implements Serializable {
     public UserInfo(UserContext user) {
         this.id = user.getUser().getKey();
         this.roles = user.getRoleNames();
-    }
-
-    public String getB32() {
-        return b32;
-    }
-
-    public void setB32(String b32) {
-        this.b32 = b32;
     }
 
     /**
@@ -76,13 +66,5 @@ public class UserInfo implements Serializable {
      */
     public void setRoles(Collection<String> roles) {
         this.roles = roles;
-    }
-
-    public String getSecret() {
-        return secret;
-    }
-
-    public void setSecret(String secret) {
-        this.secret = secret;
     }
 }

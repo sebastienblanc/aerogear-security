@@ -1,12 +1,11 @@
 package org.jboss.aerogear.security.util;
 
 import org.jboss.aerogear.security.model.AeroGearCredential;
+import org.jboss.aerogear.security.model.UserInfo;
 import org.jboss.aerogear.security.rest.http.AuthenticationRequest;
 import org.jboss.aerogear.security.rest.http.AuthenticationResponse;
-import org.jboss.aerogear.security.model.UserInfo;
 import org.picketbox.cdi.PicketBoxIdentity;
 import org.picketbox.core.UserContext;
-import org.picketbox.core.util.Base32;
 
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
@@ -16,6 +15,9 @@ public class HttpResponseBuilder {
 
     @Inject
     private PicketBoxIdentity identity;
+    @Inject
+    private Secret secret;
+
     private static final String AUTH_HEADER = "Auth-Token";
 
     public Response createResponse(AuthenticationRequest authcRequest) {
@@ -32,16 +34,11 @@ public class HttpResponseBuilder {
         return Response.ok(response).build();
     }
 
-    public Response buildUserInfoResponse(String secret) {
-        UserContext userContext = identity.getUserContext();
-        UserInfo userInfo = new UserInfo(userContext);
+    public Response buildSecretUserInfoResponse() {
 
-        if (secret != null) {
-            userInfo.setSecret(secret);
-            userInfo.setB32(Base32.encode(Hex.hexToAscii(secret).getBytes()));
-        }
+        Secret userSecret = secret.generate();
 
-        return Response.ok(userInfo).build();
+        return Response.ok(secret).build();
     }
 
     public Response buildUserInfoResponse() {
