@@ -30,7 +30,7 @@ public class UserInfo implements Serializable {
     private static final long serialVersionUID = 2637023097272776078L;
 
     private String id;
-    private String serial;
+    private String secret;
     private String b32;
     private Collection<String> roles;
 
@@ -78,11 +78,11 @@ public class UserInfo implements Serializable {
         this.roles = roles;
     }
 
-    public String getSerial() {
-        return serial;
+    public String getSecret() {
+        return secret;
     }
 
-    public void setSerial(String serial) {
-        this.serial = serial;
+    public void setSecret(String secret) {
+        this.secret = secret;
     }
 }

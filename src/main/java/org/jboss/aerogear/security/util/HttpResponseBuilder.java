@@ -32,13 +32,13 @@ public class HttpResponseBuilder {
         return Response.ok(response).build();
     }
 
-    public Response buildUserInfoResponse(String serialNumber) {
+    public Response buildUserInfoResponse(String secret) {
         UserContext userContext = identity.getUserContext();
         UserInfo userInfo = new UserInfo(userContext);
 
-        if (serialNumber != null) {
-            userInfo.setSerial(serialNumber);
-            userInfo.setB32(Base32.encode(Hex.hexToAscii(serialNumber).getBytes()));
+        if (secret != null) {
+            userInfo.setSecret(secret);
+            userInfo.setB32(Base32.encode(Hex.hexToAscii(secret).getBytes()));
         }
 
         return Response.ok(userInfo).build();

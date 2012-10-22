@@ -20,18 +20,18 @@ public class Secret {
         User user = identity.getUserContext().getUser();
         User idmuser = identityManager.getUser(user.getKey());
 
-        String serialNumber = idmuser.getAttribute("serial");
-        if (serialNumber == null) {
+        String secret = idmuser.getAttribute("serial");
+        if (secret == null) {
             //Generate serial number
-            serialNumber = UUID.randomUUID().toString();
-            serialNumber = serialNumber.replace('-', 'c');
+            secret = UUID.randomUUID().toString();
+            secret = secret.replace('-', 'c');
 
             //Just pick the first 10 characters
-            serialNumber = serialNumber.substring(0, 10);
+            secret = secret.substring(0, 10);
 
-            serialNumber = Hex.toHexString(serialNumber.getBytes());
-            idmuser.setAttribute("serial", serialNumber);
+            secret = Hex.toHexString(secret.getBytes());
+            idmuser.setAttribute("serial", secret);
         }
-        return serialNumber;
+        return secret;
     }
 }
