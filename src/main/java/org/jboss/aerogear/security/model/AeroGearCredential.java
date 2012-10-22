@@ -17,34 +17,28 @@
 
 package org.jboss.aerogear.security.model;
 
-import org.jboss.aerogear.security.annotations.LoggedIn;
-import org.jboss.aerogear.security.annotations.RoleNames;
-import org.jboss.aerogear.security.annotations.SessionId;
 import org.picketbox.cdi.PicketBoxIdentity;
 
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
-import java.io.Serializable;
 import java.util.Collection;
 
-public class AeroGearCredential implements Serializable {
+public class AeroGearCredential {
 
     @Inject
     private PicketBoxIdentity identity;
 
-    @Produces @LoggedIn
-    public String getId(){
+    public String getId() {
         return identity.getUserContext().getUser().getFirstName();
     }
 
-    @Produces @SessionId
     public String getToken() {
-        if(identity.isLoggedIn())
-            identity.getUserContext().getSession().getId().getId().toString();
-        return "";
+        String token = null;
+        if (identity.isLoggedIn())
+            token = identity.getUserContext().getSession().getId().getId().toString();
+
+        return token;
     }
 
-    @Produces @RoleNames
     public Collection<String> getRoles() {
         return identity.getUserContext().getRoleNames();
     }

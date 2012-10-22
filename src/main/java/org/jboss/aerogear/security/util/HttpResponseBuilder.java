@@ -1,11 +1,8 @@
 package org.jboss.aerogear.security.util;
 
-import org.jboss.aerogear.security.annotations.SessionId;
 import org.jboss.aerogear.security.model.AeroGearCredential;
 import org.jboss.aerogear.security.model.Secret;
 import org.jboss.aerogear.security.rest.http.AuthenticationRequest;
-import org.jboss.aerogear.security.rest.http.AuthenticationResponse;
-import org.picketbox.cdi.PicketBoxIdentity;
 
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
@@ -13,30 +10,14 @@ import javax.ws.rs.core.Response;
 public class HttpResponseBuilder {
 
     @Inject
-    private PicketBoxIdentity identity;
-    @Inject
     private AeroGearCredential credentials;
     @Inject
     private Secret secret;
 
-    @Inject
-    @SessionId
-    private String token;
-
     private static final String AUTH_HEADER = "Auth-Token";
 
     public Response createResponse(AuthenticationRequest authcRequest) {
-        AuthenticationResponse response = new AuthenticationResponse();
-
-        response.setId(authcRequest.getId());
-        response.setLoggedIn(identity.isLoggedIn());
-
-        if (response.isLoggedIn()) {
-
-            response.setToken(identity.getUserContext().getSession().getId().getId().toString());
-        }
-
-        return Response.ok(response).build();
+        return Response.ok(credentials).build();
     }
 
     public Response buildSecretUserInfoResponse() {
@@ -47,7 +28,7 @@ public class HttpResponseBuilder {
     }
 
     public Response buildUserInfoResponse() {
-        return Response.ok(credentials).build();
+        return Response.ok(credentials).header(AUTH_HEADER, credentials.getId()).build();
     }
 
     /**
@@ -57,11 +38,6 @@ public class HttpResponseBuilder {
      * @return
      */
     public Response createResponse() {
-        System.out.println("MY TOKEN MY TOKEN MY TOKEN: " + token);
-
-        if (identity.isLoggedIn()) {
-            return Response.ok(credentials).header(AUTH_HEADER, token).build();
-        }
-        return null;
+        return Response.ok(credentials).header(AUTH_HEADER, credentials.getId()).build();
     }
 }
