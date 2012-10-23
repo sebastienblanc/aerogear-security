@@ -36,13 +36,13 @@ public class AuthenticationManagerTest {
     @Test
     public void testLogin() throws Exception {
         when(picketBoxIdentity.isLoggedIn()).thenReturn(true);
-        assertTrue(authenticationManager.login(aeroGearUser));
+        assertTrue(authenticationManager.login());
     }
 
     @Test(expected = AeroGearSecurityException.class)
     public void testInvalidLogin() throws Exception {
         when(picketBoxIdentity.isLoggedIn()).thenReturn(false);
-        authenticationManager.login(aeroGearUser);
+        authenticationManager.login();
     }
 
     @Test

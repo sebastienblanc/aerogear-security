@@ -26,8 +26,6 @@ import org.jboss.aerogear.security.auth.AuthenticationManager;
 import org.jboss.aerogear.security.auth.CredentialBuilder;
 import org.jboss.aerogear.security.rest.http.AuthenticationRequest;
 import org.jboss.aerogear.security.util.HttpResponseBuilder;
-import org.picketbox.cdi.PicketBoxIdentity;
-import org.picketlink.idm.IdentityManager;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -58,12 +56,6 @@ public class AuthenticationEndpoint {
     private CredentialBuilder credentialBuilder;
 
     @Inject
-    private IdentityManager identityManager;
-
-    @Inject
-    private PicketBoxIdentity identity;
-
-    @Inject
     private HttpResponseBuilder httpResponseBuilder;
 
     /**
@@ -79,7 +71,7 @@ public class AuthenticationEndpoint {
     public Response login(final AuthenticationRequest authcRequest) {
 
         credentialBuilder.otpCredential(authcRequest);
-        authenticationManager.login(authcRequest);
+        authenticationManager.login();
 
         return httpResponseBuilder.createResponse();
     }
@@ -97,7 +89,7 @@ public class AuthenticationEndpoint {
     public Response signin(final AuthenticationRequest authcRequest) {
 
         credentialBuilder.simpleCredential(authcRequest);
-        authenticationManager.login(authcRequest);
+        authenticationManager.login();
 
         return httpResponseBuilder.createResponse();
     }
