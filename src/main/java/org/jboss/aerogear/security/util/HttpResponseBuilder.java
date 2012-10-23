@@ -1,5 +1,6 @@
 package org.jboss.aerogear.security.util;
 
+import org.jboss.aerogear.security.annotations.SessionToken;
 import org.jboss.aerogear.security.model.AeroGearCredential;
 import org.jboss.aerogear.security.model.Secret;
 import org.jboss.aerogear.security.rest.http.AuthenticationRequest;
@@ -13,22 +14,23 @@ public class HttpResponseBuilder {
     private AeroGearCredential credentials;
     @Inject
     private Secret secret;
+    @Inject
+    @SessionToken
+    private String token;
 
     private static final String AUTH_HEADER = "Auth-Token";
 
     public Response createResponse(AuthenticationRequest authcRequest) {
-        return Response.ok(credentials).build();
+        return Response.ok(credentials).header(AUTH_HEADER, token).build();
     }
 
     public Response buildSecretUserInfoResponse() {
-
         Secret userSecret = secret.generate();
-
-        return Response.ok(secret).build();
+        return Response.ok(userSecret).header(AUTH_HEADER, token).build();
     }
 
     public Response buildUserInfoResponse() {
-        return Response.ok(credentials).header(AUTH_HEADER, credentials.getId()).build();
+        return Response.ok(credentials).header(AUTH_HEADER, token).build();
     }
 
     /**
@@ -38,6 +40,6 @@ public class HttpResponseBuilder {
      * @return
      */
     public Response createResponse() {
-        return Response.ok(credentials).header(AUTH_HEADER, credentials.getId()).build();
+        return Response.ok(credentials).header(AUTH_HEADER, token).build();
     }
 }

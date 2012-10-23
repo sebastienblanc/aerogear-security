@@ -31,14 +31,6 @@ public class AeroGearCredential {
         return identity.getUserContext().getUser().getFirstName();
     }
 
-    public String getToken() {
-        String token = null;
-        if (identity.isLoggedIn())
-            token = identity.getUserContext().getSession().getId().getId().toString();
-
-        return token;
-    }
-
     public Collection<String> getRoles() {
         return identity.getUserContext().getRoleNames();
     }
