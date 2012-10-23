@@ -20,26 +20,12 @@ public class HttpResponseBuilder {
 
     private static final String AUTH_HEADER = "Auth-Token";
 
-    public Response createResponse(AuthenticationRequest authcRequest) {
+    public Response createResponse() {
         return Response.ok(credentials).header(AUTH_HEADER, token).build();
     }
 
     public Response buildSecretUserInfoResponse() {
         Secret userSecret = secret.generate();
         return Response.ok(userSecret).header(AUTH_HEADER, token).build();
-    }
-
-    public Response buildUserInfoResponse() {
-        return Response.ok(credentials).header(AUTH_HEADER, token).build();
-    }
-
-    /**
-     * Note: is not recommendable to return username and roles here
-     * It will be discussed on M7
-     *
-     * @return
-     */
-    public Response createResponse() {
-        return Response.ok(credentials).header(AUTH_HEADER, token).build();
     }
 }

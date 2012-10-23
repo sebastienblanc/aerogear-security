@@ -81,7 +81,7 @@ public class AuthenticationEndpoint {
         credentialBuilder.otpCredential(authcRequest);
         authenticationManager.login(authcRequest);
 
-        return httpResponseBuilder.createResponse(authcRequest);
+        return httpResponseBuilder.createResponse();
     }
 
     /**
@@ -99,7 +99,7 @@ public class AuthenticationEndpoint {
         credentialBuilder.simpleCredential(authcRequest);
         authenticationManager.login(authcRequest);
 
-        return httpResponseBuilder.createResponse(authcRequest);
+        return httpResponseBuilder.createResponse();
     }
 
     @Path("/logout")
@@ -119,6 +119,6 @@ public class AuthenticationEndpoint {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserInfo() {
-        return httpResponseBuilder.buildUserInfoResponse();
+        return httpResponseBuilder.createResponse();
     }
 }
