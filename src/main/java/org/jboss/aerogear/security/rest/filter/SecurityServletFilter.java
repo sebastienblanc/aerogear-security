@@ -60,9 +60,7 @@ public class SecurityServletFilter implements Filter {
         String path = httpServletRequest.getRequestURI();
         String token = httpServletRequest.getHeader(AUTH_TOKEN);
 
-        System.out.println("doFilter TOKEN TOKEN TOKEN: " + token);
-
-        if (!tokenIsValid(token) && (path.contains(LOGOUT_PATH) || !path.contains(AUTH_PATH))) {
+        if (!tokenIsValid(token) && (path.contains(LOGOUT_PATH) && !path.contains(AUTH_PATH))) {
             httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
