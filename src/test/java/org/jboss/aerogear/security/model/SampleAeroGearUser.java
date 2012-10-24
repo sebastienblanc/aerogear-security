@@ -1,5 +1,7 @@
 package org.jboss.aerogear.security.model;
 
+import org.jboss.aerogear.security.impl.model.AeroGearUser;
+
 public class SampleAeroGearUser extends AeroGearUser {
 
     @Override

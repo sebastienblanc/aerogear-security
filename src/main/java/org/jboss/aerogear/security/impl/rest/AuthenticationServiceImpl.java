@@ -20,22 +20,17 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package org.jboss.aerogear.security.rest;
+package org.jboss.aerogear.security.impl.rest;
 
-import org.jboss.aerogear.security.auth.AuthenticationManager;
-import org.jboss.aerogear.security.auth.CredentialBuilder;
-import org.jboss.aerogear.security.rest.http.AuthenticationRequest;
+import org.jboss.aerogear.security.api.auth.AuthenticationManager;
+import org.jboss.aerogear.security.api.auth.CredentialBuilder;
+import org.jboss.aerogear.security.api.rest.AuthenticationService;
+import org.jboss.aerogear.security.impl.model.AuthenticationRequest;
 import org.jboss.aerogear.security.util.HttpResponseBuilder;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Stateless

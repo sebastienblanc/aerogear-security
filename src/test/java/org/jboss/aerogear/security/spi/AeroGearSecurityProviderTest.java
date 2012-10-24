@@ -2,7 +2,8 @@ package org.jboss.aerogear.security.spi;
 
 import org.jboss.aerogear.controller.router.Route;
 import org.jboss.aerogear.security.exception.AeroGearSecurityException;
-import org.jboss.aerogear.security.model.AeroGearUser;
+import org.jboss.aerogear.security.impl.model.AeroGearUser;
+import org.jboss.aerogear.security.impl.spi.AeroGearSecurityProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

@@ -15,20 +15,15 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.authz;
+package org.jboss.aerogear.security.api.authz;
 
+import org.jboss.aerogear.security.impl.model.AeroGearUser;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+public interface IdentityManagement {
 
-@ApplicationScoped
-public class IdentityManagementImpl implements IdentityManagement {
+    GrantMethods grant(String... roles);
 
-    @Inject
-    private GrantConfiguration grantConfiguration;
-
-    @Override
-    public GrantMethods grant(String... roles) {
-        return grantConfiguration.roles(roles);
+    static interface GrantMethods {
+        void to(AeroGearUser user);
     }
 }

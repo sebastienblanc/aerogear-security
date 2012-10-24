@@ -15,34 +15,23 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.auth;
+package org.jboss.aerogear.security.impl.model;
 
-import org.jboss.aerogear.security.exception.ExceptionMessage;
 import org.picketbox.cdi.PicketBoxIdentity;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.Collection;
 
-@ApplicationScoped
-public class AuthenticationManagerImpl implements AuthenticationManager {
+public class AeroGearCredential {
 
     @Inject
     private PicketBoxIdentity identity;
 
-    public boolean login() {
-
-        identity.login();
-
-        if (!identity.isLoggedIn())
-            ExceptionMessage.AUTHENTICATION_FAILED.throwException();
-
-        return true;
-
+    public String getId() {
+        return identity.getUserContext().getUser().getFirstName();
     }
 
-    public void logout() {
-        if (identity.isLoggedIn()) {
-            identity.logout();
-        }
+    public Collection<String> getRoles() {
+        return identity.getUserContext().getRoleNames();
     }
 }

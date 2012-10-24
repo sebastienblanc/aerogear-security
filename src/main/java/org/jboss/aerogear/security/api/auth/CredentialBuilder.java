@@ -1,6 +1,6 @@
-package org.jboss.aerogear.security.auth;
+package org.jboss.aerogear.security.api.auth;
 
-import org.jboss.aerogear.security.model.AeroGearUser;
+import org.jboss.aerogear.security.impl.model.AeroGearUser;
 import org.picketlink.credential.Credential;
 
 public interface CredentialBuilder extends Credential {

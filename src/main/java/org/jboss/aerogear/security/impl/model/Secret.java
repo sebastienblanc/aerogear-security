@@ -1,4 +1,4 @@
-package org.jboss.aerogear.security.model;
+package org.jboss.aerogear.security.impl.model;
 
 import org.jboss.aerogear.security.util.Hex;
 import org.picketbox.cdi.PicketBoxIdentity;

@@ -15,15 +15,35 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.authz;
+package org.jboss.aerogear.security.impl.auth;
 
-import org.jboss.aerogear.security.model.AeroGearUser;
+import org.jboss.aerogear.security.api.auth.AuthenticationManager;
+import org.jboss.aerogear.security.exception.ExceptionMessage;
+import org.picketbox.cdi.PicketBoxIdentity;
 
-public interface IdentityManagement {
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
-    GrantMethods grant(String... roles);
+@ApplicationScoped
+public class AuthenticationManagerImpl implements AuthenticationManager {
 
-    static interface GrantMethods {
-        void to(AeroGearUser user);
+    @Inject
+    private PicketBoxIdentity identity;
+
+    public boolean login() {
+
+        identity.login();
+
+        if (!identity.isLoggedIn())
+            ExceptionMessage.AUTHENTICATION_FAILED.throwException();
+
+        return true;
+
+    }
+
+    public void logout() {
+        if (identity.isLoggedIn()) {
+            identity.logout();
+        }
     }
 }

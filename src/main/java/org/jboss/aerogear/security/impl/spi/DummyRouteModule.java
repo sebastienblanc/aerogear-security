@@ -1,4 +1,4 @@
-package org.jboss.aerogear.security.spi;
+package org.jboss.aerogear.security.impl.spi;
 
 import org.jboss.aerogear.controller.router.AbstractRoutingModule;
 

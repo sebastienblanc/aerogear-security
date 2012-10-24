@@ -15,9 +15,10 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.authz;
+package org.jboss.aerogear.security.impl.authz;
 
-import org.jboss.aerogear.security.model.AeroGearUser;
+import org.jboss.aerogear.security.api.authz.IdentityManagement;
+import org.jboss.aerogear.security.impl.model.AeroGearUser;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.model.Role;
 import org.picketlink.idm.model.User;

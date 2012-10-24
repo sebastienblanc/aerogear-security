@@ -15,23 +15,22 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.model;
+package org.jboss.aerogear.security.impl.authz;
 
-import org.picketbox.cdi.PicketBoxIdentity;
 
+import org.jboss.aerogear.security.api.authz.IdentityManagement;
+
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.util.Collection;
 
-public class AeroGearCredential {
+@ApplicationScoped
+public class IdentityManagementImpl implements IdentityManagement {
 
     @Inject
-    private PicketBoxIdentity identity;
+    private GrantConfiguration grantConfiguration;
 
-    public String getId() {
-        return identity.getUserContext().getUser().getFirstName();
-    }
-
-    public Collection<String> getRoles() {
-        return identity.getUserContext().getRoleNames();
+    @Override
+    public GrantMethods grant(String... roles) {
+        return grantConfiguration.roles(roles);
     }
 }

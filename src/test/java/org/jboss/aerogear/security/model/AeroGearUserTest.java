@@ -1,5 +1,6 @@
 package org.jboss.aerogear.security.model;
 
+import org.jboss.aerogear.security.impl.model.AeroGearUser;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

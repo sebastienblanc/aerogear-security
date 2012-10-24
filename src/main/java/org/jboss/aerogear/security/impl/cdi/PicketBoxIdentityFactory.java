@@ -1,6 +1,6 @@
-package org.jboss.aerogear.security.cdi;
+package org.jboss.aerogear.security.impl.cdi;
 
-import org.jboss.aerogear.security.annotations.SessionToken;
+import org.jboss.aerogear.security.api.annotations.SessionToken;
 import org.picketbox.cdi.PicketBoxIdentity;
 
 import javax.enterprise.context.SessionScoped;

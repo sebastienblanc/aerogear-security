@@ -1,6 +1,6 @@
-package org.jboss.aerogear.security.rest;
+package org.jboss.aerogear.security.api.rest;
 
-import org.jboss.aerogear.security.rest.http.AuthenticationRequest;
+import org.jboss.aerogear.security.impl.model.AuthenticationRequest;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;

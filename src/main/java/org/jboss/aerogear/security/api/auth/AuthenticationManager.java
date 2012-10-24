@@ -1,4 +1,4 @@
-package org.jboss.aerogear.security.auth;
+package org.jboss.aerogear.security.api.auth;
 
 public interface AuthenticationManager {
 

@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.aerogear.security.rest.http;
+package org.jboss.aerogear.security.impl.model;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.jboss.aerogear.security.model.AeroGearUser;
+import org.jboss.aerogear.security.impl.model.AeroGearUser;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;

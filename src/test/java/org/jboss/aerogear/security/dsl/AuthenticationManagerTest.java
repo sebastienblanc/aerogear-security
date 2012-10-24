@@ -1,9 +1,9 @@
 package org.jboss.aerogear.security.dsl;
 
-import org.jboss.aerogear.security.auth.AuthenticationManager;
-import org.jboss.aerogear.security.auth.AuthenticationManagerImpl;
+import org.jboss.aerogear.security.api.auth.AuthenticationManager;
+import org.jboss.aerogear.security.impl.auth.AuthenticationManagerImpl;
 import org.jboss.aerogear.security.exception.AeroGearSecurityException;
-import org.jboss.aerogear.security.model.AeroGearUser;
+import org.jboss.aerogear.security.impl.model.AeroGearUser;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

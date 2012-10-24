@@ -1,4 +1,4 @@
-package org.jboss.aerogear.security.annotations;
+package org.jboss.aerogear.security.api.annotations;
 
 import javax.inject.Qualifier;
 import java.lang.annotation.Documented;

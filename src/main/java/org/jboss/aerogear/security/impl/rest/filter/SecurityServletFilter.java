@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.rest.filter;
+package org.jboss.aerogear.security.impl.rest.filter;
 
 import org.picketbox.cdi.PicketBoxIdentity;
 import org.picketlink.authentication.AuthenticationException;

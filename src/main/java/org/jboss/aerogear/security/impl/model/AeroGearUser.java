@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.model;
+package org.jboss.aerogear.security.impl.model;
 
 import org.picketbox.cdi.PicketBoxIdentity;
 import org.picketlink.idm.model.AbstractIdentityType;
