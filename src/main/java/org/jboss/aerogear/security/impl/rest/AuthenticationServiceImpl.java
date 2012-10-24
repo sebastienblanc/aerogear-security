@@ -23,7 +23,6 @@
 package org.jboss.aerogear.security.impl.rest;
 
 import org.jboss.aerogear.security.api.auth.AuthenticationManager;
-import org.jboss.aerogear.security.api.auth.CredentialBuilder;
 import org.jboss.aerogear.security.api.rest.AuthenticationService;
 import org.jboss.aerogear.security.impl.model.AuthenticationRequest;
 import org.jboss.aerogear.security.util.HttpResponseBuilder;
@@ -41,23 +40,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private AuthenticationManager authenticationManager;
 
     @Inject
-    private CredentialBuilder credentialBuilder;
-
-    @Inject
     private HttpResponseBuilder httpResponseBuilder;
 
-    public Response login(final AuthenticationRequest authcRequest) {
+    public Response login(final AuthenticationRequest authenticationRequest) {
 
-        credentialBuilder.otpCredential(authcRequest);
-        authenticationManager.login();
+        authenticationManager.login(authenticationRequest);
 
         return httpResponseBuilder.createResponse();
     }
 
-    public Response signin(final AuthenticationRequest authcRequest) {
+    public Response signin(final AuthenticationRequest authenticationRequest) {
 
-        credentialBuilder.simpleCredential(authcRequest);
-        authenticationManager.login();
+        authenticationManager.login(authenticationRequest);
 
         return httpResponseBuilder.createResponse();
     }

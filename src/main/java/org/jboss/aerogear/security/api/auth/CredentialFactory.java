@@ -3,9 +3,8 @@ package org.jboss.aerogear.security.api.auth;
 import org.jboss.aerogear.security.impl.model.AeroGearUser;
 import org.picketlink.credential.Credential;
 
-public interface CredentialBuilder extends Credential {
+public interface CredentialFactory extends Credential {
 
-    void simpleCredential(AeroGearUser user);
+    void setCredential(AeroGearUser user);
 
-    void otpCredential(AeroGearUser user);
 }
