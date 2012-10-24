@@ -38,16 +38,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-/**
- * <p>JAX-RS Endpoint to authenticate users using otp.</p>
- *
- * @author anil saldhana
- * @author Pedro Silva
- */
 @Stateless
-@Path("/auth")
 @TransactionAttribute
-public class AuthenticationEndpoint {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Inject
     private AuthenticationManager authenticationManager;
@@ -58,16 +51,6 @@ public class AuthenticationEndpoint {
     @Inject
     private HttpResponseBuilder httpResponseBuilder;
 
-    /**
-     * <p>Performs the authentication using the informations provided by the {@link org.jboss.aerogear.security.rest.http.AuthenticationRequest}</p>
-     *
-     * @param authcRequest
-     * @return
-     */
-    @Path("/otp")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public Response login(final AuthenticationRequest authcRequest) {
 
         credentialBuilder.otpCredential(authcRequest);
@@ -76,16 +59,6 @@ public class AuthenticationEndpoint {
         return httpResponseBuilder.createResponse();
     }
 
-    /**
-     * <p>Performs the authentication using the informations provided by the {@link org.jboss.aerogear.security.rest.http.AuthenticationRequest}</p>
-     *
-     * @param authcRequest
-     * @return
-     */
-    @Path("/login")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public Response signin(final AuthenticationRequest authcRequest) {
 
         credentialBuilder.simpleCredential(authcRequest);
@@ -94,22 +67,14 @@ public class AuthenticationEndpoint {
         return httpResponseBuilder.createResponse();
     }
 
-    @Path("/logout")
-    @GET
     public void logout() {
         authenticationManager.logout();
     }
 
-    @Path("/otp/secret")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
     public Response getInfo() {
         return httpResponseBuilder.buildSecretUserInfoResponse();
     }
 
-    @Path("/userinfo")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
     public Response getUserInfo() {
         return httpResponseBuilder.createResponse();
     }
