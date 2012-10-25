@@ -24,7 +24,7 @@ import org.picketlink.idm.model.User;
 import javax.inject.Inject;
 import java.util.Set;
 
-public abstract class AeroGearUser extends AbstractIdentityType implements User {
+public class AeroGearUser extends AbstractIdentityType implements User {
 
     @Inject
     private PicketBoxIdentity identity;
@@ -32,6 +32,7 @@ public abstract class AeroGearUser extends AbstractIdentityType implements User 
     private String id;
     private String firstName;
     private String otp;
+    private String password;
 
     @Override
     public String getId() {
@@ -72,9 +73,13 @@ public abstract class AeroGearUser extends AbstractIdentityType implements User 
         return hasRoles;
     }
 
-    public abstract String getPassword();
+    public String getPassword() {
+        return password;
+    }
 
-    public abstract void setPassword(String password);
+    public void setPassword(String password) {
+        this.password = password;    
+    }
 
     //It should be removed on PicketLink IDM
     @Override
