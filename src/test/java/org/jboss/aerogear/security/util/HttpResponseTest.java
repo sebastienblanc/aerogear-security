@@ -11,15 +11,13 @@ import org.picketbox.cdi.PicketBoxIdentity;
 import org.picketbox.core.UserContext;
 import org.picketlink.idm.model.User;
 
-import javax.inject.Inject;
-
 import java.util.Arrays;
 import java.util.Collection;
 
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
-public class HttpResponseBuilderTest {
+public class HttpResponseTest {
 
     @Mock
     private PicketBoxIdentity identity;
@@ -29,7 +27,7 @@ public class HttpResponseBuilderTest {
     private User user;
 
     @InjectMocks
-    private HttpResponseBuilder builder = new HttpResponseBuilder();
+    private HttpResponse builder = new HttpResponse();
 
     @Before
     public void setUp() throws Exception {

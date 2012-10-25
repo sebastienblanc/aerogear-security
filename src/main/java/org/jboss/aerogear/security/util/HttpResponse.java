@@ -6,7 +6,7 @@ import org.jboss.aerogear.security.impl.model.AeroGearCredential;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
-public class HttpResponseBuilder {
+public class HttpResponse {
 
     @Inject
     private AeroGearCredential credentials;

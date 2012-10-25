@@ -25,7 +25,7 @@ package org.jboss.aerogear.security.impl.rest;
 import org.jboss.aerogear.security.api.auth.AuthenticationManager;
 import org.jboss.aerogear.security.api.rest.AuthenticationService;
 import org.jboss.aerogear.security.impl.model.AeroGearUser;
-import org.jboss.aerogear.security.util.HttpResponseBuilder;
+import org.jboss.aerogear.security.util.HttpResponse;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -40,20 +40,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private AuthenticationManager authenticationManager;
 
     @Inject
-    private HttpResponseBuilder httpResponseBuilder;
+    private HttpResponse httpResponse;
 
     public Response login(final AeroGearUser aeroGearUser) {
 
         authenticationManager.login(aeroGearUser);
 
-        return httpResponseBuilder.createResponse();
+        return httpResponse.createResponse();
     }
 
     public Response otpLogin(final AeroGearUser aeroGearUser) {
 
         authenticationManager.login(aeroGearUser);
 
-        return httpResponseBuilder.createResponse();
+        return httpResponse.createResponse();
     }
 
     public void logout() {
@@ -61,10 +61,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     public Response getSecret() {
-        return httpResponseBuilder.buildSecretUserInfoResponse();
+        return httpResponse.buildSecretUserInfoResponse();
     }
 
     public Response getUserInfo() {
-        return httpResponseBuilder.createResponse();
+        return httpResponse.createResponse();
     }
 }
