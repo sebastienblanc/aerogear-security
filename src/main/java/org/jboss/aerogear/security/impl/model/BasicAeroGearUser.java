@@ -24,7 +24,7 @@ import java.io.Serializable;
 
 @XmlRootElement
 @JsonSerialize
-public class AuthenticationRequest extends AeroGearUser implements Serializable {
+public class BasicAeroGearUser extends AeroGearUser implements Serializable {
 
     private static final long serialVersionUID = 2637023097272776078L;
 

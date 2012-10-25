@@ -1,6 +1,6 @@
 package org.jboss.aerogear.security.api.rest;
 
-import org.jboss.aerogear.security.impl.model.AuthenticationRequest;
+import org.jboss.aerogear.security.impl.model.BasicAeroGearUser;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -17,13 +17,13 @@ public interface AuthenticationService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(final AuthenticationRequest authcRequest);
+    public Response login(final BasicAeroGearUser aeroGearUser);
 
     @Path("/login")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response signin(final AuthenticationRequest authcRequest);
+    public Response otpLogin(final BasicAeroGearUser aeroGearUser);
 
     @Path("/logout")
     @GET
@@ -32,7 +32,7 @@ public interface AuthenticationService {
     @Path("/otp/secret")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getInfo();
+    public Response getSecret();
 
     @Path("/userinfo")
     @GET
