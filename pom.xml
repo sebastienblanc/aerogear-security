@@ -169,17 +169,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.picketbox</groupId>
-            <artifactId>picketbox-core</artifactId>
-            <version>${picketbox.core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.picketbox</groupId>
-            <artifactId>picketbox-cdi</artifactId>
-            <version>${picketbox.cdi.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.jboss.aerogear</groupId>
             <artifactId>aerogear-controller</artifactId>
             <version>0.0.4.M6-SNAPSHOT</version>
