@@ -17,6 +17,7 @@
 
 package org.jboss.aerogear.security.impl.model;
 
+import org.jboss.aerogear.security.impl.auth.AuthenticationKeyProvider;
 import org.picketbox.cdi.PicketBoxIdentity;
 
 import javax.inject.Inject;
@@ -27,11 +28,30 @@ public class AeroGearCredential {
     @Inject
     private PicketBoxIdentity identity;
 
+    @Inject
+    private AuthenticationKeyProvider provider;
+
     public String getId() {
         return identity.getUserContext().getUser().getFirstName();
     }
 
     public Collection<String> getRoles() {
         return identity.getUserContext().getRoleNames();
+    }
+
+    public String getKey() {
+        return identity.getUserContext().getUser().getKey();
+    }
+
+    public String getSecret() {
+        return provider.getSecret();
+    }
+
+    public String getB32() {
+        return provider.getB32();
+    }
+
+    public Object getToken() {
+        return provider.getToken();
     }
 }
