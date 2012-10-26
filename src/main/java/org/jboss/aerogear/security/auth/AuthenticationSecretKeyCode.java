@@ -1,4 +1,4 @@
-package org.jboss.aerogear.security.impl.auth;
+package org.jboss.aerogear.security.auth;
 
 import org.jboss.aerogear.security.util.Hex;
 
