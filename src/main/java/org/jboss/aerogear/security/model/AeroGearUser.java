@@ -61,4 +61,11 @@ public class AeroGearUser {
     public void setLastName(String lastName){
         this.lastName = lastName;
     }
+    public String getEmail() {
+        return email;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
 }
