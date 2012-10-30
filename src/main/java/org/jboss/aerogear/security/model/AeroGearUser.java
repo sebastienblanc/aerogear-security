@@ -20,6 +20,7 @@ package org.jboss.aerogear.security.model;
 public class AeroGearUser {
 
     private String id;
+
     private String firstName;
     private String otp;
     private String password;
@@ -28,6 +29,10 @@ public class AeroGearUser {
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -54,13 +59,14 @@ public class AeroGearUser {
         this.password = password;
     }
 
-    public void setEmail(String email){
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setLastName(String lastName){
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     public String getEmail() {
         return email;
     }
