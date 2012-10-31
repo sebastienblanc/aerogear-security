@@ -1,4 +1,4 @@
-package org.jboss.aerogear.security.rest;
+package org.jboss.aerogear.security.rest.service;
 
 import org.jboss.aerogear.security.model.AeroGearUser;
 
@@ -10,7 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/auth")
+@Path("/")
 public interface AuthenticationService {
 
     @Path("/otp")
