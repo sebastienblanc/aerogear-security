@@ -23,8 +23,8 @@
 package org.jboss.aerogear.security.rest.service;
 
 import org.jboss.aerogear.security.auth.AuthenticationManager;
+import org.jboss.aerogear.security.model.AeroGearCredential;
 import org.jboss.aerogear.security.model.AeroGearUser;
-import org.jboss.aerogear.security.util.HttpResponse;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -35,35 +35,37 @@ import javax.ws.rs.core.Response;
 @TransactionAttribute
 public class AuthenticationServiceImpl implements AuthenticationService {
 
+    private static final String HEADER = "Auth-Token";
+
     @Inject
     private AuthenticationManager authenticationManager;
 
-    @Inject
-    private HttpResponse httpResponse;
-
-    public Response login(AeroGearUser aeroGearUser) {
+    public Response login(final AeroGearUser aeroGearUser) {
 
         authenticationManager.login(aeroGearUser);
-
-        return httpResponse.getResponse();
+        return Response.ok(authenticationManager.getCredential()).build();
     }
 
     public Response otpLogin(final AeroGearUser aeroGearUser) {
 
         authenticationManager.login(aeroGearUser);
-
-        return httpResponse.getResponse();
+        return Response.ok(authenticationManager.getCredential()).build();
     }
 
     public void logout() {
         authenticationManager.logout();
     }
 
+    //TODO token will be provided by servlet filters
     public Response getSecret() {
-        return httpResponse.getResponse();
+        AeroGearCredential credential = authenticationManager.getCredential();
+        return Response.ok(credential)
+                .header(HEADER, credential.getToken()).build();
     }
 
     public Response getUserInfo() {
-        return httpResponse.getResponse();
+        AeroGearCredential credential = authenticationManager.getCredential();
+        return Response.ok(credential)
+                .header(HEADER, credential.getToken()).build();
     }
 }

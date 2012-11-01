@@ -18,6 +18,7 @@
 package org.jboss.aerogear.security.rest.filter;
 
 import org.jboss.aerogear.security.authz.AuthorizationManager;
+import org.jboss.aerogear.security.model.AeroGearCredential;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -39,11 +40,15 @@ public class SecurityServletFilter implements Filter {
     private static final String AUTH_PATH = "/auth/";
     private static final String AUTH_TOKEN = "Auth-Token";
     private static final String LOGOUT_PATH = "/auth/logout";
+    private static final String AUTH_HEADER = "Auth-Token";
 
     private FilterConfig config;
 
     @Inject
     private AuthorizationManager manager;
+
+    @Inject
+    private AeroGearCredential credential;
 
     @Override
     public void init(FilterConfig config) throws ServletException {
@@ -61,6 +66,7 @@ public class SecurityServletFilter implements Filter {
         if (!manager.validate(token) && (path.contains(LOGOUT_PATH) || !path.contains(AUTH_PATH))) {
             httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         } else {
+            httpServletResponse.setHeader(AUTH_HEADER, credential.getToken());
             filterChain.doFilter(servletRequest, servletResponse);
         }
     }

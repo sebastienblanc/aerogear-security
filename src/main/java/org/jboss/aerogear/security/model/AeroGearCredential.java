@@ -12,7 +12,7 @@ public interface AeroGearCredential {
 
     public String getB32();
 
-    public Object getToken();
+    public String getToken();
 
     public Collection<String> getRoles();
 

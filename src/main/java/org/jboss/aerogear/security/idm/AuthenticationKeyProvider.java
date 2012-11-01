@@ -6,5 +6,5 @@ public interface AuthenticationKeyProvider {
 
     String getB32();
 
-    Object getToken();
+    String getToken();
 }

@@ -17,26 +17,26 @@
 
 package org.jboss.aerogear.security.exception;
 
-import static javax.ws.rs.core.Response.Status.*;
+import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
 //TODO must be improved
-public enum ExceptionMessage {
+public enum HttpStatus {
 
     AUTHENTICATION_FAILED("User authentication failed", UNAUTHORIZED.getStatusCode());
 
     private String message;
     private int status;
 
-    ExceptionMessage(String message) {
+    HttpStatus(String message) {
         this.message = message;
     }
 
-    ExceptionMessage(String message, int status) {
+    HttpStatus(String message, int status) {
         this.message = message;
         this.status = status;
     }
 
-    public int getStatus() {
+    public int getCode() {
         return status;
     }
 
@@ -47,9 +47,5 @@ public enum ExceptionMessage {
 
     public String getMessage() {
         return message;
-    }
-
-    public void throwException() {
-        throw new AeroGearSecurityException(message, status);
     }
 }

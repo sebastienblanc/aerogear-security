@@ -2,7 +2,8 @@ package org.jboss.aerogear.security.spi;
 
 import org.jboss.aerogear.controller.router.Route;
 import org.jboss.aerogear.controller.spi.SecurityProvider;
-import org.jboss.aerogear.security.exception.ExceptionMessage;
+import org.jboss.aerogear.security.exception.AeroGearSecurityException;
+import org.jboss.aerogear.security.exception.HttpStatus;
 import org.jboss.aerogear.security.idm.AeroGearPrincipal;
 
 import javax.inject.Inject;
@@ -17,7 +18,7 @@ public class AeroGearSecurityProvider implements SecurityProvider {
     public void isRouteAllowed(Route route) throws ServletException {
 
         if (!principal.hasRoles(route.getRoles())) {
-            ExceptionMessage.AUTHENTICATION_FAILED.throwException();
+            throw new AeroGearSecurityException(HttpStatus.AUTHENTICATION_FAILED);
         }
     }
 }

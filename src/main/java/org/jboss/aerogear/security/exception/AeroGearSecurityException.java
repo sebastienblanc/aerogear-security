@@ -6,6 +6,11 @@ public class AeroGearSecurityException extends RuntimeException implements HttpS
 
     private int status;
 
+    public AeroGearSecurityException(HttpStatus httpStatus){
+        super(httpStatus.getMessage());
+        this.status = httpStatus.getCode();
+    }
+
     public AeroGearSecurityException(String message, int status) {
         super(message);
         this.status = status;
