@@ -48,7 +48,6 @@ public class SecurityServletFilter implements Filter {
     @Override
     public void init(FilterConfig config) throws ServletException {
         this.config = config;
-        //TODO to be implemented
     }
 
     @Override
@@ -59,7 +58,7 @@ public class SecurityServletFilter implements Filter {
         String path = httpServletRequest.getRequestURI();
         String token = httpServletRequest.getHeader(AUTH_TOKEN);
 
-        if (!manager.validate(token) && (path.contains(LOGOUT_PATH) && !path.contains(AUTH_PATH))) {
+        if (!manager.validate(token) && (path.contains(LOGOUT_PATH) || !path.contains(AUTH_PATH))) {
             httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
