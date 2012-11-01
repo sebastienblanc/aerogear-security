@@ -60,7 +60,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     public Response getSecret() {
-        return httpResponse.buildSecretUserInfoResponse();
+        return httpResponse.createResponse();
     }
 
     public Response getUserInfo() {

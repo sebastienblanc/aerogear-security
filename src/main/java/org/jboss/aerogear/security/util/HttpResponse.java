@@ -15,8 +15,4 @@ public class HttpResponse {
     public Response createResponse() {
         return Response.ok(credentials).header(AUTH_HEADER, credentials.getToken()).build();
     }
-
-    public Response buildSecretUserInfoResponse() {
-        return Response.ok(credentials).header(AUTH_HEADER, credentials.getToken()).build();
-    }
 }
