@@ -12,7 +12,7 @@ public class HttpResponse {
 
     private static final String AUTH_HEADER = "Auth-Token";
 
-    public Response createResponse() {
+    public Response getResponse() {
         return Response.ok(credentials).header(AUTH_HEADER, credentials.getToken()).build();
     }
 }

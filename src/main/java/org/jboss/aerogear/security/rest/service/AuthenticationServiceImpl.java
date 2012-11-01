@@ -41,18 +41,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Inject
     private HttpResponse httpResponse;
 
-    public Response login(final AeroGearUser aeroGearUser) {
+    public Response login(AeroGearUser aeroGearUser) {
 
         authenticationManager.login(aeroGearUser);
 
-        return httpResponse.createResponse();
+        return httpResponse.getResponse();
     }
 
     public Response otpLogin(final AeroGearUser aeroGearUser) {
 
         authenticationManager.login(aeroGearUser);
 
-        return httpResponse.createResponse();
+        return httpResponse.getResponse();
     }
 
     public void logout() {
@@ -60,10 +60,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     public Response getSecret() {
-        return httpResponse.createResponse();
+        return httpResponse.getResponse();
     }
 
     public Response getUserInfo() {
-        return httpResponse.createResponse();
+        return httpResponse.getResponse();
     }
 }
