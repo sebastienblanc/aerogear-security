@@ -13,7 +13,7 @@ public class AuthenticationSecretKeyCode {
         //Just pick the first 10 characters
         secret = secret.substring(0, 10);
 
-        secret = Hex.toHexString(secret.getBytes());
+        secret = Hex.toString(secret.getBytes());
 
         return secret;
     }

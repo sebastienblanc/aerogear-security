@@ -17,15 +17,14 @@
 
 package org.jboss.aerogear.security.exception;
 
-import javax.servlet.http.HttpServletResponse;
+import static javax.ws.rs.core.Response.Status.*;
 
 //TODO must be improved
 public enum ExceptionMessage {
 
-    AUTHENTICATION_FAILED("User authentication failed", HttpServletResponse.SC_UNAUTHORIZED);
+    AUTHENTICATION_FAILED("User authentication failed", UNAUTHORIZED.getStatusCode());
 
     private String message;
-
     private int status;
 
     ExceptionMessage(String message) {
