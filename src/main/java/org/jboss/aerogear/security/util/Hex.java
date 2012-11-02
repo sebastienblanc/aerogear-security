@@ -21,8 +21,7 @@ public class Hex {
 
     public static String toString(byte[] bytes) {
         StringBuilder str = new StringBuilder();
-        for (int i = 0; i < bytes.length; i++)
-            str.append(String.format("%x", bytes[i]));
+        for (byte aByte : bytes) str.append(String.format("%x", aByte));
         return str.toString();
     }
 
