@@ -1,5 +1,3 @@
-package org.jboss.aerogear.security.exception;
-
 /*
  * JBoss, Home of Professional Open Source
  * Copyright 2012, Red Hat, Inc., and individual contributors
@@ -16,6 +14,8 @@ package org.jboss.aerogear.security.exception;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package org.jboss.aerogear.security.exception;
 
 import org.jboss.logging.Logger;
 
@@ -34,8 +34,6 @@ public class HttpExceptionMapper implements ExceptionMapper<Throwable> {
     public Response toResponse(Throwable exception) {
 
         Throwable exceptionCause = exception.getCause();
-
-        System.out.println("BAD REQUEST: " + exceptionCause.getMessage());
 
         if (exceptionCause instanceof AeroGearSecurityException) {
             return Response.status(UNAUTHORIZED)
