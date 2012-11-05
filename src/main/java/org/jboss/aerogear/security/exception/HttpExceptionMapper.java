@@ -17,8 +17,6 @@
 
 package org.jboss.aerogear.security.exception;
 
-import org.jboss.logging.Logger;
-
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -28,14 +26,10 @@ import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 @Provider
 public class HttpExceptionMapper implements ExceptionMapper<Throwable> {
 
-    private static final Logger LOGGER = Logger.getLogger(HttpExceptionMapper.class);
-
     @Override
     public Response toResponse(Throwable exception) {
 
-        Throwable exceptionCause = exception.getCause();
-
-        if (exceptionCause instanceof AeroGearSecurityException) {
+        if (exception instanceof AeroGearSecurityException) {
             return Response.status(UNAUTHORIZED)
                     .entity(HttpStatus.AUTHENTICATION_FAILED.toString())
                     .build();

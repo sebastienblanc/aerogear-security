@@ -28,11 +28,6 @@ public class AeroGearSecurityException extends RuntimeException implements HttpS
         this.status = httpStatus.getCode();
     }
 
-    public AeroGearSecurityException(String message, int status) {
-        super(message);
-        this.status = status;
-    }
-
     @Override
     public int getStatus() {
         return status;
