@@ -15,21 +15,22 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.rest;
+package org.jboss.aerogear.security.util;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import org.jboss.aerogear.security.model.AeroGearCredential;
 
-/**
- * A class extending {@link javax.ws.rs.core.Application} and annotated with @ApplicationPath is the Java EE 6
- * "no XML" approach to activating JAX-RS.
- * <p/>
- * <p>
- * Resources are served relative to the servlet path specified in the {@link javax.ws.rs.ApplicationPath}
- * annotation.
- * </p>
- */
-@ApplicationPath("/auth")
-public class JaxRsActivator extends Application {
-    /* class body intentionally left blank */
+import javax.inject.Inject;
+import javax.ws.rs.core.Response;
+
+public class ResponseBuilder {
+
+    private static final String HEADER = "Auth-Token";
+
+    @Inject
+    private AeroGearCredential credential;
+
+    public Response createResponse() {
+        return Response.ok(credential)
+                .header(HEADER, credential.getToken()).build();
+    }
 }
