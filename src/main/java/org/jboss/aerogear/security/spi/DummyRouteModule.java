@@ -21,7 +21,7 @@ import org.jboss.aerogear.controller.router.AbstractRoutingModule;
 
 import javax.enterprise.inject.Alternative;
 
-//@Alternative
+@Alternative
 public class DummyRouteModule extends AbstractRoutingModule {
 
     @Override
