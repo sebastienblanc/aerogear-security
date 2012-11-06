@@ -18,6 +18,7 @@
 package org.jboss.aerogear.security.rest.service;
 
 import org.jboss.aerogear.security.auth.AuthenticationManager;
+import org.jboss.aerogear.security.auth.CredentialFactory;
 import org.jboss.aerogear.security.model.AeroGearCredential;
 import org.jboss.aerogear.security.model.AeroGearUser;
 import org.jboss.aerogear.security.util.ResponseBuilder;
@@ -35,16 +36,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private AuthenticationManager authenticationManager;
 
     @Inject
+    private CredentialFactory credentialFactory;
+
+    @Inject
     private ResponseBuilder responseBuilder;
 
     public Response login(final AeroGearUser aeroGearUser) {
 
+        credentialFactory.setSimpleCredential(aeroGearUser);
         authenticationManager.login(aeroGearUser);
         return responseBuilder.createResponse();
     }
 
     public Response otpLogin(final AeroGearUser aeroGearUser) {
 
+        credentialFactory.setOtpCredential(aeroGearUser);
         authenticationManager.login(aeroGearUser);
         return responseBuilder.createResponse();
     }

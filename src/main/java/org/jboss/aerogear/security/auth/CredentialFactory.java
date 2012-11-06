@@ -21,6 +21,8 @@ import org.jboss.aerogear.security.model.AeroGearUser;
 
 public interface CredentialFactory {
 
-    void setCredential(AeroGearUser user);
+    void setOtpCredential(AeroGearUser user);
+
+    void setSimpleCredential(AeroGearUser user);
 
 }
