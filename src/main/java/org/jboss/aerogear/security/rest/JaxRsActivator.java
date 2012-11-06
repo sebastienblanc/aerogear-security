@@ -15,29 +15,21 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.util;
+package org.jboss.aerogear.security.rest;
 
-import org.jboss.aerogear.security.model.AeroGearCredential;
-import org.jboss.logging.Logger;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
-import javax.inject.Inject;
-import javax.ws.rs.core.Response;
-
-
-public class ResponseBuilder {
-
-    private static final String HEADER = "Auth-Token";
-
-    private static final Logger LOGGER = Logger.getLogger(ResponseBuilder.class);
-
-    @Inject
-    private AeroGearCredential credential;
-
-    public Response createResponse() {
-        LOGGER.debug("Secret: " + credential.getSecret());
-        LOGGER.debug("Key: " + credential.getKey());
-        LOGGER.debug("Base32: " + credential.getB32());
-        return Response.ok(credential)
-                .header(HEADER, credential.getToken()).build();
-    }
+/**
+ * A class extending {@link javax.ws.rs.core.Application} and annotated with @ApplicationPath is the Java EE 6
+ * "no XML" approach to activating JAX-RS.
+ * <p/>
+ * <p>
+ * Resources are served relative to the servlet path specified in the {@link javax.ws.rs.ApplicationPath}
+ * annotation.
+ * </p>
+ */
+@ApplicationPath("/auth")
+public class JaxRsActivator extends Application {
+    /* class body intentionally left blank */
 }
