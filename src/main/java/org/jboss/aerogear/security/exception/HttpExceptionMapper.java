@@ -20,6 +20,7 @@ package org.jboss.aerogear.security.exception;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
+import org.jboss.resteasy.spi.NotFoundException;
 
 import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
@@ -33,8 +34,10 @@ public class HttpExceptionMapper implements ExceptionMapper<Throwable> {
             return Response.status(UNAUTHORIZED)
                     .entity(HttpStatus.AUTHENTICATION_FAILED.toString())
                     .build();
-        } else {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+        } /* else if (exception instanceof NotFoundException){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        } */ else {
+            return Response.status(Response.Status.OK).build();
         }
     }
 }
