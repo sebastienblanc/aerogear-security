@@ -24,5 +24,5 @@ public interface AeroGearPrincipal {
 
     boolean hasRoles(Set<String> roles);
 
-    public Collection<String> getRoles();
+    Collection<String> getRoles();
 }

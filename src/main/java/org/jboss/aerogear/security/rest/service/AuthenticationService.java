@@ -34,25 +34,25 @@ public interface AuthenticationService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(final AeroGearUser aeroGearUser);
+    Response login(final AeroGearUser aeroGearUser);
 
     @Path("/login")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response otpLogin(final AeroGearUser aeroGearUser);
+    Response otpLogin(final AeroGearUser aeroGearUser);
 
     @Path("/logout")
     @GET
-    public void logout();
+    void logout();
 
     @Path("/otp/secret")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSecret();
+    Response getSecret();
 
     @Path("/userinfo")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserInfo();
+    Response getUserInfo();
 }

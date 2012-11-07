@@ -19,7 +19,7 @@ package org.jboss.aerogear.security.idm;
 
 public interface AeroGearIdentity {
 
-    public String getUsername();
+    String getUsername();
 
-    public String getKey();
+    String getKey();
 }

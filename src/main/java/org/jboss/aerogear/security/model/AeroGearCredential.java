@@ -21,16 +21,16 @@ import java.util.Collection;
 
 public interface AeroGearCredential {
 
-    public String getId();
+    String getId();
 
-    public String getKey();
+    String getKey();
 
-    public String getSecret();
+    String getSecret();
 
-    public String getB32();
+    String getB32();
 
-    public String getToken();
+    String getToken();
 
-    public Collection<String> getRoles();
+    Collection<String> getRoles();
 
 }
