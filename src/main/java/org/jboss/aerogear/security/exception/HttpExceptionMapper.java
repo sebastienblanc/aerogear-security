@@ -34,8 +34,7 @@ public class HttpExceptionMapper implements ExceptionMapper<Throwable> {
                     .entity(HttpStatus.AUTHENTICATION_FAILED.toString())
                     .build();
         } else  {
-            //return Response.status(Response.Status.BAD_REQUEST).build();
-            return Response.status(Response.Status.OK).build();
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 }
