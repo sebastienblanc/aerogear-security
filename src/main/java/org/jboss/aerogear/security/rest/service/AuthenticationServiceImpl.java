@@ -19,6 +19,7 @@ package org.jboss.aerogear.security.rest.service;
 
 import org.jboss.aerogear.security.auth.AuthenticationManager;
 import org.jboss.aerogear.security.auth.CredentialFactory;
+import org.jboss.aerogear.security.authz.IdentityManagement;
 import org.jboss.aerogear.security.model.AeroGearCredential;
 import org.jboss.aerogear.security.model.AeroGearUser;
 
@@ -35,12 +36,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private AuthenticationManager authenticationManager;
 
     @Inject
+    private IdentityManagement configuration;
+
+    @Inject
     private CredentialFactory credentialFactory;
 
     @Inject
     private AeroGearCredential aeroGearCredential;
 
     private static final String HEADER = "Auth-Token";
+
+    //TODO figure out how to provide it
+    public static final String DEFAULT_ROLE = "admin";
 
     public Response login(final AeroGearUser aeroGearUser) {
 
@@ -56,6 +63,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         authenticationManager.login(aeroGearUser);
         return Response.ok(aeroGearCredential)
                 .header(HEADER, aeroGearCredential.getToken()).build();
+    }
+
+    //TODO
+    public void register(AeroGearUser aeroGearUser) {
+        configuration.grant(DEFAULT_ROLE).to(aeroGearUser);
+        authenticationManager.login(aeroGearUser);
     }
 
     public void logout() {

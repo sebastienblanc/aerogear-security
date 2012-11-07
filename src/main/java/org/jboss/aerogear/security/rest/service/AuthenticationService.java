@@ -27,7 +27,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/")
+@Path("/auth")
 public interface AuthenticationService {
 
     @Path("/otp")
@@ -41,6 +41,12 @@ public interface AuthenticationService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     Response otpLogin(final AeroGearUser aeroGearUser);
+
+    @Path("/register")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    void register(final AeroGearUser aeroGearUser);
 
     @Path("/logout")
     @GET
