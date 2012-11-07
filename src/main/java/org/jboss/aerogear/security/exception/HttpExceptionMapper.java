@@ -17,24 +17,24 @@
 
 package org.jboss.aerogear.security.exception;
 
-import org.jboss.aerogear.controller.spi.HttpStatusAwareException;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
-public class AeroGearSecurityException extends RuntimeException implements HttpStatusAwareException {
+import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
-    private int status;
-
-    public AeroGearSecurityException(HttpStatus httpStatus) {
-        super(httpStatus.getMessage());
-        this.status = httpStatus.getCode();
-    }
+@Provider
+public class HttpExceptionMapper implements ExceptionMapper<Throwable> {
 
     @Override
-    public int getStatus() {
-        return status;
-    }
+    public Response toResponse(Throwable exception) {
 
-    @Override
-    public String getMessage() {
-        return super.getMessage();
+        if (exception instanceof AeroGearSecurityException) {
+            return Response.status(UNAUTHORIZED)
+                    .entity(HttpStatus.AUTHENTICATION_FAILED.toString())
+                    .build();
+        } else  {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
     }
 }

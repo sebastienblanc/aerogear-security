@@ -15,26 +15,17 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.exception;
+package org.jboss.aerogear.security.spi;
 
-import org.jboss.aerogear.controller.spi.HttpStatusAwareException;
+import org.jboss.aerogear.controller.router.AbstractRoutingModule;
 
-public class AeroGearSecurityException extends RuntimeException implements HttpStatusAwareException {
+import javax.enterprise.inject.Alternative;
 
-    private int status;
-
-    public AeroGearSecurityException(HttpStatus httpStatus) {
-        super(httpStatus.getMessage());
-        this.status = httpStatus.getCode();
-    }
+@Alternative
+public class DummyRouteModule extends AbstractRoutingModule {
 
     @Override
-    public int getStatus() {
-        return status;
-    }
-
-    @Override
-    public String getMessage() {
-        return super.getMessage();
+    public void configuration() throws Exception {
+        //Dummy implementation fallback
     }
 }

@@ -15,20 +15,22 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.dsl;
+package org.jboss.aerogear.security.model;
 
+import java.util.Collection;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+public interface AeroGearCredential {
 
-@ApplicationScoped
-public class IdentityManagementImpl implements IdentityManagement {
+    String getId();
 
-    @Inject
-    private GrantConfiguration grantConfiguration;
+    String getKey();
 
-    @Override
-    public GrantMethods grant(String... roles) {
-        return grantConfiguration.roles(roles);
-    }
+    String getSecret();
+
+    String getB32();
+
+    String getToken();
+
+    Collection<String> getRoles();
+
 }

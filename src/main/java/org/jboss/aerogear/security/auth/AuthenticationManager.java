@@ -15,26 +15,13 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.exception;
+package org.jboss.aerogear.security.auth;
 
-import org.jboss.aerogear.controller.spi.HttpStatusAwareException;
+import org.jboss.aerogear.security.model.AeroGearUser;
 
-public class AeroGearSecurityException extends RuntimeException implements HttpStatusAwareException {
+public interface AuthenticationManager {
 
-    private int status;
+    boolean login(AeroGearUser aeroGearUser);
 
-    public AeroGearSecurityException(HttpStatus httpStatus) {
-        super(httpStatus.getMessage());
-        this.status = httpStatus.getCode();
-    }
-
-    @Override
-    public int getStatus() {
-        return status;
-    }
-
-    @Override
-    public String getMessage() {
-        return super.getMessage();
-    }
+    void logout();
 }

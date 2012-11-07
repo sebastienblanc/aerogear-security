@@ -15,26 +15,23 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.exception;
+package org.jboss.aerogear.security.auth;
 
-import org.jboss.aerogear.controller.spi.HttpStatusAwareException;
+import org.jboss.aerogear.security.util.Hex;
 
-public class AeroGearSecurityException extends RuntimeException implements HttpStatusAwareException {
+import java.util.UUID;
 
-    private int status;
+public class AuthenticationSecretKeyCode {
 
-    public AeroGearSecurityException(HttpStatus httpStatus) {
-        super(httpStatus.getMessage());
-        this.status = httpStatus.getCode();
-    }
+    public static String create() {
+        String secret = UUID.randomUUID().toString();
+        secret = secret.replace('-', 'c');
 
-    @Override
-    public int getStatus() {
-        return status;
-    }
+        //Just pick the first 10 characters
+        secret = secret.substring(0, 10);
 
-    @Override
-    public String getMessage() {
-        return super.getMessage();
+        secret = Hex.toString(secret.getBytes());
+
+        return secret;
     }
 }

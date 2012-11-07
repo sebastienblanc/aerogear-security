@@ -6,7 +6,7 @@
 
     <groupId>org.jboss.aerogear</groupId>
     <artifactId>aerogear-security</artifactId>
-    <version>0.0.4.M6-SNAPSHOT</version>
+    <version>1.0.0.M1-20121107</version>
     <packaging>jar</packaging>
     <name>AeroGear Security</name>
 
@@ -39,9 +39,17 @@
         <!-- Define the version of JBoss' Java EE 6 APIs we want to import. Any dependencies from org.jboss.spec will have their
              version defined by this BOM -->
         <javaee6.bom.version>1.0.0.Final</javaee6.bom.version>
-        <picketbox.version>5.0.0-2012Sep26</picketbox.version>
+        <picketbox.cdi.version>5.0.0-SNAPSHOT</picketbox.cdi.version>
+        <picketbox.core.version>5.0.0-SNAPSHOT</picketbox.core.version>
     </properties>
 
+   <!-- <repositories>
+        <repository>
+            <id>cloudbees-snapshot-repository</id>
+            <name>cloudbees-snapshot-repository</name>
+            <url>http://repository-aerogear.forge.cloudbees.com/snapshot/</url>
+        </repository>
+    </repositories>  -->
     <build>
         <plugins>
             <plugin>
@@ -161,17 +169,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.picketbox</groupId>
-            <artifactId>picketbox-core</artifactId>
-            <version>${picketbox.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.picketbox</groupId>
-            <artifactId>picketbox-cdi</artifactId>
-            <version>${picketbox.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.jboss.aerogear</groupId>
             <artifactId>aerogear-controller</artifactId>
             <version>0.0.4.M6-SNAPSHOT</version>
@@ -270,6 +267,13 @@
             <artifactId>mockito-core</artifactId>
             <version>1.9.0</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>2.3.4.Final</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

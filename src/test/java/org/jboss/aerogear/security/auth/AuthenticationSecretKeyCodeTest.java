@@ -15,15 +15,17 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.dsl;
+package org.jboss.aerogear.security.auth;
 
-import org.jboss.aerogear.security.model.AeroGearUser;
+import org.junit.Test;
 
-public interface IdentityManagement {
+import static org.junit.Assert.assertEquals;
 
-    GrantMethods grant(String... roles);
+public class AuthenticationSecretKeyCodeTest {
 
-    static interface GrantMethods {
-        void to(AeroGearUser user);
+    @Test
+    public void testCreate() throws Exception {
+        String secretCode = AuthenticationSecretKeyCode.create();
+        assertEquals(20, secretCode.length());
     }
 }

@@ -15,26 +15,13 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.exception;
+package org.jboss.aerogear.security.idm;
 
-import org.jboss.aerogear.controller.spi.HttpStatusAwareException;
+public interface AuthenticationKeyProvider {
 
-public class AeroGearSecurityException extends RuntimeException implements HttpStatusAwareException {
+    String getSecret();
 
-    private int status;
+    String getB32();
 
-    public AeroGearSecurityException(HttpStatus httpStatus) {
-        super(httpStatus.getMessage());
-        this.status = httpStatus.getCode();
-    }
-
-    @Override
-    public int getStatus() {
-        return status;
-    }
-
-    @Override
-    public String getMessage() {
-        return super.getMessage();
-    }
+    String getToken();
 }

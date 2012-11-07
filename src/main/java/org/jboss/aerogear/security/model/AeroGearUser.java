@@ -17,30 +17,61 @@
 
 package org.jboss.aerogear.security.model;
 
-import org.jboss.picketlink.cdi.Identity;
-import org.jboss.picketlink.idm.model.AbstractIdentityType;
-import org.jboss.picketlink.idm.model.User;
-import org.picketbox.cdi.PicketBoxUser;
+public class AeroGearUser {
 
-import javax.inject.Inject;
-import java.util.Set;
+    private String id;
 
-public abstract class AeroGearUser extends AbstractIdentityType implements User {
+    private String firstName;
+    private String otp;
+    private String password;
+    private String email;
+    private String lastName;
 
-    @Inject
-    private Identity identity;
+    public String getId() {
+        return id;
+    }
 
-    public abstract String getPassword();
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public abstract void setPassword(String password);
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public boolean hasRoles(Set<String> roles) {
-        boolean hasRoles = false;
-        PicketBoxUser picketBoxUser = (PicketBoxUser) identity.getUser();
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-        if (picketBoxUser != null && identity.isLoggedIn()) {
-            hasRoles = picketBoxUser.getSubject().getRoleNames().containsAll(roles);
-        }
-        return hasRoles;
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 }
