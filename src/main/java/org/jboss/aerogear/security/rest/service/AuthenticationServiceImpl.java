@@ -44,7 +44,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     public Response login(final AeroGearUser aeroGearUser) {
 
-        credentialFactory.setSimpleCredential(aeroGearUser);
+        credentialFactory.setCredential(aeroGearUser);
         authenticationManager.login(aeroGearUser);
         return Response.ok(aeroGearCredential)
                 .header(HEADER, aeroGearCredential.getToken()).build();
