@@ -21,7 +21,6 @@ import org.jboss.aerogear.security.auth.AuthenticationManager;
 import org.jboss.aerogear.security.auth.CredentialFactory;
 import org.jboss.aerogear.security.model.AeroGearCredential;
 import org.jboss.aerogear.security.model.AeroGearUser;
-import org.jboss.aerogear.security.util.ResponseBuilder;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -39,20 +38,24 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private CredentialFactory credentialFactory;
 
     @Inject
-    private ResponseBuilder responseBuilder;
+    private AeroGearCredential aeroGearCredential;
+
+    private static final String HEADER = "Auth-Token";
 
     public Response login(final AeroGearUser aeroGearUser) {
 
         credentialFactory.setSimpleCredential(aeroGearUser);
         authenticationManager.login(aeroGearUser);
-        return responseBuilder.createResponse();
+        return Response.ok(aeroGearCredential)
+                .header(HEADER, aeroGearCredential.getToken()).build();
     }
 
     public Response otpLogin(final AeroGearUser aeroGearUser) {
 
         credentialFactory.setOtpCredential(aeroGearUser);
         authenticationManager.login(aeroGearUser);
-        return responseBuilder.createResponse();
+        return Response.ok(aeroGearCredential)
+                .header(HEADER, aeroGearCredential.getToken()).build();
     }
 
     public void logout() {
@@ -61,10 +64,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     //TODO token will be provided by servlet filters
     public Response getSecret() {
-        return responseBuilder.createResponse();
+        return Response.ok(aeroGearCredential)
+                .header(HEADER, aeroGearCredential.getToken()).build();
     }
 
     public Response getUserInfo() {
-        return responseBuilder.createResponse();
+        return Response.ok(aeroGearCredential)
+                .header(HEADER, aeroGearCredential.getToken()).build();
     }
 }
