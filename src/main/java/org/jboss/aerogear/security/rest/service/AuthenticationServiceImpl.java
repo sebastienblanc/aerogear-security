@@ -23,7 +23,6 @@ import org.jboss.aerogear.security.auth.CredentialFactory;
 import org.jboss.aerogear.security.authz.IdentityManagement;
 import org.jboss.aerogear.security.model.AeroGearCredential;
 import org.jboss.aerogear.security.model.AeroGearUser;
-import org.jboss.aerogear.security.model.UserInfo;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -80,10 +79,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     //TODO token will be provided by servlet filters
     public Response getSecret() {
         Totp totp = new Totp("B2374TNIQ3HKC446");
-        System.out.println("My pretty URI: " + totp.uri("john"));
-        UserInfo userInfo = new UserInfo();
+        AeroGearUser userInfo = new AeroGearUser();
         userInfo.setUri(totp.uri("john"));
-        System.out.println("GET SECRET: " + userInfo.getUri());
 
         return Response.ok(userInfo)
                 .header(HEADER, aeroGearCredential.getToken()).build();
@@ -91,11 +88,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     public Response getUserInfo() {
         Totp totp = new Totp("B2374TNIQ3HKC446");
-        System.out.println("My pretty URI: " + totp.uri("john"));
-        UserInfo userInfo = new UserInfo();
+        AeroGearUser userInfo = new AeroGearUser();
         userInfo.setUri(totp.uri("john"));
-
-        System.out.println("GET USERINFO: " + userInfo.getUri());
 
         return Response.ok(userInfo)
                 .header(HEADER, aeroGearCredential.getToken()).build();
