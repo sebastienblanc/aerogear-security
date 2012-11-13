@@ -17,8 +17,13 @@
 
 package org.jboss.aerogear.security.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class AeroGearUser {
 
+    @Id
     private String id;
 
     private String firstName;
@@ -26,6 +31,24 @@ public class AeroGearUser {
     private String password;
     private String email;
     private String lastName;
+    private String secret;
+    private String uri;
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
 
     public String getId() {
         return id;
