@@ -316,5 +316,12 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.abstractj.cuckootp</groupId>
+            <artifactId>cuckootp</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 </project>
