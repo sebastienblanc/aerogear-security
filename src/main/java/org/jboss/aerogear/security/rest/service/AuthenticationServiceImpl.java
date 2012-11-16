@@ -28,6 +28,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
+import java.util.logging.Logger;
 
 @Stateless
 @TransactionAttribute
@@ -45,6 +46,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Inject
     private AeroGearCredential aeroGearCredential;
 
+    private static final Logger LOGGER = Logger.getLogger(AuthenticationServiceImpl.class.getName());
+
     private static final String HEADER = "Auth-Token";
 
     //TODO figure out how to provide it
@@ -61,6 +64,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public Response otpLogin(final AeroGearUser aeroGearUser) {
 
         //TODO include some validation here
+        LOGGER.info("WE HAZ SECRETS! " + aeroGearCredential.getSecret());
         authenticationManager.login(aeroGearUser);
         return Response.ok(aeroGearCredential)
                 .header(HEADER, aeroGearCredential.getToken()).build();
@@ -78,23 +82,23 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     //TODO token will be provided by servlet filters
     public Response getSecret() {
-        Totp totp = new Totp("B2374TNIQ3HKC446");
-        System.out.println("My pretty URI: " + totp.uri("john"));
+        Totp totp = new Totp(aeroGearCredential.getSecret());
         AeroGearUser userInfo = new AeroGearUser();
-        userInfo.setUri(totp.uri("john"));
-        System.out.println("GET SECRET: " + userInfo.getUri());
+        userInfo.setUri(totp.uri(aeroGearCredential.getId()));
+
+        LOGGER.info("GET SECRET: " + userInfo.getUri());
 
         return Response.ok(userInfo)
                 .header(HEADER, aeroGearCredential.getToken()).build();
     }
 
     public Response getUserInfo() {
-        Totp totp = new Totp("B2374TNIQ3HKC446");
-        System.out.println("My pretty URI: " + totp.uri("john"));
+        Totp totp = new Totp(aeroGearCredential.getSecret());
+        LOGGER.info("My pretty URI: " + totp.uri(aeroGearCredential.getId()));
         AeroGearUser userInfo = new AeroGearUser();
-        userInfo.setUri(totp.uri("john"));
+        userInfo.setUri(totp.uri(aeroGearCredential.getId()));
 
-        System.out.println("GET USERINFO: " + userInfo.getUri());
+        LOGGER.info("GET USERINFO: " + userInfo.getUri());
 
         return Response.ok(userInfo)
                 .header(HEADER, aeroGearCredential.getToken()).build();
