@@ -60,7 +60,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     public Response otpLogin(final AeroGearUser aeroGearUser) {
 
-        credentialFactory.setOtpCredential(aeroGearUser);
+        //TODO include some validation here
         authenticationManager.login(aeroGearUser);
         return Response.ok(aeroGearCredential)
                 .header(HEADER, aeroGearCredential.getToken()).build();

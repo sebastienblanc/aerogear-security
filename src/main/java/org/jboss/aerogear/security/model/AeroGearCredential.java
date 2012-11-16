@@ -23,11 +23,7 @@ public interface AeroGearCredential {
 
     String getId();
 
-    String getKey();
-
     String getSecret();
-
-    String getB32();
 
     String getToken();
 
