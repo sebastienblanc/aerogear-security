@@ -23,7 +23,6 @@ import org.jboss.aerogear.security.auth.CredentialFactory;
 import org.jboss.aerogear.security.authz.IdentityManagement;
 import org.jboss.aerogear.security.model.AeroGearCredential;
 import org.jboss.aerogear.security.model.AeroGearUser;
-import org.jboss.aerogear.security.persistence.UserRepository;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -45,9 +44,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Inject
     private AeroGearCredential aeroGearCredential;
-
-    @Inject
-    private UserRepository userRepository;
 
     private static final String HEADER = "Auth-Token";
 
@@ -82,12 +78,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     //TODO token will be provided by servlet filters
     public Response getSecret() {
-        System.out.println("CREDENTIAL ID:  " + aeroGearCredential.getId());
-        AeroGearUser bastard = userRepository.findById(aeroGearCredential.getId());
-        System.out.println("BASTARD FOUND: " + bastard);
-        Totp totp = new Totp(bastard.getSecret());
+        Totp totp = new Totp("B2374TNIQ3HKC446");
+        System.out.println("My pretty URI: " + totp.uri("john"));
         AeroGearUser userInfo = new AeroGearUser();
-        userInfo.setUri(totp.uri(bastard.getId()));
+        userInfo.setUri(totp.uri("john"));
+        System.out.println("GET SECRET: " + userInfo.getUri());
 
         return Response.ok(userInfo)
                 .header(HEADER, aeroGearCredential.getToken()).build();
@@ -95,8 +90,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     public Response getUserInfo() {
         Totp totp = new Totp("B2374TNIQ3HKC446");
+        System.out.println("My pretty URI: " + totp.uri("john"));
         AeroGearUser userInfo = new AeroGearUser();
-        userInfo.setSecret(totp.uri("john"));
+        userInfo.setUri(totp.uri("john"));
+
+        System.out.println("GET USERINFO: " + userInfo.getUri());
 
         return Response.ok(userInfo)
                 .header(HEADER, aeroGearCredential.getToken()).build();
