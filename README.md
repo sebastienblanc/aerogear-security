@@ -11,7 +11,7 @@ AeroGear Security will come in two flavors: REST api interfaces and with [AeroGe
         <dependency>
             <groupId>org.jboss.aerogear</groupId>
             <artifactId>aerogear-security</artifactId>
-            <version>1.0.0.M1-20121107</version>
+            <version>1.0.0.M1-20121107-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         
@@ -20,7 +20,7 @@ AeroGear Security will come in two flavors: REST api interfaces and with [AeroGe
         <dependency>
              <groupId>org.jboss.aerogear</groupId>
              <artifactId>aerogear-security-picketbox</artifactId>
-             <version>1.0.0.M1-20121107</version>
+             <version>1.0.0.M1-20121107-SNAPSHOT</version>
              <scope>compile</scope>
         </dependency>
 
