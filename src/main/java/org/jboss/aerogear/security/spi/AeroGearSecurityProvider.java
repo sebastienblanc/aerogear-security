@@ -32,10 +32,11 @@ public class AeroGearSecurityProvider implements SecurityProvider {
     private AeroGearPrincipal principal;
 
     @Override
-    public void isRouteAllowed(Route route) throws ServletException {
+    public boolean isRouteAllowed(Route route) throws ServletException {
 
         if (!principal.hasRoles(route.getRoles())) {
             throw new AeroGearSecurityException(HttpStatus.AUTHENTICATION_FAILED);
         }
+        return false;
     }
 }
