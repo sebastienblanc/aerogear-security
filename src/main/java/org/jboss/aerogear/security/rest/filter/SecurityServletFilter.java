@@ -17,9 +17,10 @@
 
 package org.jboss.aerogear.security.rest.filter;
 
+import org.jboss.aerogear.security.auth.Token;
 import org.jboss.aerogear.security.authz.AuthorizationManager;
-import org.jboss.aerogear.security.idm.AeroGearCredential;
 
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -27,14 +28,13 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-//TODO include authentication headers or maybe create a new filter
-@WebFilter(filterName = "SecurityFilter", urlPatterns = "/auth/*")
+//TODO include authentication headers
+//@WebFilter(filterName = "SecurityFilter", urlPatterns = "/auth/*")
 public class SecurityServletFilter implements Filter {
 
     private static final String AUTH_TOKEN = "Auth-Token";
@@ -52,7 +52,8 @@ public class SecurityServletFilter implements Filter {
     private AuthorizationManager manager;
 
     @Inject
-    private AeroGearCredential credential;
+    @Token
+    private Instance<String> credential;
 
     @Override
     public void init(FilterConfig config) throws ServletException {
@@ -66,29 +67,27 @@ public class SecurityServletFilter implements Filter {
 
         String path = httpServletRequest.getRequestURI();
 
-        LOGGER.info("CREDENTIALS? " + credential.getId());
-
-        if (path.contains("auth/login")) {
-            httpServletResponse.setHeader(AUTH_TOKEN, "Testing Token");
+        if (path.contains("auth/login") && httpServletRequest.getSession().getId() != null) {
+            LOGGER.info("FILTER CREDENTIALS? " + credential.get());
         }
 
         if (path.contains("auth/otp")) {
             httpServletResponse.setHeader(AUTH_SECRET, "Testing OTP");
         }
 
-//        String token = httpServletRequest.getHeader(AUTH_TOKEN);
-//
-//        if (!manager.validate(token) && (path.contains(LOGOUT_PATH) || !path.contains(AUTH_PATH))) {
-//            httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//        } else {
-//            filterChain.doFilter(servletRequest, servletResponse);
-//        }
+        String token = httpServletRequest.getHeader(AUTH_TOKEN);
+
+        if (!manager.validate(token) && (path.contains(LOGOUT_PATH) || !path.contains(AUTH_PATH))) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        } else {
+            filterChain.doFilter(servletRequest, servletResponse);
+        }
 
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
     public void destroy() {
-        //TODO to be implemented
+        //TODO
     }
 }

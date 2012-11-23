@@ -18,13 +18,16 @@
 package org.jboss.aerogear.security.rest.service;
 
 import org.jboss.aerogear.security.auth.AuthenticationManager;
+import org.jboss.aerogear.security.auth.LoggedUser;
+import org.jboss.aerogear.security.auth.Secret;
+import org.jboss.aerogear.security.auth.Token;
 import org.jboss.aerogear.security.authz.IdentityManagement;
-import org.jboss.aerogear.security.idm.AeroGearCredential;
 import org.jboss.aerogear.security.model.AeroGearUser;
 import org.jboss.aerogear.security.otp.Totp;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import java.util.logging.Logger;
@@ -33,6 +36,13 @@ import java.util.logging.Logger;
 @TransactionAttribute
 public class AuthenticationServiceImpl implements AuthenticationService {
 
+    //TODO will be moved to SecurityServletFilter
+    private static final String AUTH_TOKEN = "Auth-Token";
+    private static final String AUTH_SECRET = "Auth-Secret";
+
+    //TODO it must be replaced by some admin page
+    public static final String DEFAULT_ROLE = "admin";
+
     @Inject
     private AuthenticationManager authenticationManager;
 
@@ -40,29 +50,32 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private IdentityManagement configuration;
 
     @Inject
-    private AeroGearCredential aeroGearCredential;
+    @Token
+    private Instance<String> token;
+
+    @Inject
+    @Secret
+    private Instance<String> secret;
+
+    @Inject
+    @LoggedUser
+    private Instance<String> loggedUser;
 
     private static final Logger LOGGER = Logger.getLogger(AuthenticationServiceImpl.class.getName());
 
-    private static final String HEADER = "Auth-Token";
-
-    //TODO figure out how to provide it
-    public static final String DEFAULT_ROLE = "admin";
-
     public Response login(final AeroGearUser aeroGearUser) {
 
-        LOGGER.info("LOGIN!! " + aeroGearUser.getId());
-        LOGGER.info("LOGIN!! " + aeroGearUser.getPassword());
-        LOGGER.info("CREDENTIAL!! " + aeroGearCredential.getId());
         authenticationManager.login(aeroGearUser);
-        return Response.ok(aeroGearUser).build();
+        return Response.ok(aeroGearUser).header(AUTH_TOKEN, token.get()).build();
     }
 
     public Response otpLogin(final AeroGearUser aeroGearUser) {
 
         //TODO include some validation here
         authenticationManager.login(aeroGearUser);
-        return Response.ok(aeroGearCredential).build();
+        return Response.ok(aeroGearUser)
+                .header(AUTH_TOKEN, token.get())
+                .header(AUTH_SECRET, secret.get()).build();
     }
 
     //TODO
@@ -77,22 +90,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     //TODO token will be provided by servlet filters
     public Response getSecret() {
-//        Totp totp = new Totp(aeroGearCredential.getSecret());
+        Totp totp = new Totp(secret.get());
         AeroGearUser userInfo = new AeroGearUser();
-//        userInfo.setUri(totp.uri(aeroGearCredential.getId()));
-
-        LOGGER.info("GET SECRET: " + userInfo.getUri());
+        userInfo.setUri(totp.uri(loggedUser.get()));
 
         return Response.ok(userInfo).build();
     }
 
     public Response getUserInfo() {
-//        Totp totp = new Totp(aeroGearCredential.getSecret());
-//        LOGGER.info("My pretty URI: " + totp.uri(aeroGearCredential.getId()));
+        Totp totp = new Totp(secret.get());
         AeroGearUser userInfo = new AeroGearUser();
-//        userInfo.setUri(totp.uri(aeroGearCredential.getId()));
-
-        LOGGER.info("GET USERINFO: " + userInfo.getUri());
+        userInfo.setUri(totp.uri(loggedUser.get()));
 
         return Response.ok(userInfo).build();
     }
