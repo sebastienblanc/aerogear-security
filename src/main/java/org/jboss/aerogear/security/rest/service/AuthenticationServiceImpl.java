@@ -19,7 +19,7 @@ package org.jboss.aerogear.security.rest.service;
 
 import org.jboss.aerogear.security.auth.AuthenticationManager;
 import org.jboss.aerogear.security.authz.IdentityManagement;
-import org.jboss.aerogear.security.model.AeroGearCredential;
+import org.jboss.aerogear.security.idm.AeroGearCredential;
 import org.jboss.aerogear.security.model.AeroGearUser;
 import org.jboss.aerogear.security.otp.Totp;
 
@@ -51,18 +51,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     public Response login(final AeroGearUser aeroGearUser) {
 
+        LOGGER.info("LOGIN!! " + aeroGearUser.getId());
+        LOGGER.info("LOGIN!! " + aeroGearUser.getPassword());
         authenticationManager.login(aeroGearUser);
-        return Response.ok(aeroGearCredential)
-                .header(HEADER, aeroGearCredential.getToken()).build();
+        return Response.ok(aeroGearUser).build();
     }
 
     public Response otpLogin(final AeroGearUser aeroGearUser) {
 
         //TODO include some validation here
-        LOGGER.info("WE HAZ SECRETS! " + aeroGearCredential.getSecret());
         authenticationManager.login(aeroGearUser);
-        return Response.ok(aeroGearCredential)
-                .header(HEADER, aeroGearCredential.getToken()).build();
+        return Response.ok(aeroGearCredential).build();
     }
 
     //TODO
@@ -77,25 +76,23 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     //TODO token will be provided by servlet filters
     public Response getSecret() {
-        Totp totp = new Totp(aeroGearCredential.getSecret());
+//        Totp totp = new Totp(aeroGearCredential.getSecret());
         AeroGearUser userInfo = new AeroGearUser();
-        userInfo.setUri(totp.uri(aeroGearCredential.getId()));
+//        userInfo.setUri(totp.uri(aeroGearCredential.getId()));
 
         LOGGER.info("GET SECRET: " + userInfo.getUri());
 
-        return Response.ok(userInfo)
-                .header(HEADER, aeroGearCredential.getToken()).build();
+        return Response.ok(userInfo).build();
     }
 
     public Response getUserInfo() {
-        Totp totp = new Totp(aeroGearCredential.getSecret());
-        LOGGER.info("My pretty URI: " + totp.uri(aeroGearCredential.getId()));
+//        Totp totp = new Totp(aeroGearCredential.getSecret());
+//        LOGGER.info("My pretty URI: " + totp.uri(aeroGearCredential.getId()));
         AeroGearUser userInfo = new AeroGearUser();
-        userInfo.setUri(totp.uri(aeroGearCredential.getId()));
+//        userInfo.setUri(totp.uri(aeroGearCredential.getId()));
 
         LOGGER.info("GET USERINFO: " + userInfo.getUri());
 
-        return Response.ok(userInfo)
-                .header(HEADER, aeroGearCredential.getToken()).build();
+        return Response.ok(userInfo).build();
     }
 }
