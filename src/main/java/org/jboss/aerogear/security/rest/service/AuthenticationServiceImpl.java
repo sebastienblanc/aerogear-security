@@ -53,6 +53,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         LOGGER.info("LOGIN!! " + aeroGearUser.getId());
         LOGGER.info("LOGIN!! " + aeroGearUser.getPassword());
+        LOGGER.info("CREDENTIAL!! " + aeroGearCredential.getId());
         authenticationManager.login(aeroGearUser);
         return Response.ok(aeroGearUser).build();
     }
