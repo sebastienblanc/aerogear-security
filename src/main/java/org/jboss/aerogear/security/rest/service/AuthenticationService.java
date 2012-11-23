@@ -30,13 +30,13 @@ import javax.ws.rs.core.Response;
 @Path("/")
 public interface AuthenticationService {
 
-    @Path("/otp")
+    @Path("/login")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     Response login(final AeroGearUser aeroGearUser);
 
-    @Path("/login")
+    @Path("/otp")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
