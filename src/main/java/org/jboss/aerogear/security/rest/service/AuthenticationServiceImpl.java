@@ -17,12 +17,11 @@
 
 package org.jboss.aerogear.security.rest.service;
 
-import org.abstractj.cuckootp.Totp;
 import org.jboss.aerogear.security.auth.AuthenticationManager;
-import org.jboss.aerogear.security.auth.CredentialFactory;
 import org.jboss.aerogear.security.authz.IdentityManagement;
 import org.jboss.aerogear.security.model.AeroGearCredential;
 import org.jboss.aerogear.security.model.AeroGearUser;
+import org.jboss.aerogear.security.otp.Totp;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -41,9 +40,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private IdentityManagement configuration;
 
     @Inject
-    private CredentialFactory credentialFactory;
-
-    @Inject
     private AeroGearCredential aeroGearCredential;
 
     private static final Logger LOGGER = Logger.getLogger(AuthenticationServiceImpl.class.getName());
@@ -55,7 +51,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     public Response login(final AeroGearUser aeroGearUser) {
 
-        credentialFactory.setCredential(aeroGearUser);
         authenticationManager.login(aeroGearUser);
         return Response.ok(aeroGearCredential)
                 .header(HEADER, aeroGearCredential.getToken()).build();
