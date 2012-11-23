@@ -15,14 +15,22 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.idm;
+package org.jboss.aerogear.security.auth;
 
-import java.util.Collection;
-import java.util.Set;
+import javax.inject.Qualifier;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-public interface AeroGearPrincipal {
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-    boolean hasRoles(Set<String> roles);
-
-    Collection<String> getRoles();
+@Qualifier
+@Target({TYPE, METHOD, PARAMETER, FIELD})
+@Retention(RUNTIME)
+@Documented
+public @interface Secret {
 }

@@ -15,17 +15,14 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.auth;
+package org.jboss.aerogear.security.idm;
 
-import org.junit.Test;
+import java.io.Serializable;
+import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
+public interface AeroGearCredential extends Serializable {
 
-public class AuthenticationSecretKeyCodeTest {
+    String getId();
 
-    @Test
-    public void testCreate() throws Exception {
-        String secretCode = AuthenticationSecretKeyCode.create();
-        assertEquals(20, secretCode.length());
-    }
+    boolean hasRoles(Set<String> roles);
 }

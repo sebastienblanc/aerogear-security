@@ -19,7 +19,7 @@ package org.jboss.aerogear.security.spi;
 
 import org.jboss.aerogear.controller.router.Route;
 import org.jboss.aerogear.security.exception.AeroGearSecurityException;
-import org.jboss.aerogear.security.idm.AeroGearPrincipal;
+import org.jboss.aerogear.security.idm.AeroGearCredential;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -37,7 +37,7 @@ public class AeroGearSecurityProviderTest {
     @Mock
     private Route route;
     @Mock
-    private AeroGearPrincipal user;
+    private AeroGearCredential credential;
     @InjectMocks
     private AeroGearSecurityProvider provider = new AeroGearSecurityProvider();
 
@@ -46,7 +46,7 @@ public class AeroGearSecurityProviderTest {
         MockitoAnnotations.initMocks(this);
         Set<String> roles = new HashSet<String>(Arrays.asList("manager", "developer"));
         when(route.getRoles()).thenReturn(roles);
-        when(user.hasRoles(roles)).thenReturn(true);
+        when(credential.hasRoles(roles)).thenReturn(true);
     }
 
     @Test

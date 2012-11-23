@@ -15,27 +15,22 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.util;
+package org.jboss.aerogear.security.auth;
 
-import org.junit.Test;
+import javax.inject.Qualifier;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-import static junit.framework.Assert.assertEquals;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-public class HexTest {
-
-    @Test
-    public void testToString() throws Exception {
-        byte[] hexString =  {(byte) 0xFF, (byte) 0xD0, (byte) 0xFF, (byte) 0xD1};
-        assertEquals("ffd0ffd1", Hex.toString(hexString));
-    }
-
-    @Test
-    public void testToAscii() throws Exception {
-        assertEquals("AeroGear", Hex.toAscii("4165726f47656172"));
-    }
-
-    @Test
-    public void testToInt() throws Exception {
-        assertEquals(10, Hex.toInt('A'));
-    }
+@Qualifier
+@Target({TYPE, METHOD, PARAMETER, FIELD})
+@Retention(RUNTIME)
+@Documented
+public @interface Token {
 }

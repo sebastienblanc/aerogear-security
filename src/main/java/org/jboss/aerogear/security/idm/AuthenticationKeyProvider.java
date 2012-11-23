@@ -21,7 +21,5 @@ public interface AuthenticationKeyProvider {
 
     String getSecret();
 
-    String getB32();
-
     String getToken();
 }

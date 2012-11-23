@@ -17,9 +17,10 @@
 
 package org.jboss.aerogear.security.rest.filter;
 
+import org.jboss.aerogear.security.auth.Token;
 import org.jboss.aerogear.security.authz.AuthorizationManager;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -27,24 +28,32 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Logger;
 
-//TODO include authentication headers or maybe create a new filter
-@WebFilter
-@ApplicationScoped
+//TODO include authentication headers
+//@WebFilter(filterName = "SecurityFilter", urlPatterns = "/auth/*")
 public class SecurityServletFilter implements Filter {
 
-    private static final String AUTH_PATH = "/auth/";
     private static final String AUTH_TOKEN = "Auth-Token";
+    private static final String AUTH_SECRET = "Auth-Secret";
+
+    private static final String AUTH_PATH = "/auth/";
     private static final String LOGOUT_PATH = "/auth/logout";
+
+    private static final Logger LOGGER = Logger.getLogger(SecurityServletFilter.class.getName());
+
 
     private FilterConfig config;
 
     @Inject
     private AuthorizationManager manager;
+
+    @Inject
+    @Token
+    private Instance<String> credential;
 
     @Override
     public void init(FilterConfig config) throws ServletException {
@@ -57,6 +66,15 @@ public class SecurityServletFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 
         String path = httpServletRequest.getRequestURI();
+
+        if (path.contains("auth/login") && httpServletRequest.getSession().getId() != null) {
+            LOGGER.info("FILTER CREDENTIALS? " + credential.get());
+        }
+
+        if (path.contains("auth/otp")) {
+            httpServletResponse.setHeader(AUTH_SECRET, "Testing OTP");
+        }
+
         String token = httpServletRequest.getHeader(AUTH_TOKEN);
 
         if (!manager.validate(token) && (path.contains(LOGOUT_PATH) || !path.contains(AUTH_PATH))) {
@@ -64,10 +82,12 @@ public class SecurityServletFilter implements Filter {
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }
+
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
     public void destroy() {
-        //TODO to be implemented
+        //TODO
     }
 }
