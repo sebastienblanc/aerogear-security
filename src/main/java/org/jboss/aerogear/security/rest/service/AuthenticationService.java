@@ -49,7 +49,6 @@ public interface AuthenticationService {
     Response register(final AeroGearUser aeroGearUser);
 
     @Path("/logout")
-    @GET
     void logout();
 
     @Path("/otp/secret")

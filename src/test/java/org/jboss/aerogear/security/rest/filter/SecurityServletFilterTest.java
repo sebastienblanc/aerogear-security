@@ -80,8 +80,6 @@ public class SecurityServletFilterTest {
 
     @Test
     public void testDoNotValidateTokenOnLogin() throws Exception {
-        String token = null;
-
         when(servletRequest.getRequestURI()).thenReturn("/mysweetapp/auth/login");
         tokenServletFilter.doFilter(servletRequest, servletResponse, filterChain);
         verify(filterChain).doFilter(servletRequest, servletResponse);

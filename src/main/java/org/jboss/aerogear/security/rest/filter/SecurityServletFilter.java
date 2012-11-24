@@ -45,9 +45,6 @@ public class SecurityServletFilter implements Filter {
 
     private static final Logger LOGGER = Logger.getLogger(SecurityServletFilter.class.getName());
 
-
-    private FilterConfig config;
-
     @Inject
     private AuthorizationManager manager;
 
@@ -57,7 +54,7 @@ public class SecurityServletFilter implements Filter {
 
     @Override
     public void init(FilterConfig config) throws ServletException {
-        this.config = config;
+        //TODO
     }
 
     @Override
