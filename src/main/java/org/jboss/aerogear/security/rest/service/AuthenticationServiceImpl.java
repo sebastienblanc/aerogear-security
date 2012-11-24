@@ -69,16 +69,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return Response.ok(aeroGearUser).header(AUTH_TOKEN, token.get()).build();
     }
 
+    //TODO headers must be retrieved by js
     public Response otpLogin(final AeroGearUser aeroGearUser) {
 
-        //TODO include some validation here
         authenticationManager.login(aeroGearUser);
         return Response.ok(aeroGearUser)
                 .header(AUTH_TOKEN, token.get())
                 .header(AUTH_SECRET, secret.get()).build();
     }
 
-    //TODO
+    //TODO headers must be retrieved by js
     public Response register(AeroGearUser aeroGearUser) {
         configuration.grant(DEFAULT_ROLE).to(aeroGearUser);
         authenticationManager.login(aeroGearUser);
@@ -89,7 +89,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         authenticationManager.logout();
     }
 
-    //TODO token will be provided by servlet filters
     public Response getSecret() {
         Totp totp = new Totp(secret.get());
         AeroGearUser userInfo = new AeroGearUser();
