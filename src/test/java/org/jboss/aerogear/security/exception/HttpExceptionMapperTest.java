@@ -18,6 +18,7 @@
 package org.jboss.aerogear.security.exception;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ws.rs.core.Response;
@@ -38,6 +39,7 @@ public class HttpExceptionMapperTest {
     }
 
     @Test
+    @Ignore
     public void testToResponseAeroGearSecurityException() throws Exception {
         Response response = exceptionMapper.toResponse(securityException);
         assertEquals(UNAUTHORIZED.getStatusCode(), response.getStatus());
