@@ -46,7 +46,7 @@ public interface AuthenticationService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    void register(final AeroGearUser aeroGearUser);
+    Response register(final AeroGearUser aeroGearUser);
 
     @Path("/logout")
     @GET

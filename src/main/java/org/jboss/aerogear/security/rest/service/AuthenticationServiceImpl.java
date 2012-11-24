@@ -79,9 +79,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     //TODO
-    public void register(AeroGearUser aeroGearUser) {
+    public Response register(AeroGearUser aeroGearUser) {
         configuration.grant(DEFAULT_ROLE).to(aeroGearUser);
         authenticationManager.login(aeroGearUser);
+        return Response.ok(aeroGearUser).header(AUTH_TOKEN, token.get()).build();
     }
 
     public void logout() {
