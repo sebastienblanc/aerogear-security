@@ -17,24 +17,33 @@
 
 package org.jboss.aerogear.security.exception;
 
+import javax.ejb.EJBException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
+import java.util.logging.Logger;
 
-import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
+import static org.jboss.aerogear.security.exception.HttpStatus.AUTHENTICATION_FAILED;
 
 @Provider
 public class HttpExceptionMapper implements ExceptionMapper<Throwable> {
 
+    private static final Logger LOGGER = Logger.getLogger(HttpExceptionMapper.class.getSimpleName());
+
     @Override
     public Response toResponse(Throwable exception) {
 
-        if (exception instanceof AeroGearSecurityException) {
-            return Response.status(UNAUTHORIZED)
-                    .entity(HttpStatus.AUTHENTICATION_FAILED.toString())
-                    .build();
-        } else  {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+        if (exception instanceof EJBException) {
+            Exception causedByException = ((EJBException) exception).getCausedByException();
+
+            if (causedByException instanceof AeroGearSecurityException) {
+                return Response.status(AUTHENTICATION_FAILED.getCode())
+                        .entity(AUTHENTICATION_FAILED.getMessage())
+                        .build();
+            }
         }
+
+        return Response.status(Response.Status.BAD_REQUEST).build();
+
     }
 }
