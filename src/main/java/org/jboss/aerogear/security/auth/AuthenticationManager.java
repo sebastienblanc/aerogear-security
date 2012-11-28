@@ -21,7 +21,7 @@ import org.jboss.aerogear.security.model.AeroGearUser;
 
 public interface AuthenticationManager {
 
-    boolean login(AeroGearUser aeroGearUser);
+    void login(AeroGearUser aeroGearUser);
 
     void logout();
 }
