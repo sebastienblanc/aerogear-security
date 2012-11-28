@@ -17,7 +17,14 @@
 
 package org.jboss.aerogear.security.authz;
 
+/**
+ *  User authorization based on the submitted <i>token</i>
+ */
 public interface AuthorizationManager {
-
+    /**
+     * Token validation against authorization provider
+     * @param token the generated token for the current {@link org.jboss.aerogear.security.model.AeroGearUser} logged in.
+     * @return true if the <i>token</i> is valid
+     */
     boolean validate(String token);
 }

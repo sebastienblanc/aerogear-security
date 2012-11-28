@@ -19,9 +19,21 @@ package org.jboss.aerogear.security.auth;
 
 import org.jboss.aerogear.security.model.AeroGearUser;
 
+/**
+ * A <i>AuthenticationManager</i> executes the basic authentication operations for {@link AeroGearUser}
+ */
 public interface AuthenticationManager {
 
+    /**
+     * Logs in the specified {@link AeroGearUser}.
+     * @param aeroGearUser represents a simple implementation that holds user's credentials.
+     * @throws org.jboss.aerogear.security.exception.AeroGearSecurityException on login failure.
+     */
     void login(AeroGearUser aeroGearUser);
 
+    /**
+     * Logs out the specified {@link AeroGearUser} from the system.
+     * @throws org.jboss.aerogear.security.exception.AeroGearSecurityException on logout failure.
+     */
     void logout();
 }

@@ -21,15 +21,20 @@ import javax.ejb.EJBException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-import java.util.logging.Logger;
 
 import static org.jboss.aerogear.security.exception.HttpStatus.AUTHENTICATION_FAILED;
 
+/**
+ *  Maps security exceptions to HTTP responses
+ */
 @Provider
 public class HttpExceptionMapper implements ExceptionMapper<Throwable> {
 
-    private static final Logger LOGGER = Logger.getLogger(HttpExceptionMapper.class.getSimpleName());
-
+    /**
+     *
+     * @param exception Authentication/Authorization exceptions
+     * @return HTTP response code
+     */
     @Override
     public Response toResponse(Throwable exception) {
 

@@ -34,6 +34,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+/**
+ * Token validation filter
+ */
 @WebFilter(filterName = "SecurityFilter", urlPatterns = "/auth/*")
 public class SecurityServletFilter implements Filter {
 
@@ -51,6 +54,14 @@ public class SecurityServletFilter implements Filter {
         //TODO
     }
 
+    /**
+     * Validates the provided token on headers against the Security Provider
+     * @param servletRequest
+     * @param servletResponse
+     * @param filterChain
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;

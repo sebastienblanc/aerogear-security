@@ -26,11 +26,19 @@ import org.jboss.aerogear.security.idm.AeroGearCredential;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 
+/**
+ * Security SPI for AeroGear Controller
+ */
 public class AeroGearSecurityProvider implements SecurityProvider {
 
     @Inject
     private AeroGearCredential credential;
 
+    /**
+     * Route validation support on AeroGear Controller
+     * @param route the {@link Route} for which this provider to determine access.
+     * @throws ServletException
+     */
     @Override
     public void isRouteAllowed(Route route) throws ServletException {
 

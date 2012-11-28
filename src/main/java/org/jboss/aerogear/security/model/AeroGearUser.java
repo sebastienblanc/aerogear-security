@@ -20,80 +20,129 @@ package org.jboss.aerogear.security.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * A simple POJO User entity to support the most widely-used authentication mechanism
+ */
 @Entity
 public class AeroGearUser {
 
     @Id
     private String id;
-
     private String firstName;
     private String otp;
     private String password;
     private String email;
     private String lastName;
-    private String secret;
     private String uri;
 
+    /**
+     * URI retrieval
+     * @return OTP URI encoded in QRCode. For example: otpauth://totp/alice@google.com?secret=JBSWY3DPEHPK3PXP
+     */
     public String getUri() {
         return uri;
     }
 
+    /**
+     * Provision a OTP URI
+     * @param uri OTP URI encoded in QRCode. For example: otpauth://totp/alice@google.com?secret=JBSWY3DPEHPK3PXP
+     */
     public void setUri(String uri) {
         this.uri = uri;
     }
 
-    public String getSecret() {
-        return secret;
-    }
-
-    public void setSecret(String secret) {
-        this.secret = secret;
-    }
-
+    /**
+     * Username retrieval
+     * @return username
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Username setup
+     * @param id username
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * First name retrieval
+     * @return first name
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * First name setup
+     * @param firstName first name
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * OTP provided on login
+     * @return OTP
+     */
     public String getOtp() {
         return otp;
     }
 
+    /**
+     * OTP provided on login
+     * @param otp OTP
+     */
     public void setOtp(String otp) {
         this.otp = otp;
     }
 
+    /**
+     * Password provided on login
+     * @return Password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Password provided on login
+     * @param password Password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * E-mail provided on registration process
+     * @param email E-mail
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
+    /**
+     * E-mail provided on registration process
+     * @return E-mail
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Last name provided on registration process
+     * @param lastName Last name
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     * Last name provided on registration process
+     * @return Last name
+     */
     public String getLastName() {
         return lastName;
     }

@@ -32,6 +32,9 @@ import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import java.util.logging.Logger;
 
+/**
+ * Default authentication endpoint implementation
+ */
 @Stateless
 @TransactionAttribute
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -61,8 +64,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @LoggedUser
     private Instance<String> loggedUser;
 
-    private static final Logger LOGGER = Logger.getLogger(AuthenticationServiceImpl.class.getName());
-
+    /**
+     * Logs in the specified {@link AeroGearUser}
+     * @param aeroGearUser represents a simple implementation that holds user's credentials.
+     * @return HTTP response and the session ID
+     */
     public Response login(final AeroGearUser aeroGearUser) {
 
         authenticationManager.login(aeroGearUser);
@@ -70,25 +76,43 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     //TODO headers must be retrieved by js
+    /**
+     * Logs in the specified {@link AeroGearUser} with the provided OTP
+     * @param aeroGearUser represents a simple implementation that holds user's credentials.
+     * @return HTTP response and the session ID
+     */
     public Response otpLogin(final AeroGearUser aeroGearUser) {
 
         authenticationManager.login(aeroGearUser);
         return Response.ok(aeroGearUser)
-                .header(AUTH_TOKEN, token.get())
-                .header(AUTH_SECRET, secret.get()).build();
+                .header(AUTH_TOKEN, token.get()).build();
     }
 
     //TODO headers must be retrieved by js
+    /**
+     * {@link AeroGearUser} registration
+     * @param aeroGearUser represents a simple implementation that holds user's credentials.
+     * @return HTTP response and the session ID
+     */
     public Response register(AeroGearUser aeroGearUser) {
         configuration.grant(DEFAULT_ROLE).to(aeroGearUser);
         authenticationManager.login(aeroGearUser);
         return Response.ok(aeroGearUser).header(AUTH_TOKEN, token.get()).build();
     }
 
+    /**
+     * Logs out the specified {@link AeroGearUser} from the system.
+     * @throws org.jboss.aerogear.security.exception.AeroGearSecurityException on logout failure
+     * {@link org.jboss.aerogear.security.exception.HttpExceptionMapper} return the HTTP status code
+     */
     public void logout() {
         authenticationManager.logout();
     }
 
+    /**
+     * Retrieves the shared secret to the current user logged in
+     * @return HTTP response with the OTP URI encoded in QRCode. For example: otpauth://totp/alice@google.com?secret=JBSWY3DPEHPK3PXP
+     */
     public Response getSecret() {
         Totp totp = new Totp(secret.get());
         AeroGearUser userInfo = new AeroGearUser();

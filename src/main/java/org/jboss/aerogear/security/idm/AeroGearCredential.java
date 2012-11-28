@@ -20,9 +20,15 @@ package org.jboss.aerogear.security.idm;
 import java.io.Serializable;
 import java.util.Set;
 
+/**
+ * Represents the current logged in Credential
+ */
 public interface AeroGearCredential extends Serializable {
 
-    String getId();
-
+    /**
+     * Role validation against the IDM
+     * @param roles
+     * @return
+     */
     boolean hasRoles(Set<String> roles);
 }

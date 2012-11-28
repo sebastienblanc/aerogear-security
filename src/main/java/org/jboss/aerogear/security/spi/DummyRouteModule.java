@@ -21,6 +21,9 @@ import org.jboss.aerogear.controller.router.AbstractRoutingModule;
 
 import javax.enterprise.inject.Alternative;
 
+/**
+ * Dummy routing module implementation fallback to AeroGear Controller
+ */
 @Alternative
 public class DummyRouteModule extends AbstractRoutingModule {
 

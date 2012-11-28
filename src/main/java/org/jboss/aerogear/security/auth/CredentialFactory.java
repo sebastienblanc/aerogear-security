@@ -19,7 +19,14 @@ package org.jboss.aerogear.security.auth;
 
 import org.jboss.aerogear.security.model.AeroGearUser;
 
+/**
+ * Configure credentials on authentication provider
+ */
 public interface CredentialFactory {
 
-    void setCredential(AeroGearUser user);
+    /**
+     * Sets the identity required on authentication provider.
+     * @param aeroGearUser represents a simple implementation that holds user's credentials.
+     */
+    void setCredential(AeroGearUser aeroGearUser);
 }

@@ -19,11 +19,26 @@ package org.jboss.aerogear.security.authz;
 
 import org.jboss.aerogear.security.model.AeroGearUser;
 
+/**
+ * <i>IdentityManagement</i> allows to assign a set of roles to {@link AeroGearUser} on Identity Manager provider
+ */
 public interface IdentityManagement {
 
+    /**
+     * This method allows to specify which <i>roles</i> must be assigned to {@link AeroGearUser}
+     * @param roles The list of roles.
+     * @return {@link GrantMethods} is a builder which a allows to apply a list of roles to the specified {@link AeroGearUser}.
+     */
     GrantMethods grant(String... roles);
 
+    /**
+     * <i>GrantMethods</i> is a builder to apply roles to {@link AeroGearUser}
+     */
     static interface GrantMethods {
-        void to(AeroGearUser user);
+        /**
+         * This method applies roles specified on {@link IdentityManagement#grant(String...)}
+         * @param aeroGearUser represents a simple user's implementation to hold credentials.
+         */
+        void to(AeroGearUser aeroGearUser);
     }
 }
