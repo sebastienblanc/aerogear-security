@@ -58,7 +58,7 @@
         <javaee6.bom.version>1.0.0.Final</javaee6.bom.version>
 
         <!-- Define the version of AeroGear APIs we want to import -->
-        <aerogear.controller.version>1.0.0.M1-20121124-SNAPSHOT</aerogear.controller.version>
+        <aerogear.controller.version>1.0.0.M1-20121203-SNAPSHOT</aerogear.controller.version>
         <aerogear.otp.version>1.0.0.M1-20121124-SNAPSHOT</aerogear.otp.version>
 
     </properties>
