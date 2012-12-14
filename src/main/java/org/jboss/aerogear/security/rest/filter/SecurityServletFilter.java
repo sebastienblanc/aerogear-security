@@ -28,22 +28,16 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-//TODO include authentication headers
-//@WebFilter(filterName = "SecurityFilter", urlPatterns = "/auth/*")
+@WebFilter(filterName = "SecurityFilter", urlPatterns = "/auth/*")
 public class SecurityServletFilter implements Filter {
 
     private static final String AUTH_TOKEN = "Auth-Token";
-    private static final String AUTH_SECRET = "Auth-Secret";
-
-    private static final String AUTH_PATH = "/auth/";
-    private static final String LOGOUT_PATH = "/auth/logout";
-
-    private static final Logger LOGGER = Logger.getLogger(SecurityServletFilter.class.getName());
 
     @Inject
     private AuthorizationManager manager;
@@ -62,19 +56,9 @@ public class SecurityServletFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 
-        String path = httpServletRequest.getRequestURI();
-
-        if (path.contains("auth/login") && httpServletRequest.getSession().getId() != null) {
-            LOGGER.info("FILTER CREDENTIALS? " + credential.get());
-        }
-
-        if (path.contains("auth/otp")) {
-            httpServletResponse.setHeader(AUTH_SECRET, "Testing OTP");
-        }
-
         String token = httpServletRequest.getHeader(AUTH_TOKEN);
 
-        if (!manager.validate(token) && (path.contains(LOGOUT_PATH) || !path.contains(AUTH_PATH))) {
+        if (token != null && token.isEmpty() && !manager.validate(token)) {
             httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
