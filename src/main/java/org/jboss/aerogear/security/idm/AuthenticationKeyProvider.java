@@ -17,9 +17,18 @@
 
 package org.jboss.aerogear.security.idm;
 
+/**
+ * Authentication key provider
+ */
 public interface AuthenticationKeyProvider {
 
+    /**
+     * Represents the generated secret for the current {@link org.jboss.aerogear.security.model.AeroGearUser} logged in.
+     */
     String getSecret();
 
+    /**
+     * Represents the generated token for the current {@link org.jboss.aerogear.security.model.AeroGearUser} logged in.
+     */
     String getToken();
 }
