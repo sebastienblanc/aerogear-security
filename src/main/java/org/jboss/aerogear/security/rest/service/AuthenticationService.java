@@ -59,8 +59,4 @@ public interface AuthenticationService {
     @Produces(MediaType.APPLICATION_JSON)
     Response getSecret();
 
-    @Path("/userinfo")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    Response getUserInfo();
 }

@@ -121,11 +121,4 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return Response.ok(userInfo).build();
     }
 
-    public Response getUserInfo() {
-        Totp totp = new Totp(secret.get());
-        AeroGearUser userInfo = new AeroGearUser();
-        userInfo.setUri(totp.uri(loggedUser.get()));
-
-        return Response.ok(userInfo).build();
-    }
 }
