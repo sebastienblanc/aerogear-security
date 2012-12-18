@@ -31,8 +31,8 @@ public interface AeroGearCredential extends Serializable {
     public String getId();
     /**
      * Role validation against the IDM
-     * @param roles
-     * @return
+     * @param roles roles to be checked
+     * @return returns true if the current logged in has roles at the IDM, false otherwise
      */
     boolean hasRoles(Set<String> roles);
 }
