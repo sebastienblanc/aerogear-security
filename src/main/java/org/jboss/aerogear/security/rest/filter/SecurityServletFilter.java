@@ -71,10 +71,7 @@ public class SecurityServletFilter implements Filter {
 
         if (token != null && token.isEmpty() && !manager.validate(token)) {
             httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        } else {
-            filterChain.doFilter(servletRequest, servletResponse);
         }
-
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
