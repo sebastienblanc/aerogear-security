@@ -11,7 +11,7 @@ AeroGear Security will come in two flavors: REST api interfaces and with [AeroGe
         <dependency>
             <groupId>org.jboss.aerogear</groupId>
             <artifactId>aerogear-security</artifactId>
-            <version>1.0.0.M1-20121124-SNAPSHOT</version>
+            <version>1.0.0.M1</version>
             <scope>compile</scope>
         </dependency>
         
@@ -20,7 +20,7 @@ AeroGear Security will come in two flavors: REST api interfaces and with [AeroGe
         <dependency>
              <groupId>org.jboss.aerogear</groupId>
              <artifactId>aerogear-security-picketbox</artifactId>
-             <version>1.0.0.M1-20121124-SNAPSHOT</version>
+             <version>1.0.0.M1</version>
              <scope>compile</scope>
         </dependency>
 
@@ -30,7 +30,7 @@ AeroGear Security will come in two flavors: REST api interfaces and with [AeroGe
         <dependency>
              <groupId>org.jboss.aerogear</groupId>
              <artifactId>aerogear-controller</artifactId>
-             <version>1.0.0.M1-20121203-SNAPSHOT</version>
+             <version>1.0.0.M1</version>
              <scope>compile</scope>
         </dependency>
        
@@ -171,7 +171,7 @@ Possible Error Responses:
 
 ## Credits
 
-* The Restful API description was totally based on [@danbev](https://github.com/danbev) documentation https://gist.github.com/4001775. 
+* More detailed description of the Restful API can be found here: http://aerogear.org/docs/specs/aerogear-rest-api/.
 
 ---
 you can find a slightly better example at <https://github.com/aerogear/aerogear-controller-demo> 
