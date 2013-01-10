@@ -32,6 +32,12 @@ public interface IdentityManagement {
     GrantMethods grant(String... roles);
 
     /**
+     * This method creates a new {@link AeroGearUser}
+     * @param aeroGearUser
+     */
+    void create(AeroGearUser aeroGearUser);
+
+    /**
      * <i>GrantMethods</i> is a builder to apply roles to {@link AeroGearUser}
      */
     static interface GrantMethods {
