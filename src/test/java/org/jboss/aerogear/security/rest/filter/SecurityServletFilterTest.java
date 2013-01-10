@@ -18,6 +18,7 @@
 package org.jboss.aerogear.security.rest.filter;
 
 import org.jboss.aerogear.security.authz.AuthorizationManager;
+import org.jboss.aerogear.security.http.SecurityServletFilter;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

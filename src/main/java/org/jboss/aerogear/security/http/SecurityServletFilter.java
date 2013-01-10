@@ -15,13 +15,8 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.rest.filter;
+package org.jboss.aerogear.security.http;
 
-import org.jboss.aerogear.security.auth.Token;
-import org.jboss.aerogear.security.authz.AuthorizationManager;
-
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -32,47 +27,24 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.logging.Logger;
 
 /**
- * Token validation filter
+ * XSS mitigation filter
  */
-@WebFilter(filterName = "SecurityFilter", urlPatterns = "/auth/*")
+@WebFilter(filterName = "SecurityFilter", urlPatterns = "/*")
 public class SecurityServletFilter implements Filter {
-
-    private static final String AUTH_TOKEN = "Auth-Token";
-
-    @Inject
-    private AuthorizationManager manager;
-
-    @Inject
-    @Token
-    private Instance<String> credential;
 
     @Override
     public void init(FilterConfig config) throws ServletException {
         //TODO
     }
 
-    /**
-     * Validates the provided token on headers against the Security Provider
-     * @param servletRequest
-     * @param servletResponse
-     * @param filterChain
-     * @throws IOException
-     * @throws ServletException
-     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 
-        String token = httpServletRequest.getHeader(AUTH_TOKEN);
-
-        if (token != null && token.isEmpty() && !manager.validate(token)) {
-            httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        }
-        filterChain.doFilter(servletRequest, servletResponse);
+        filterChain.doFilter(new XSSServletRequestWrapper(httpServletRequest), httpServletResponse);
     }
 
     @Override
