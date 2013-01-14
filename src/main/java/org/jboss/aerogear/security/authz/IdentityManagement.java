@@ -19,10 +19,14 @@ package org.jboss.aerogear.security.authz;
 
 import org.jboss.aerogear.security.model.AeroGearUser;
 
+import java.util.List;
+
 /**
  * <i>IdentityManagement</i> allows to assign a set of roles to {@link AeroGearUser} on Identity Manager provider
  */
 public interface IdentityManagement {
+
+
 
     /**
      * This method allows to specify which <i>roles</i> must be assigned to {@link AeroGearUser}
@@ -30,6 +34,25 @@ public interface IdentityManagement {
      * @return {@link GrantMethods} is a builder which a allows to apply a list of roles to the specified {@link AeroGearUser}.
      */
     GrantMethods grant(String... roles);
+
+    /**
+     * Get an {@link AeroGearUser}
+     * @param id
+     * @return AeroGearUSer
+     */
+    AeroGearUser get(String id) throws RuntimeException;
+
+    /**
+     * Remove an {@link AeroGearUser}
+     * @param aeroGearUser
+     */
+    void remove(AeroGearUser aeroGearUser);
+
+    /**
+     * Get All the users
+     * @return
+     */
+    List<AeroGearUser> findAllByRole(String role);
 
     /**
      * This method creates a new {@link AeroGearUser}
