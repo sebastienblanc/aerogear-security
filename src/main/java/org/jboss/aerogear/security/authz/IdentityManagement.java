@@ -40,19 +40,13 @@ public interface IdentityManagement {
      * @param id
      * @return AeroGearUSer
      */
-    AeroGearUser get(String id);
+    AeroGearUser get(String id) throws RuntimeException;
 
     /**
      * Remove an {@link AeroGearUser}
      * @param aeroGearUser
      */
     void remove(AeroGearUser aeroGearUser);
-
-    /**
-     * Update an {@link AeroGearUser}
-     * @param aeroGearUser
-     */
-    void update(AeroGearUser aeroGearUser);
 
     /**
      * Get All the users
