@@ -45,7 +45,7 @@ public interface AuthenticationService {
     @Produces(MediaType.APPLICATION_JSON)
     Response otpLogin(final AeroGearUser aeroGearUser);
 
-    @Path("/register")
+    @Path("/enroll")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
