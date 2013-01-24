@@ -27,7 +27,7 @@ import javax.persistence.Id;
 public class AeroGearUser {
 
     @Id
-    private String id;
+    private String username;
     private String firstName;
     private String otp;
     private String password;
@@ -55,16 +55,16 @@ public class AeroGearUser {
      * Username retrieval
      * @return username
      */
-    public String getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
     /**
      * Username setup
-     * @param id username
+     * @param username username
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
