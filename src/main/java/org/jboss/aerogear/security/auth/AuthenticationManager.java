@@ -36,4 +36,10 @@ public interface AuthenticationManager {
      * @throws org.jboss.aerogear.security.exception.AeroGearSecurityException on logout failure.
      */
     void logout();
+    
+    /**
+     * Determines if the is currently a Subject logged in.
+     * @return {@code true} if there is currently a logged in subject.
+     */
+    boolean isSubjectLoggedIn();
 }
