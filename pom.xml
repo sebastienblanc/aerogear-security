@@ -23,7 +23,7 @@
 
     <groupId>org.jboss.aerogear</groupId>
     <artifactId>aerogear-security</artifactId>
-    <version>1.0.0.M8</version>
+    <version>1.0.0.CR1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>aerogear-security</name>
@@ -70,8 +70,8 @@
         <javaee6.bom.version>1.0.0.Final</javaee6.bom.version>
 
         <!-- Define the version of AeroGear APIs we want to import -->
-        <aerogear.controller.version>1.0.0.M8</aerogear.controller.version>
-        <aerogear.otp.version>1.0.0.M8</aerogear.otp.version>
+        <aerogear.controller.version>1.0.0.CR1-SNAPSHOT</aerogear.controller.version>
+        <aerogear.otp.version>1.0.0.CR1-SNAPSHOT</aerogear.otp.version>
 
     </properties>
 
