@@ -27,8 +27,5 @@ public interface AuthenticationKeyProvider {
      */
     String getSecret();
 
-    /**
-     * Represents the generated token for the current {@link org.jboss.aerogear.security.model.AeroGearUser} logged in.
-     */
-    String getToken();
+
 }
