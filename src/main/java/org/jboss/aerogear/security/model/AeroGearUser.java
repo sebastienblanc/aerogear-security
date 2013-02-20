@@ -17,16 +17,12 @@
 
 package org.jboss.aerogear.security.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 /**
  * A simple POJO User entity to support the most widely-used authentication mechanism
  */
-@Entity
+
 public class AeroGearUser {
 
-    @Id
     private String username;
     private String firstName;
     private String otp;
@@ -37,6 +33,7 @@ public class AeroGearUser {
 
     /**
      * URI retrieval
+     *
      * @return OTP URI encoded in QRCode. For example: otpauth://totp/alice@google.com?secret=JBSWY3DPEHPK3PXP
      */
     public String getUri() {
@@ -45,6 +42,7 @@ public class AeroGearUser {
 
     /**
      * Provision a OTP URI
+     *
      * @param uri OTP URI encoded in QRCode. For example: otpauth://totp/alice@google.com?secret=JBSWY3DPEHPK3PXP
      */
     public void setUri(String uri) {
@@ -53,6 +51,7 @@ public class AeroGearUser {
 
     /**
      * Username retrieval
+     *
      * @return username
      */
     public String getUsername() {
@@ -61,6 +60,7 @@ public class AeroGearUser {
 
     /**
      * Username setup
+     *
      * @param username username
      */
     public void setUsername(String username) {
@@ -69,6 +69,7 @@ public class AeroGearUser {
 
     /**
      * First name retrieval
+     *
      * @return first name
      */
     public String getFirstName() {
@@ -77,6 +78,7 @@ public class AeroGearUser {
 
     /**
      * First name setup
+     *
      * @param firstName first name
      */
     public void setFirstName(String firstName) {
@@ -85,6 +87,7 @@ public class AeroGearUser {
 
     /**
      * OTP provided on login
+     *
      * @return OTP
      */
     public String getOtp() {
@@ -93,6 +96,7 @@ public class AeroGearUser {
 
     /**
      * OTP provided on login
+     *
      * @param otp OTP
      */
     public void setOtp(String otp) {
@@ -101,6 +105,7 @@ public class AeroGearUser {
 
     /**
      * Password provided on login
+     *
      * @return Password
      */
     public String getPassword() {
@@ -109,6 +114,7 @@ public class AeroGearUser {
 
     /**
      * Password provided on login
+     *
      * @param password Password
      */
     public void setPassword(String password) {
@@ -117,6 +123,7 @@ public class AeroGearUser {
 
     /**
      * E-mail provided on registration process
+     *
      * @param email E-mail
      */
     public void setEmail(String email) {
@@ -125,6 +132,7 @@ public class AeroGearUser {
 
     /**
      * E-mail provided on registration process
+     *
      * @return E-mail
      */
     public String getEmail() {
@@ -133,6 +141,7 @@ public class AeroGearUser {
 
     /**
      * Last name provided on registration process
+     *
      * @param lastName Last name
      */
     public void setLastName(String lastName) {
@@ -141,6 +150,7 @@ public class AeroGearUser {
 
     /**
      * Last name provided on registration process
+     *
      * @return Last name
      */
     public String getLastName() {
