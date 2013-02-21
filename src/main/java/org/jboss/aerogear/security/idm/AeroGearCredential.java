@@ -28,7 +28,7 @@ public interface AeroGearCredential extends Serializable {
     /**
      * Represents the current {@link org.jboss.aerogear.security.model.AeroGearUser} logged in.
      */
-    public String getId();
+    public String getLogin();
     /**
      * Role validation against the IDM
      * @param roles roles to be checked
