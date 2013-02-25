@@ -17,17 +17,16 @@
 
 package org.jboss.aerogear.security.exception;
 
-import org.jboss.aerogear.controller.spi.HttpStatusAwareException;
-
 /**
  * General exception thrown due to an error during the Authentication/Authorization process.
  */
-public class AeroGearSecurityException extends RuntimeException implements HttpStatusAwareException {
+public class AeroGearSecurityException extends RuntimeException {
 
     private int status;
 
     /**
      * Constructs a new <i>AeroGearSecurityException</i> with HTTP status response mapped from the supplied exception at {@link HttpExceptionMapper}.
+     *
      * @param httpStatus
      */
     public AeroGearSecurityException(HttpStatus httpStatus) {
@@ -37,15 +36,16 @@ public class AeroGearSecurityException extends RuntimeException implements HttpS
 
     /**
      * Current HTTP status
+     *
      * @return HTTP response code
      */
-    @Override
     public int getStatus() {
         return status;
     }
 
     /**
      * HTTP response message
+     *
      * @return response message
      */
     @Override
