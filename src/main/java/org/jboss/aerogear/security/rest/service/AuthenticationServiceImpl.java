@@ -37,10 +37,6 @@ import javax.ws.rs.core.Response;
 @TransactionAttribute
 public class AuthenticationServiceImpl implements AuthenticationService {
 
-    //TODO will be moved to SecurityServletFilter
-    private static final String AUTH_TOKEN = "Auth-Token";
-    private static final String AUTH_SECRET = "Auth-Secret";
-
     //TODO it must be replaced by some admin page
     public static final String DEFAULT_ROLE = "admin";
 

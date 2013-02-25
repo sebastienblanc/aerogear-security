@@ -18,7 +18,7 @@
 package org.jboss.aerogear.security.rest.filter;
 
 import org.jboss.aerogear.security.authz.AuthorizationManager;
-import org.jboss.aerogear.security.http.SecurityServletFilter;
+import org.jboss.aerogear.security.http.XSSServletFilter;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -33,14 +33,14 @@ import javax.servlet.http.HttpServletResponse;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-//TODO SecurityServletFilter must be improved
+//TODO XSSServletFilter must be improved
 @Ignore
 public class SecurityServletFilterTest {
 
     public static final String AUTH_TOKEN = "Auth-Token";
 
     @InjectMocks
-    private SecurityServletFilter tokenServletFilter;
+    private XSSServletFilter tokenServletFilter;
 
     @Mock
     private HttpServletRequest servletRequest;
@@ -57,7 +57,7 @@ public class SecurityServletFilterTest {
 
     @Before
     public void setUp() {
-        tokenServletFilter = new SecurityServletFilter();
+        tokenServletFilter = new XSSServletFilter();
         MockitoAnnotations.initMocks(this);
     }
 
