@@ -30,7 +30,7 @@ import javax.ws.rs.core.Response;
 /**
  * Default authentication endpoint
  */
-@Path("/")
+@Path("/auth")
 public interface AuthenticationService {
 
     @Path("/login")
