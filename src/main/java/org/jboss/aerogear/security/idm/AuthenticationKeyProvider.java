@@ -17,15 +17,19 @@
 
 package org.jboss.aerogear.security.idm;
 
+import java.io.Serializable;
+
 /**
  * Authentication key provider
  */
-public interface AuthenticationKeyProvider {
+public interface AuthenticationKeyProvider extends Serializable {
 
     /**
      * Represents the generated secret for the current {@link org.jboss.aerogear.security.model.AeroGearUser} logged in.
      */
     String getSecret();
+
+    String getToken();
 
 
 }

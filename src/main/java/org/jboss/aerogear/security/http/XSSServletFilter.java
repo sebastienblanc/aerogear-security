@@ -31,7 +31,6 @@ import java.io.IOException;
 /**
  * XSS mitigation filter
  */
-@WebFilter(filterName = "XSSServletFilter", urlPatterns = "/*")
 public class XSSServletFilter implements Filter {
 
     @Override
