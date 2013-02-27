@@ -17,7 +17,9 @@
 
 package org.jboss.aerogear.security.idm;
 
+import javax.management.relation.Role;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -35,4 +37,6 @@ public interface AeroGearCredential extends Serializable {
      * @return returns true if the current logged in has roles at the IDM, false otherwise
      */
     boolean hasRoles(Set<String> roles);
+
+    List<String> getRoles();
 }
