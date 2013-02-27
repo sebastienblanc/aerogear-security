@@ -24,11 +24,11 @@ package org.jboss.aerogear.security.model;
 public class AeroGearUser {
 
     private String username;
-    private String firstname;
+    private String firstName;
     private String otp;
     private String password;
     private String email;
-    private String lastname;
+    private String lastName;
     private String uri;
 
     private String role;
@@ -74,17 +74,17 @@ public class AeroGearUser {
      *
      * @return first name
      */
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
     /**
      * First name setup
      *
-     * @param firstname first name
+     * @param firstName first name
      */
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     /**
@@ -144,10 +144,10 @@ public class AeroGearUser {
     /**
      * Last name provided on registration process
      *
-     * @param lastname Last name
+     * @param lastName Last name
      */
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     /**
@@ -155,8 +155,8 @@ public class AeroGearUser {
      *
      * @return Last name
      */
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
     public String getRole() {
