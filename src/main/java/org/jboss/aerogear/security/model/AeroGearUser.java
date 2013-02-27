@@ -31,6 +31,8 @@ public class AeroGearUser {
     private String lastName;
     private String uri;
 
+    private String role;
+
     /**
      * URI retrieval
      *
@@ -156,4 +158,13 @@ public class AeroGearUser {
     public String getLastName() {
         return lastName;
     }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
 }

@@ -29,7 +29,7 @@ public interface AuthenticationManager {
      * @param aeroGearUser represents a simple implementation that holds user's credentials.
      * @throws org.jboss.aerogear.security.exception.AeroGearSecurityException on login failure.
      */
-    void login(AeroGearUser aeroGearUser);
+    boolean login(AeroGearUser aeroGearUser);
 
     /**
      * Logs out the specified {@link AeroGearUser} from the system.
