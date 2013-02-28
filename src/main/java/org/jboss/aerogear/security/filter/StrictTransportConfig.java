@@ -4,9 +4,9 @@ import javax.servlet.FilterConfig;
 
 public class StrictTransportConfig {
 
-    private Long maxAge;
-    private Boolean includeSubDomains;
-    private String location;
+    private final Long maxAge;
+    private final Boolean includeSubDomains;
+    private final String location;
 
     public StrictTransportConfig(FilterConfig config) {
         this.maxAge = Long.valueOf(config.getInitParameter("max-age"));
