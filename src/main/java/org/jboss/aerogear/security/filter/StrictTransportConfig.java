@@ -22,10 +22,6 @@ public class StrictTransportConfig {
         return header;
     }
 
-    public Boolean includeSubDomains() {
-        return includeSubDomains;
-    }
-
     public String getLocation() {
         return location;
     }
