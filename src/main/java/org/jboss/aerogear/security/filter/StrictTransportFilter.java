@@ -26,15 +26,15 @@ public class StrictTransportFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
                          FilterChain chain) throws IOException, ServletException {
 
-        HttpServletResponse request = (HttpServletResponse) servletResponse;
-        HttpServletRequest response = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
 
-        if (!isHttpsEnabled(response)) {
-            request.addHeader(LOCATION, config.getLocation());
-            request.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+        if (!isHttpsEnabled(request)) {
+            response.addHeader(LOCATION, config.getLocation());
+            response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 
         } else {
-            request.addHeader(STRICT_TRANSPORT_SECURITY, config.getMaxAge());
+            response.addHeader(STRICT_TRANSPORT_SECURITY, config.getMaxAge());
         }
 
         chain.doFilter(servletRequest, servletResponse);

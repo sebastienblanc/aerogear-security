@@ -11,7 +11,7 @@ public class StrictTransportConfig {
     public StrictTransportConfig(FilterConfig config) {
         this.maxAge = Long.valueOf(config.getInitParameter("max-age"));
         this.includeSubDomains = Boolean.valueOf(config.getInitParameter("include-subdomains"));
-        this.location = config.getInitParameter("location");
+        this.location = config.getInitParameter("Location");
     }
 
     public String getMaxAge() {
