@@ -29,7 +29,9 @@ public class StrictTransportFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
-        if (!isHttpsEnabled(request)) {
+        final String HTTPS = "https";
+
+        if (!request.getScheme().equals(HTTPS)) {
             response.addHeader(LOCATION, config.getLocation());
             response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 
@@ -38,15 +40,5 @@ public class StrictTransportFilter implements Filter {
         }
 
         chain.doFilter(request, response);
-    }
-
-    private static boolean isHttpsEnabled(HttpServletRequest httpServletRequest) {
-
-        final String HTTPS = "https";
-
-        if (httpServletRequest.getScheme().equals(HTTPS)) {
-            return true;
-        }
-        return false;
     }
 }
