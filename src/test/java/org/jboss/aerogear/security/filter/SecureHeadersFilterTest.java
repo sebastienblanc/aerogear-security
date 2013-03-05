@@ -15,12 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class StrictTransportFilterTest {
+public class SecureHeadersFilterTest {
 
     public static final String STRICT_TRANSPORT_SECURITY = "Strict-Transport-Security";
 
     @InjectMocks
-    private StrictTransportFilter filter;
+    private SecureHeadersFilter filter;
 
     @Mock
     private HttpServletRequest request;
@@ -40,7 +40,7 @@ public class StrictTransportFilterTest {
         when(config.getInitParameter("max-age")).thenReturn("2592000");
         when(config.getInitParameter("include-subdomains")).thenReturn("true");
         when(config.getInitParameter("Location")).thenReturn("https://john.doe");
-        filter = new StrictTransportFilter();
+        filter = new SecureHeadersFilter();
         filter.init(config);
     }
 
