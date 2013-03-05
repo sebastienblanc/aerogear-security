@@ -37,7 +37,7 @@ public class StrictTransportFilter implements Filter {
             response.addHeader(STRICT_TRANSPORT_SECURITY, config.getMaxAge());
         }
 
-        chain.doFilter(servletRequest, servletResponse);
+        chain.doFilter(request, response);
     }
 
     private static boolean isHttpsEnabled(HttpServletRequest httpServletRequest) {
