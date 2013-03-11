@@ -26,7 +26,7 @@ public class AeroGearUser {
     private String username;
     private String firstName;
     private String otp;
-    private String password;
+    private String password = "";
     private String email;
     private String lastName;
     private String uri;
@@ -116,11 +116,13 @@ public class AeroGearUser {
 
     /**
      * Password provided on login
+     * Already fixed on https://github.com/picketlink/picketlink/pull/82
+     * It will be removed after PicketLink Beta release
      *
      * @param password Password
      */
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password != null ? password : "";
     }
 
     /**
