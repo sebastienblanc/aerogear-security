@@ -42,19 +42,19 @@ public class SecureHeadersFilter implements Filter {
     }
 
     private void addStrictTransportSecurity(HttpServletResponse response) {
-        if (config.getMaxAge() != null && !config.getMaxAge().trim().isEmpty()) {
+        if (config.hasMaxAge()) {
             response.addHeader(STRICT_TRANSPORT_SECURITY, config.getMaxAge());
         }
     }
 
     private void addFrameOptions(HttpServletResponse response) {
-        if (config.getFrameOptions() != null && !config.getFrameOptions().trim().isEmpty()) {
+        if (config.hasFrameOptions()) {
             response.addHeader(X_FRAME_OPTIONS, config.getFrameOptions());
         }
     }
 
     private void addLocation(HttpServletResponse response) {
-        if (config.getLocation() != null && !config.getLocation().trim().isEmpty()) {
+        if (config.hasLocation()) {
             response.addHeader(LOCATION, config.getLocation());
             response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
         }

@@ -31,4 +31,20 @@ public class SecureHeadersConfig {
     public String getFrameOptions() {
         return frameOptions;
     }
+
+    public boolean hasMaxAge(){
+        return maxAge != null && maxAge >= 0;
+    }
+
+    public boolean hasLocation(){
+        return isEmpty(location);
+    }
+
+    public boolean hasFrameOptions() {
+        return isEmpty(frameOptions);
+    }
+
+    private boolean isEmpty(String value){
+        return value != null && !value.trim().isEmpty();
+    }
 }
