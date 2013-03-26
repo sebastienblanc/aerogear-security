@@ -23,7 +23,7 @@
 
     <groupId>org.jboss.aerogear</groupId>
     <artifactId>aerogear-security</artifactId>
-    <version>1.0.0-19032013-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>aerogear-security</name>
@@ -69,7 +69,7 @@
              version defined by this BOM -->
         <javaee6.bom.version>1.0.0.Final</javaee6.bom.version>
 
-        <aerogear.otp.version>1.0.0.CR1</aerogear.otp.version>
+        <aerogear.otp.version>1.0.0</aerogear.otp.version>
 
     </properties>
 
