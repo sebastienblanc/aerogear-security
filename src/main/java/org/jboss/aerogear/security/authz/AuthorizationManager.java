@@ -18,7 +18,7 @@
 package org.jboss.aerogear.security.authz;
 
 /**
- *  User authorization based on the submitted <i>token</i>
+ *  AeroGearUser authorization based on the submitted <i>token</i>
  */
 public interface AuthorizationManager {
     /**

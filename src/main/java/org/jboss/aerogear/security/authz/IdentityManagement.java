@@ -20,33 +20,36 @@ package org.jboss.aerogear.security.authz;
 import org.jboss.aerogear.security.model.AeroGearUser;
 
 import java.util.List;
+import java.util.Set;
 
 /**
- * <i>IdentityManagement</i> allows to assign a set of roles to {@link AeroGearUser} on Identity Manager provider
+ * <i>IdentityManagement</i> allows to assign a set of roles to {@link org.jboss.aerogear.security.model.AeroGearUser} on Identity Manager provider
  */
 public interface IdentityManagement {
 
 
 
     /**
-     * This method allows to specify which <i>roles</i> must be assigned to {@link AeroGearUser}
+     * This method allows to specify which <i>roles</i> must be assigned to {@link org.jboss.aerogear.security.model.AeroGearUser}
      * @param roles The list of roles.
-     * @return {@link GrantMethods} is a builder which a allows to apply a list of roles to the specified {@link AeroGearUser}.
+     * @return {@link GrantMethods} is a builder which a allows to apply a list of roles to the specified {@link org.jboss.aerogear.security.model.AeroGearUser}.
      */
     GrantMethods grant(String... roles);
 
     /**
-     * Get an {@link AeroGearUser}
+     * Get an {@link org.jboss.aerogear.security.model.AeroGearUser}
      * @param id
      * @return AeroGearUSer
      */
-    AeroGearUser get(String id) throws RuntimeException;
+    AeroGearUser findByUsername(String username) throws RuntimeException;
+
+    AeroGearUser findById(long id) throws RuntimeException;
 
     /**
-     * Remove an {@link AeroGearUser}
-     * @param aeroGearUser
+     * Remove an {@link org.jboss.aerogear.security.model.AeroGearUser}
+     * @param username
      */
-    void remove(AeroGearUser aeroGearUser);
+    void remove(String username);
 
     /**
      * Get All the users
@@ -55,19 +58,23 @@ public interface IdentityManagement {
     List<AeroGearUser> findAllByRole(String role);
 
     /**
-     * This method creates a new {@link AeroGearUser}
-     * @param aeroGearUser
+     * This method creates a new {@link org.jboss.aerogear.security.model.AeroGearUser}
+     * @param user
      */
-    void create(AeroGearUser aeroGearUser);
+    void create(AeroGearUser user);
 
     /**
-     * <i>GrantMethods</i> is a builder to apply roles to {@link AeroGearUser}
+     * <i>GrantMethods</i> is a builder to apply roles to {@link org.jboss.aerogear.security.model.AeroGearUser}
      */
     static interface GrantMethods {
         /**
          * This method applies roles specified on {@link IdentityManagement#grant(String...)}
-         * @param aeroGearUser represents a simple user's implementation to hold credentials.
+         * @param user represents a simple user's implementation to hold credentials.
          */
-        void to(AeroGearUser aeroGearUser);
+        void to(AeroGearUser user);
     }
+
+    String getSecret();
+    String getLogin();
+    boolean hasRoles(Set<String> roles);
 }
