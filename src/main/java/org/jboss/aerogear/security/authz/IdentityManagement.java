@@ -21,31 +21,38 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * <i>IdentityManagement</i> allows to assign a set of roles to {@link org.jboss.aerogear.security.model.AeroGearUser} on Identity Manager provider
+ * <i>IdentityManagement</i> allows to assign a set of roles to User on Identity Manager provider
  */
 public interface IdentityManagement<T> {
 
 
     /**
-     * This method allows to specify which <i>roles</i> must be assigned to {@link org.jboss.aerogear.security.model.AeroGearUser}
+     * This method allows to specify which <i>roles</i> must be assigned to User
      *
-     * @param roles The list of roles.
-     * @return {@link GrantMethods} is a builder which a allows to apply a list of roles to the specified {@link org.jboss.aerogear.security.model.AeroGearUser}.
+     * @param roles A list of roles.
+     * @return {@link GrantMethods} is a builder which a allows to apply a list of roles to the specified User.
      */
     GrantMethods grant(String... roles);
 
     /**
-     * Get an {@link org.jboss.aerogear.security.model.AeroGearUser}
+     * Find an User by the username specified
      *
-     * @param id
-     * @return AeroGearUSer
+     * @param username
+     * @return <T> where the generic type represents a User into the system
      */
     T findByUsername(String username) throws RuntimeException;
 
+
+    /**
+     * Find an User by the id specified
+     *
+     * @param id
+     * @return <T> where the generic type represents a User into the system
+     */
     T findById(long id) throws RuntimeException;
 
     /**
-     * Remove an {@link org.jboss.aerogear.security.model.AeroGearUser}
+     * Remove an User
      *
      * @param username
      */
@@ -60,20 +67,21 @@ public interface IdentityManagement<T> {
     List<T> findAllByRole(String roleName);
 
     /**
-     * This method creates a new {@link org.jboss.aerogear.security.model.AeroGearUser}
+     * This method creates a new User
      *
-     * @param user
+     * @param user where the generic type represents a User into the system
+     * @param password input provided by User
      */
     void create(T user, String password);
 
     /**
-     * <i>GrantMethods</i> is a builder to apply roles to {@link org.jboss.aerogear.security.model.AeroGearUser}
+     * <i>GrantMethods</i> is a builder to apply roles to User
      */
     static interface GrantMethods<T> {
         /**
          * This method applies roles specified on {@link IdentityManagement#grant(String...)}
          *
-         * @param user represents a simple user's implementation to hold credentials.
+         * @param username represents a simple user's implementation to hold credentials.
          */
         void to(String username);
     }

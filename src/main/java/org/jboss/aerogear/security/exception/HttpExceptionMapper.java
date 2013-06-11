@@ -28,6 +28,7 @@ import static org.jboss.aerogear.security.exception.HttpStatus.AUTHENTICATION_FA
  * Maps security exceptions to HTTP responses
  */
 @Provider
+@Deprecated
 public class HttpExceptionMapper implements ExceptionMapper<Throwable> {
 
     /**

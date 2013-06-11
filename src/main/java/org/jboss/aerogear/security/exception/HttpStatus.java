@@ -19,6 +19,7 @@ package org.jboss.aerogear.security.exception;
 
 import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
+@Deprecated
 public enum HttpStatus {
 
     AUTHENTICATION_FAILED("User authentication failed", UNAUTHORIZED.getStatusCode());

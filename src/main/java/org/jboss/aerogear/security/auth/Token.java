@@ -29,11 +29,12 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Represents the generated token for the current {@link org.jboss.aerogear.security.model.AeroGearUser} logged in.
+ * Represents the generated token for the current User logged in.
  */
 @Qualifier
 @Target({TYPE, METHOD, PARAMETER, FIELD})
 @Retention(RUNTIME)
 @Documented
+@Deprecated
 public @interface Token {
 }

@@ -29,7 +29,7 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Represents the current {@link org.jboss.aerogear.security.model.AeroGearUser} logged in.
+ * Represents the current User logged in.
  */
 @Qualifier
 @Target({TYPE, METHOD, PARAMETER, FIELD})

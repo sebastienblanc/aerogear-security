@@ -18,12 +18,13 @@
 package org.jboss.aerogear.security.auth;
 
 /**
- * A <i>AuthenticationManager</i> executes the basic authentication operations for {@link org.jboss.aerogear.security.model.AeroGearUser}
+ * A <i>AuthenticationManager</i> executes the basic authentication operations for an entity from the authentication provider
+ * Ex: User, SimpleUser
  */
 public interface AuthenticationManager<T> {
 
     /**
-     * Logs in the specified {@link org.jboss.aerogear.security.model.AeroGearUser}.
+     * Logs in the specified User.
      *
      * @param user represents a simple implementation that holds user's credentials.
      * @throws org.jboss.aerogear.security.exception.AeroGearSecurityException
@@ -32,7 +33,7 @@ public interface AuthenticationManager<T> {
     boolean login(T user, String password);
 
     /**
-     * Logs out the specified {@link org.jboss.aerogear.security.model.AeroGearUser} from the system.
+     * Logs out the specified User from the system.
      *
      * @throws org.jboss.aerogear.security.exception.AeroGearSecurityException
      *          on logout failure.
