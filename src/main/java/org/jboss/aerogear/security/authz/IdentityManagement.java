@@ -42,7 +42,7 @@ public interface IdentityManagement<T> {
      * @param id
      * @return AeroGearUSer
      */
-    AeroGearUser findByUsername(String username) throws RuntimeException;
+    T findByUsername(String username) throws RuntimeException;
 
     AeroGearUser findById(long id) throws RuntimeException;
 
