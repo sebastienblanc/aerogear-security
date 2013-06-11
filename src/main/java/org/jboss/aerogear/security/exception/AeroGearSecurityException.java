@@ -20,7 +20,6 @@ package org.jboss.aerogear.security.exception;
 /**
  * General exception thrown due to an error during the Authentication/Authorization process.
  */
-@Deprecated
 public class AeroGearSecurityException extends RuntimeException {
 
     private int status;
