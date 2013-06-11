@@ -25,13 +25,12 @@ import javax.ws.rs.ext.Provider;
 import static org.jboss.aerogear.security.exception.HttpStatus.AUTHENTICATION_FAILED;
 
 /**
- *  Maps security exceptions to HTTP responses
+ * Maps security exceptions to HTTP responses
  */
 @Provider
 public class HttpExceptionMapper implements ExceptionMapper<Throwable> {
 
     /**
-     *
      * @param exception Authentication/Authorization exceptions
      * @return HTTP response code
      */

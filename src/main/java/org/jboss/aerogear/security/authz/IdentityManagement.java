@@ -25,12 +25,12 @@ import java.util.Set;
 /**
  * <i>IdentityManagement</i> allows to assign a set of roles to {@link org.jboss.aerogear.security.model.AeroGearUser} on Identity Manager provider
  */
-public interface IdentityManagement {
-
+public interface IdentityManagement<T> {
 
 
     /**
      * This method allows to specify which <i>roles</i> must be assigned to {@link org.jboss.aerogear.security.model.AeroGearUser}
+     *
      * @param roles The list of roles.
      * @return {@link GrantMethods} is a builder which a allows to apply a list of roles to the specified {@link org.jboss.aerogear.security.model.AeroGearUser}.
      */
@@ -38,6 +38,7 @@ public interface IdentityManagement {
 
     /**
      * Get an {@link org.jboss.aerogear.security.model.AeroGearUser}
+     *
      * @param id
      * @return AeroGearUSer
      */
@@ -47,18 +48,22 @@ public interface IdentityManagement {
 
     /**
      * Remove an {@link org.jboss.aerogear.security.model.AeroGearUser}
+     *
      * @param username
      */
     void remove(String username);
 
     /**
      * Get All the users
+     *
+     * @param roleName
      * @return
      */
-    List<AeroGearUser> findAllByRole(String role);
+    List<T> findAllByRole(String roleName);
 
     /**
      * This method creates a new {@link org.jboss.aerogear.security.model.AeroGearUser}
+     *
      * @param user
      */
     void create(AeroGearUser user);
@@ -69,12 +74,15 @@ public interface IdentityManagement {
     static interface GrantMethods {
         /**
          * This method applies roles specified on {@link IdentityManagement#grant(String...)}
+         *
          * @param user represents a simple user's implementation to hold credentials.
          */
         void to(AeroGearUser user);
     }
 
     String getSecret();
+
     String getLogin();
+
     boolean hasRoles(Set<String> roles);
 }

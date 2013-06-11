@@ -29,6 +29,7 @@ public class XSSServletRequestWrapper extends HttpServletRequestWrapper {
     public XSSServletRequestWrapper(HttpServletRequest request) {
         super(request);
     }
+
     @Override
     public String[] getParameterValues(String param) {
         String[] values = super.getParameterValues(param);

@@ -26,14 +26,18 @@ public interface AuthenticationManager {
 
     /**
      * Logs in the specified {@link org.jboss.aerogear.security.model.AeroGearUser}.
+     *
      * @param user represents a simple implementation that holds user's credentials.
-     * @throws org.jboss.aerogear.security.exception.AeroGearSecurityException on login failure.
+     * @throws org.jboss.aerogear.security.exception.AeroGearSecurityException
+     *          on login failure.
      */
     boolean login(AeroGearUser user);
 
     /**
      * Logs out the specified {@link org.jboss.aerogear.security.model.AeroGearUser} from the system.
-     * @throws org.jboss.aerogear.security.exception.AeroGearSecurityException on logout failure.
+     *
+     * @throws org.jboss.aerogear.security.exception.AeroGearSecurityException
+     *          on logout failure.
      */
     void logout();
 }

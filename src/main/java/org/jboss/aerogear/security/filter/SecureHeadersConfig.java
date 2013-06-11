@@ -32,11 +32,11 @@ public class SecureHeadersConfig {
         return frameOptions;
     }
 
-    public boolean hasMaxAge(){
+    public boolean hasMaxAge() {
         return maxAge != null && maxAge >= 0;
     }
 
-    public boolean hasLocation(){
+    public boolean hasLocation() {
         return isEmpty(location);
     }
 
@@ -44,7 +44,7 @@ public class SecureHeadersConfig {
         return isEmpty(frameOptions);
     }
 
-    private boolean isEmpty(String value){
+    private boolean isEmpty(String value) {
         return value != null && !value.trim().isEmpty();
     }
 }
