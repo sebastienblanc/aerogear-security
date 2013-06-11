@@ -17,8 +17,6 @@
 
 package org.jboss.aerogear.security.authz;
 
-import org.jboss.aerogear.security.model.AeroGearUser;
-
 import java.util.List;
 import java.util.Set;
 
@@ -44,7 +42,7 @@ public interface IdentityManagement<T> {
      */
     T findByUsername(String username) throws RuntimeException;
 
-    AeroGearUser findById(long id) throws RuntimeException;
+    T findById(long id) throws RuntimeException;
 
     /**
      * Remove an {@link org.jboss.aerogear.security.model.AeroGearUser}
@@ -66,18 +64,18 @@ public interface IdentityManagement<T> {
      *
      * @param user
      */
-    void create(AeroGearUser user);
+    void create(T user, String password);
 
     /**
      * <i>GrantMethods</i> is a builder to apply roles to {@link org.jboss.aerogear.security.model.AeroGearUser}
      */
-    static interface GrantMethods {
+    static interface GrantMethods<T> {
         /**
          * This method applies roles specified on {@link IdentityManagement#grant(String...)}
          *
          * @param user represents a simple user's implementation to hold credentials.
          */
-        void to(AeroGearUser user);
+        void to(String username);
     }
 
     String getSecret();
