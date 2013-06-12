@@ -11,7 +11,7 @@ AeroGear Security already comes with [AeroGear Controller](https://github.com/ae
         <dependency>
             <groupId>org.jboss.aerogear</groupId>
             <artifactId>aerogear-security</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         
@@ -19,8 +19,8 @@ AeroGear Security already comes with [AeroGear Controller](https://github.com/ae
 
         <dependency>
              <groupId>org.jboss.aerogear</groupId>
-             <artifactId>aerogear-security-picketbox</artifactId>
-             <version>1.0.0</version>
+             <artifactId>aerogear-security-picketlink</artifactId>
+             <version>1.0.1-SNAPSHOT</version>
              <scope>compile</scope>
         </dependency>
 
@@ -48,7 +48,7 @@ For more information about how to create a simple project with AeroGear Controll
             @Inject
             private AuthenticationManager authenticationManager;
 
-            public AeroGearUser login(AeroGearUser user) {
+            public User login(SimpleUser user) {
  
                 authenticationManager.login(user);
  
@@ -73,7 +73,7 @@ For more information about how to create a simple project with AeroGear Controll
             @Inject
             private IdentityManagement configuration;
 
-            public AeroGearUser register(AeroGearUser user) {
+            public User register(SimpleUser user) {
 
                 configuration.grant(DEFAULT_ROLE).to(user);
                 return user;

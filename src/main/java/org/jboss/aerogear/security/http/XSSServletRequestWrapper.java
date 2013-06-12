@@ -1,4 +1,4 @@
-/**
+/*
  * JBoss, Home of Professional Open Source
  * Copyright Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
@@ -29,6 +29,7 @@ public class XSSServletRequestWrapper extends HttpServletRequestWrapper {
     public XSSServletRequestWrapper(HttpServletRequest request) {
         super(request);
     }
+
     @Override
     public String[] getParameterValues(String param) {
         String[] values = super.getParameterValues(param);

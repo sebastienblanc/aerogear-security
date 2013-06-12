@@ -1,4 +1,4 @@
-/**
+/*
  * JBoss, Home of Professional Open Source
  * Copyright Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
@@ -15,27 +15,26 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.idm;
+package org.jboss.aerogear.security.auth;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
+import javax.inject.Qualifier;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 
 /**
- * Represents the current logged in Credential
+ * Exposes the session id to the current logged in User.
  */
-public interface AeroGearCredential extends Serializable {
-
-    /**
-     * Represents the current {@link org.jboss.aerogear.security.model.AeroGearUser} logged in.
-     */
-    public String getLogin();
-    /**
-     * Role validation against the IDM
-     * @param roles roles to be checked
-     * @return returns true if the current logged in has roles at the IDM, false otherwise
-     */
-    boolean hasRoles(Set<String> roles);
-
-    List<String> getRoles();
+@Qualifier
+@Target({TYPE, METHOD, PARAMETER, FIELD})
+@Retention(RUNTIME)
+@Documented
+public @interface SessionId {
 }

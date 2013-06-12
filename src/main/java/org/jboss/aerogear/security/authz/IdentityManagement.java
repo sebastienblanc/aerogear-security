@@ -1,4 +1,4 @@
-/**
+/*
  * JBoss, Home of Professional Open Source
  * Copyright Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
@@ -17,57 +17,78 @@
 
 package org.jboss.aerogear.security.authz;
 
-import org.jboss.aerogear.security.model.AeroGearUser;
-
 import java.util.List;
+import java.util.Set;
 
 /**
- * <i>IdentityManagement</i> allows to assign a set of roles to {@link AeroGearUser} on Identity Manager provider
+ * <i>IdentityManagement</i> allows to assign a set of roles to User on Identity Manager provider
  */
-public interface IdentityManagement {
-
+public interface IdentityManagement<T> {
 
 
     /**
-     * This method allows to specify which <i>roles</i> must be assigned to {@link AeroGearUser}
-     * @param roles The list of roles.
-     * @return {@link GrantMethods} is a builder which a allows to apply a list of roles to the specified {@link AeroGearUser}.
+     * This method allows to specify which <i>roles</i> must be assigned to User
+     *
+     * @param roles A list of roles.
+     * @return {@link GrantMethods} is a builder which a allows to apply a list of roles to the specified User.
      */
     GrantMethods grant(String... roles);
 
     /**
-     * Get an {@link AeroGearUser}
-     * @param id
-     * @return AeroGearUSer
+     * Find an User by the username specified
+     *
+     * @param username
+     * @return <T> where the generic type represents a User into the system
      */
-    AeroGearUser get(String id) throws RuntimeException;
+    T findByUsername(String username) throws RuntimeException;
+
 
     /**
-     * Remove an {@link AeroGearUser}
-     * @param aeroGearUser
+     * Find an User by the id specified
+     *
+     * @param id
+     * @return <T> where the generic type represents a User into the system
      */
-    void remove(AeroGearUser aeroGearUser);
+    T findById(long id) throws RuntimeException;
+
+    /**
+     * Remove an User
+     *
+     * @param username
+     */
+    void remove(String username);
 
     /**
      * Get All the users
+     *
+     * @param roleName
      * @return
      */
-    List<AeroGearUser> findAllByRole(String role);
+    List<T> findAllByRole(String roleName);
 
     /**
-     * This method creates a new {@link AeroGearUser}
-     * @param aeroGearUser
+     * This method creates a new User
+     *
+     * @param user where the generic type represents a User into the system
+     * @param password input provided by User
      */
-    void create(AeroGearUser aeroGearUser);
+    void create(T user, String password);
 
     /**
-     * <i>GrantMethods</i> is a builder to apply roles to {@link AeroGearUser}
+     * <i>GrantMethods</i> is a builder to apply roles to User
      */
-    static interface GrantMethods {
+    static interface GrantMethods<T> {
         /**
          * This method applies roles specified on {@link IdentityManagement#grant(String...)}
-         * @param aeroGearUser represents a simple user's implementation to hold credentials.
+         *
+         * @param username represents a simple user's implementation to hold credentials.
          */
-        void to(AeroGearUser aeroGearUser);
+        void to(String username);
     }
+
+    String getSecret();
+
+    String getLogin();
+
+    boolean hasRoles(Set<String> roles);
 }

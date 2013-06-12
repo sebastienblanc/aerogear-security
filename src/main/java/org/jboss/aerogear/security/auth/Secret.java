@@ -1,4 +1,4 @@
-/**
+/*
  * JBoss, Home of Professional Open Source
  * Copyright Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
@@ -29,7 +29,7 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Represents the generated secret for the current {@link org.jboss.aerogear.security.model.AeroGearUser} logged in.
+ * Represents the generated TOTP secret for the current User logged in.
  */
 @Qualifier
 @Target({TYPE, METHOD, PARAMETER, FIELD})

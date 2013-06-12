@@ -1,4 +1,4 @@
-/**
+/*
  * JBoss, Home of Professional Open Source
  * Copyright Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
@@ -17,23 +17,26 @@
 
 package org.jboss.aerogear.security.auth;
 
-import org.jboss.aerogear.security.model.AeroGearUser;
-
 /**
- * A <i>AuthenticationManager</i> executes the basic authentication operations for {@link AeroGearUser}
+ * A <i>AuthenticationManager</i> executes the basic authentication operations for an entity from the authentication provider
+ * Ex: User, SimpleUser
  */
-public interface AuthenticationManager {
+public interface AuthenticationManager<T> {
 
     /**
-     * Logs in the specified {@link AeroGearUser}.
-     * @param aeroGearUser represents a simple implementation that holds user's credentials.
-     * @throws org.jboss.aerogear.security.exception.AeroGearSecurityException on login failure.
+     * Logs in the specified User.
+     *
+     * @param user represents a simple implementation that holds user's credentials.
+     * @throws org.jboss.aerogear.security.exception.AeroGearSecurityException
+     *          on login failure.
      */
-    boolean login(AeroGearUser aeroGearUser);
+    boolean login(T user, String password);
 
     /**
-     * Logs out the specified {@link AeroGearUser} from the system.
-     * @throws org.jboss.aerogear.security.exception.AeroGearSecurityException on logout failure.
+     * Logs out the specified User from the system.
+     *
+     * @throws org.jboss.aerogear.security.exception.AeroGearSecurityException
+     *          on logout failure.
      */
     void logout();
 }

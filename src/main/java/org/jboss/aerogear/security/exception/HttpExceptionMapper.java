@@ -1,4 +1,4 @@
-/**
+/*
  * JBoss, Home of Professional Open Source
  * Copyright Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
@@ -25,13 +25,13 @@ import javax.ws.rs.ext.Provider;
 import static org.jboss.aerogear.security.exception.HttpStatus.AUTHENTICATION_FAILED;
 
 /**
- *  Maps security exceptions to HTTP responses
+ * Maps security exceptions to HTTP responses
  */
 @Provider
+@Deprecated
 public class HttpExceptionMapper implements ExceptionMapper<Throwable> {
 
     /**
-     *
      * @param exception Authentication/Authorization exceptions
      * @return HTTP response code
      */
