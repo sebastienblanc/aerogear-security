@@ -62,7 +62,7 @@ public interface IdentityManagement<T> {
      * Get All the users
      *
      * @param roleName
-     * @return
+     * @return Users by roles
      */
     List<T> findAllByRole(String roleName);
 
