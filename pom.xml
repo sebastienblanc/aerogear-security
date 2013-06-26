@@ -199,6 +199,13 @@
         </dependency>
 
         <dependency>
+            <groupId>com.wealdtech.hawk</groupId>
+            <artifactId>hawk-core</artifactId>
+            <version>0.13.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.jboss.spec</groupId>
             <artifactId>jboss-javaee-6.0</artifactId>
             <version>1.0.0.Final</version>
