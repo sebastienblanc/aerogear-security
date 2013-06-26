@@ -1,13 +1,13 @@
-/*
+/**
  * JBoss, Home of Professional Open Source
  * Copyright Red Hat, Inc., and individual contributors
- * by the @authors tag. See the copyright.txt in the distribution for a
- * full listing of individual contributors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,38 +17,45 @@
 
 package org.jboss.aerogear.security.exception;
 
+import org.jboss.resteasy.spi.UnauthorizedException;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
+import javax.ejb.EJBException;
 import javax.ws.rs.core.Response;
 
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 public class HttpExceptionMapperTest {
 
-    private AeroGearSecurityException securityException;
-    private HttpExceptionMapper exceptionMapper;
+    @Mock
+    private EJBException ejbException;
+
+    @InjectMocks
+    private HttpExceptionMapper exceptionMapper = new HttpExceptionMapper();
 
     @Before
     public void setUp() throws Exception {
-        securityException = new AeroGearSecurityException(HttpStatus.AUTHENTICATION_FAILED);
-        exceptionMapper = new HttpExceptionMapper();
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    @Ignore
-    public void testToResponseAeroGearSecurityException() throws Exception {
-        Response response = exceptionMapper.toResponse(securityException);
-        assertEquals(UNAUTHORIZED.getStatusCode(), response.getStatus());
+    public void testUnauthorizedResponse() throws Exception {
+        when(ejbException.getCausedByException()).thenReturn(new UnauthorizedException("Not authorized here"));
+        Response response = exceptionMapper.toResponse(ejbException);
+        assertEquals(response.getStatus(), UNAUTHORIZED.getStatusCode());
     }
 
     @Test
-    public void testToResponseAnyException() throws Exception {
-        Exception exception = new Exception();
-        Response response = exceptionMapper.toResponse(exception);
-        assertEquals(BAD_REQUEST.getStatusCode(), response.getStatus());
+    public void testBadRequestResponse() throws Exception {
+        when(ejbException.getCausedByException()).thenReturn(new Exception("Any other exception"));
+        Response response = exceptionMapper.toResponse(ejbException);
+        assertEquals(response.getStatus(), BAD_REQUEST.getStatusCode());
     }
 }
