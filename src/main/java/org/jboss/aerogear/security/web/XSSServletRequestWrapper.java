@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.http;
+package org.jboss.aerogear.security.web;
 
 import org.apache.commons.lang.StringEscapeUtils;
 

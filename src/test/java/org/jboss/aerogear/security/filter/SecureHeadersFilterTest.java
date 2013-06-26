@@ -17,6 +17,7 @@
 
 package org.jboss.aerogear.security.filter;
 
+import org.jboss.aerogear.security.web.SecureHeadersFilter;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

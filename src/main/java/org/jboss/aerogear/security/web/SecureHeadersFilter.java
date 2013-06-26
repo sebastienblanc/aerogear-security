@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.aerogear.security.filter;
+package org.jboss.aerogear.security.web;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
