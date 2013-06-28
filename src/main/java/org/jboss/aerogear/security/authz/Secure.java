@@ -39,7 +39,14 @@ import java.lang.annotation.Target;
  * </pre>
  * 
  * <b>Note:</b> You need to enable this annotation by adding the {@link SecurityInterceptor}
- * in your <code>beans.xml</code> file.
+ * in your <code>beans.xml</code> file:
+ * <pre>
+ *     ...
+ *     &lt;interceptors&gt;
+ *         &lt;class&gt;org.jboss.aerogear.security.interceptor.SecurityInterceptor&lt;/class&gt;
+ *     &lt;/interceptors&gt;
+ *   ...
+ * </pre>
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
