@@ -11,7 +11,7 @@ AeroGear Security already comes with [AeroGear Controller](https://github.com/ae
         <dependency>
             <groupId>org.jboss.aerogear</groupId>
             <artifactId>aerogear-security</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>1.1.1</version>
             <scope>compile</scope>
         </dependency>
         
@@ -20,7 +20,7 @@ AeroGear Security already comes with [AeroGear Controller](https://github.com/ae
         <dependency>
              <groupId>org.jboss.aerogear</groupId>
              <artifactId>aerogear-security-picketlink</artifactId>
-             <version>1.0.1-SNAPSHOT</version>
+             <version>1.0.2</version>
              <scope>compile</scope>
         </dependency>
 
@@ -30,7 +30,7 @@ AeroGear Security already comes with [AeroGear Controller](https://github.com/ae
         <dependency>
              <groupId>org.jboss.aerogear</groupId>
              <artifactId>aerogear-controller</artifactId>
-             <version>1.0.0</version>
+             <version>1.0.1</version>
              <scope>compile</scope>
         </dependency>
        
