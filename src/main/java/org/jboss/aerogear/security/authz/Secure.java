@@ -29,10 +29,10 @@ import java.lang.annotation.Target;
 
 /**
  * Annotates classes or methods to indicate accessing the class (or the method),
- * is restricted to a "user" that matches the given roles"
+ * is restricted to a "user" that matches the given roles:
  * <pre>
- *     @Path("/applications")
- *     @Secure({"developer"})
+ *     @Path("/myApp")
+ *     @Secure({"admin"})
  *     public class SomeRestEndpoint {
  *         ...
  *     }
