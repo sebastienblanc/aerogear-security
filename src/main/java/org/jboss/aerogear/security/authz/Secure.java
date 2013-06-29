@@ -20,8 +20,6 @@ package org.jboss.aerogear.security.authz;
 import javax.enterprise.util.Nonbinding;
 import javax.interceptor.InterceptorBinding;
 
-import org.jboss.aerogear.security.interceptor.SecurityInterceptor;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
