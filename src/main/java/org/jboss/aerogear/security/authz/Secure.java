@@ -19,16 +19,41 @@ package org.jboss.aerogear.security.authz;
 
 import javax.enterprise.util.Nonbinding;
 import javax.interceptor.InterceptorBinding;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Annotates classes or methods to indicate accessing the class (or the method),
+ * is restricted to a "user" that matches the given roles:
+ * <pre>
+ *     @Path("/myApp")
+ *     @Secure({"admin"})
+ *     public class SomeRestEndpoint {
+ *         ...
+ *     }
+ * </pre>
+ * 
+ * <b>Note:</b> You need to enable this annotation by adding the {@link SecurityInterceptor}
+ * in your <code>beans.xml</code> file:
+ * <pre>
+ *     ...
+ *     &lt;interceptors&gt;
+ *         &lt;class&gt;org.jboss.aerogear.security.interceptor.SecurityInterceptor&lt;/class&gt;
+ *     &lt;/interceptors&gt;
+ *   ...
+ * </pre>
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 @InterceptorBinding
 public @interface Secure {
 
+    /**
+     * List of roles that are allowed to access the annotated resource.
+     */
     @Nonbinding
     String[] value();
 }
