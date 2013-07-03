@@ -17,6 +17,7 @@
 package org.jboss.aerogear.security.interceptor;
 
 import org.jboss.aerogear.security.authz.Secure;
+import org.jboss.aerogear.security.cdi.interceptor.SecurityInterceptor;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
