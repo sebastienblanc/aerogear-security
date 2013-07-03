@@ -11,7 +11,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 public class HawkAuthenticatorFilter implements Filter {
 
@@ -37,12 +36,8 @@ public class HawkAuthenticatorFilter implements Filter {
             if (!response.isCommitted()) {
                 chain.doFilter(request, response);
             }
-        } catch (ServletException e) {
+        } catch (Exception e) {
             ExceptionHandler.handle(response, e);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
-
     }
 }

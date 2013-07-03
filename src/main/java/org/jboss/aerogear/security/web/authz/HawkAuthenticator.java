@@ -39,7 +39,7 @@ public class HawkAuthenticator {
         this.server = server;
     }
 
-    public void authenticate(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    public void authenticate(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         String hash = null;
 
@@ -58,7 +58,7 @@ public class HawkAuthenticator {
 
 
         } catch (Throwable de) {
-            throw new ServletException(de);
+            throw new Exception(de);
         }
     }
 
@@ -66,12 +66,12 @@ public class HawkAuthenticator {
         return request.getHeader(CONTENT_LENGTH) != null;
     }
 
-    private URI getUri(HttpServletRequest request) throws ServletException {
+    private URI getUri(HttpServletRequest request) throws Exception {
         URI uri;
         try {
             uri = new URI(request.getScheme() + "://" + request.getHeader(HOST) + request.getRequestURI());
         } catch (URISyntaxException use) {
-            throw new ServletException(use);
+            throw new Exception(use);
         }
         return uri;
     }
