@@ -19,6 +19,7 @@ public class ExceptionHandler {
         Throwable e = exception.getCause();
 
         try {
+            response.setHeader("WWW-Authenticate", "Hawk");
             if (e instanceof DataError) {
                 LOGGER.info("Error: " + e.getMessage());
                 response.sendError(UNAUTHORIZED.getStatusCode());
