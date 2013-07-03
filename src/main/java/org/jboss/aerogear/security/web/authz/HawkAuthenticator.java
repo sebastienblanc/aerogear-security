@@ -5,7 +5,6 @@ import com.google.common.io.CharStreams;
 import com.wealdtech.hawk.Hawk;
 import com.wealdtech.hawk.HawkCredentials;
 import com.wealdtech.hawk.HawkServer;
-import com.wealdtech.hawk.HawkServerConfiguration;
 import org.jboss.aerogear.security.auth.HawkCredentialProvider;
 
 import javax.inject.Inject;
@@ -35,12 +34,9 @@ public class HawkAuthenticator {
     }
 
     @Inject
-    public HawkAuthenticator(HawkCredentialProvider credentialProvider) {
-        this.credentialProvider = credentialProvider;
-
-        HawkServerConfiguration configuration = new HawkServerConfiguration.Builder().build();
-        this.server = new HawkServer.Builder().configuration(configuration).build();
-
+    public HawkAuthenticator(HawkServer server, HawkCredentialProvider provider) {
+        this.credentialProvider = provider;
+        this.server = server;
     }
 
     public void authenticate(HttpServletRequest request, HttpServletResponse response) throws ServletException {
@@ -50,7 +46,7 @@ public class HawkAuthenticator {
         try {
             URI uri = getUri(request);
 
-            ImmutableMap<String, String> authorizationHeaders = this.server.splitAuthorizationHeader(request.getHeader(AUTHORIZATION));
+            ImmutableMap<String, String> authorizationHeaders = server.splitAuthorizationHeader(request.getHeader(AUTHORIZATION));
 
             HawkCredentials credentials = credentialProvider.findByKey(authorizationHeaders.get("id"));
 
