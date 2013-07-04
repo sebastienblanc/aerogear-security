@@ -16,7 +16,6 @@
  */
 package org.jboss.aerogear.security.auth;
 
-
 import javax.inject.Qualifier;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -32,7 +31,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * Represents the roles available into the system.
  */
 @Qualifier
-@Target({TYPE, METHOD, PARAMETER, FIELD})
+@Target( { TYPE, METHOD, PARAMETER, FIELD })
 @Retention(RUNTIME)
 @Documented
 public @interface Roles {
