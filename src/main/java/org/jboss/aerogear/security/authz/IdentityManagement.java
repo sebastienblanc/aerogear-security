@@ -24,7 +24,6 @@ import java.util.Set;
  */
 public interface IdentityManagement<T> {
 
-
     /**
      * This method allows to specify which <i>roles</i> must be assigned to User
      *
@@ -40,7 +39,6 @@ public interface IdentityManagement<T> {
      * @return <T> where the generic type represents a User into the system
      */
     T findByUsername(String username) throws RuntimeException;
-
 
     /**
      * Find an User by the id specified

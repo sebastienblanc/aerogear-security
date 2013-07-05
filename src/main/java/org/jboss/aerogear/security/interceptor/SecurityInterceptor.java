@@ -30,7 +30,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Interceptor
-@Secure({})
+@Secure( {})
 public class SecurityInterceptor {
 
     @Inject
