@@ -17,6 +17,9 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <i>HawkAuthenticator</i> Authenticate a Hawk request
+ */
 public class HawkAuthenticator {
 
     private static final String SERVER_AUTHORIZATION = "Server-Authorization";
@@ -33,12 +36,21 @@ public class HawkAuthenticator {
     public HawkAuthenticator() {
     }
 
+    /**
+     * @param server Hawk HTTP configuration provided by the framework
+     * @param provider developer's credential provider implementation
+     */
     @Inject
     public HawkAuthenticator(HawkServer server, HawkCredentialProvider provider) {
         this.credentialProvider = provider;
         this.server = server;
     }
 
+    /**
+     * @param request Hawk HTTP <i>Authorization</i> request
+     * @param response Hawk HTTP response to authenticated requests with a <i>Server-Authorization</i> header
+     * @throws Exception
+     */
     public void authenticate(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         String hash = null;

@@ -12,6 +12,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <i>HawkAuthenticatorFilter</> Servlet filter to handle Hawk HTTP requests
+ */
 public class HawkAuthenticatorFilter implements Filter {
 
     @Inject
