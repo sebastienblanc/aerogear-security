@@ -23,7 +23,7 @@
 
     <groupId>org.jboss.aerogear</groupId>
     <artifactId>aerogear-security</artifactId>
-    <version>1.1.2-SNAPSHOT</version>
+    <version>1.2.0</version>
     <packaging>jar</packaging>
 
     <name>aerogear-security</name>
