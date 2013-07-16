@@ -21,7 +21,7 @@
 
     <groupId>org.jboss.aerogear</groupId>
     <artifactId>aerogear-security</artifactId>
-    <version>1.1.2-SNAPSHOT</version>
+    <version>1.1.1</version>
     <packaging>jar</packaging>
 
     <name>aerogear-security</name>
@@ -154,23 +154,6 @@
             <version>${aerogear.otp.version}</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- Dependencies from hawk-java -->
-        <dependency>
-            <groupId>com.wealdtech.hawk</groupId>
-            <artifactId>hawk-core</artifactId>
-            <version>1.0.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>14.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- End of dependencies -->
 
         <dependency>
             <groupId>org.jboss.spec</groupId>
