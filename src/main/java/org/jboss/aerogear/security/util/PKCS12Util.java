@@ -27,9 +27,11 @@ import java.security.KeyStore;
  * It only if the file provided is a valid PKCS12
  * </p>
  */
-public class PKCS12Util {
+public final class PKCS12Util {
 
     private static final String ALGORITHM = "PKCS12";
+
+    private PKCS12Util(){}
 
     /**
      * Check if the file provide is PKCS12
@@ -40,8 +42,8 @@ public class PKCS12Util {
     public static void validate(byte[] cert, String pass) throws Exception {
 
         try {
-            KeyStore p12 = KeyStore.getInstance(ALGORITHM);
-            p12.load(new ByteArrayInputStream(cert), pass.toCharArray());
+            KeyStore keyStore = KeyStore.getInstance(ALGORITHM);
+            keyStore.load(new ByteArrayInputStream(cert), pass.toCharArray());
         } catch (Exception e) {
             throw new Exception("Certificate is not valid!", e);
         }
