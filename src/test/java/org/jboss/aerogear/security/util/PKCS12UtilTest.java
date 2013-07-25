@@ -45,6 +45,16 @@ public class PKCS12UtilTest {
         PKCS12Util.validate(invalid, PASSWORD);
     }
 
+    @Test(expected = Exception.class)
+    public void testNullCertificate() throws Exception {
+        PKCS12Util.validate(null, PASSWORD);
+    }
+
+    @Test(expected = Exception.class)
+    public void testCertificateWithNullPassphrase() throws Exception {
+        PKCS12Util.validate(invalid, null);
+    }
+
     //Utility method to convert InputStream to bytes
     private byte[] toByteArray(InputStream file) throws IOException {
         int n;

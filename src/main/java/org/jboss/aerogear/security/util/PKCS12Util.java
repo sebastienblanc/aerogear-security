@@ -37,7 +37,7 @@ public final class PKCS12Util {
      * Check if the file provide is PKCS12
      * @param cert certificate to be validated
      * @param pass password to be provided
-     * @throws Exception
+     * @throws Exception to indicate an invalid certificate
      */
     public static void validate(byte[] cert, String pass) throws Exception {
 
@@ -49,4 +49,3 @@ public final class PKCS12Util {
         }
     }
 }
-
