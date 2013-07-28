@@ -40,7 +40,7 @@ For more information about how to create a simple project with AeroGear Controll
 
 ### Authentication 
 
-1. create a pojo controller and inject *AuthenticationManager*.
+1. create a POJO controller and inject *AuthenticationManager*.
 
         @Stateless
         public class Login {
@@ -62,7 +62,7 @@ For more information about how to create a simple project with AeroGear Controll
        
 ### Registration
 
-1. create a pojo controller and inject *IdentityManagement*.
+1. create a POJO controller and inject *IdentityManagement*.
 
         @Stateless
         public class Register {
