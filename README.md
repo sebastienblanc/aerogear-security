@@ -15,7 +15,7 @@ AeroGear Security already comes with [AeroGear Controller](https://github.com/ae
             <scope>compile</scope>
         </dependency>
         
-2. AeroGear Security doesn't reinvent the wheel and make use of the existing security providers. For now only PicketLink is supported:
+2. AeroGear Security doesn't reinvent the wheel and make use of the existing security providers. You can choose between [PicketLink](http://www.picketlink.org/) (shown below here), [Apache Shiro](http://shiro.apache.org/) or [Hawk](https://github.com/hueniverse/hawk).
 
         <dependency>
              <groupId>org.jboss.aerogear</groupId>
