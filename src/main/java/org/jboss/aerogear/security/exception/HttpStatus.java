@@ -26,7 +26,8 @@ public enum HttpStatus {
     PASSWORD_RESET_FAILED("Password reset failed", UNAUTHORIZED.getStatusCode()),
     CREDENTIAL_NOT_FOUND("Credentials could not be found", FORBIDDEN.getStatusCode()),
     ALREADY_LOGGED_IN("Credentials already logged in", NOT_ACCEPTABLE.getStatusCode()),
-    CREDENTIAL_HAS_EXPIRED("Credential has expired", FORBIDDEN.getStatusCode());
+    CREDENTIAL_HAS_EXPIRED("Credential has expired", FORBIDDEN.getStatusCode()),
+    CREDENTIAL_NOT_AUTHORIZED("Not authorized!", UNAUTHORIZED.getStatusCode());
 
     private String message;
     private int status;
