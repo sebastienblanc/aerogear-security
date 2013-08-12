@@ -122,9 +122,23 @@ public interface IdentityManagement<T> {
         GrantMethods<T> revoke(String[] roles);
     }
 
+    /**
+     * Represents the generated TOTP secret for the current User logged in.
+     * @return shared secret
+     */
     String getSecret();
 
+    /**
+     * Retrieve the logged user name
+     * @return user name
+     */
     String getLogin();
 
+    /**
+     * Check if a logged in user has the roles provided
+     *
+     * @param roles roles to be checked
+     * @return returns true if the current logged in has roles at the IDM, false otherwise
+     */
     boolean hasRoles(Set<String> roles);
 }

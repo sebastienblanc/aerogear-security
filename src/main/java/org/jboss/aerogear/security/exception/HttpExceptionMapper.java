@@ -23,9 +23,17 @@ import javax.ws.rs.ext.Provider;
 
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 
+/**
+ * Maps for security exceptions
+ */
 @Provider
 public class HttpExceptionMapper implements ExceptionMapper<EJBException> {
 
+    /**
+     * Exception mapping
+     * @param exception
+     * @return HTTP response
+     */
     @Override
     public Response toResponse(EJBException exception) {
 

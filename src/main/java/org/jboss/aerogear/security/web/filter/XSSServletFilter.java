@@ -46,6 +46,5 @@ public class XSSServletFilter implements Filter {
 
     @Override
     public void destroy() {
-        //TODO
     }
 }

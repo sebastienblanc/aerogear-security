@@ -30,6 +30,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Perform security authorization for methods annotated with {@link Secure}
+ */
 @Interceptor
 @Secure({})
 public class SecurityInterceptor {
@@ -37,6 +40,12 @@ public class SecurityInterceptor {
     @Inject
     private IdentityManagement<?> identityManagement;
 
+    /**
+     * Verify a the list of roles specified by {@link Secure} are present to the current logged in user
+     * @param ctx context information
+     * @return result of the next method invoked
+     * @throws Exception
+     */
     @AroundInvoke
     public Object invoke(InvocationContext ctx) throws Exception {
 

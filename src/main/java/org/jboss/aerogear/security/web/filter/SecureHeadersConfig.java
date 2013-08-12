@@ -18,6 +18,10 @@ package org.jboss.aerogear.security.web.filter;
 
 import javax.servlet.FilterConfig;
 
+/**
+ * HTTP headers related to security
+ * For example: HSTS and Clickjacking mitigation support
+ */
 public class SecureHeadersConfig {
 
     private final Long maxAge;
@@ -32,6 +36,11 @@ public class SecureHeadersConfig {
         this.frameOptions = config.getInitParameter("x-frame-options");
     }
 
+    /**
+     * Specifies the number of seconds, after the reception of the STS header field
+     * @see <a href="https://tools.ietf.org/html/rfc6797#section-6.1.1">The max-age Directive</a>
+     * @return max-age directive
+     */
     public String getMaxAge() {
         String header = "max-age=" + maxAge;
         if (includeSubDomains) {
@@ -40,22 +49,48 @@ public class SecureHeadersConfig {
         return header;
     }
 
+    /**
+     * Retrieve the Location header
+     * @see <a href="https://tools.ietf.org/html/rfc6797#section-7.2">HTTP Request Type</a>
+     * @return Location header field value
+     */
     public String getLocation() {
         return location;
     }
 
+    /**
+     * Allows a secure web page from host B to declare
+     * that its content (for example a button, links, text, etc.) must not
+     * be displayed in a frame (<frame> or <iframe>) of another page (e.g.
+     * from host A).  In principle this is done by a policy declared in the
+     * HTTP header and enforced by conforming browser implementations
+     * @see <a href="https://tools.ietf.org/html/draft-ietf-websec-x-frame-options-02#section-1"> X-Frame-Options</a>
+     * @return X-Frame-Options HTTP header field
+     */
     public String getFrameOptions() {
         return frameOptions;
     }
 
+    /**
+     * Verify if the option "max-age" is present
+     * @return boolean
+     */
     public boolean hasMaxAge() {
         return maxAge != null && maxAge >= 0;
     }
 
+    /**
+     * Verify if the option "Location" is present
+     * @return boolean
+     */
     public boolean hasLocation() {
         return isEmpty(location);
     }
 
+    /**
+     * Verify if "x-frame-options" is present
+     * @return boolean
+     */
     public boolean hasFrameOptions() {
         return isEmpty(frameOptions);
     }

@@ -34,7 +34,7 @@ import java.lang.annotation.Target;
  *     }
  * </pre>
  * 
- * <b>Note:</b> You need to enable this annotation by adding the {@link SecurityInterceptor}
+ * <b>Note:</b> You need to enable this annotation by adding the {@link org.jboss.aerogear.security.interceptor.SecurityInterceptor}
  * in your <code>beans.xml</code> file:
  * <pre>
  *     ...
