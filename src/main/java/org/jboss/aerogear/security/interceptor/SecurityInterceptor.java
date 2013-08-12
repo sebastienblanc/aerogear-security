@@ -18,7 +18,8 @@ package org.jboss.aerogear.security.interceptor;
 
 import org.jboss.aerogear.security.authz.IdentityManagement;
 import org.jboss.aerogear.security.authz.Secure;
-import org.jboss.resteasy.spi.UnauthorizedException;
+import org.jboss.aerogear.security.exception.AeroGearSecurityException;
+import org.jboss.aerogear.security.exception.HttpStatus;
 
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
@@ -30,7 +31,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Interceptor
-@Secure( {})
+@Secure({})
 public class SecurityInterceptor {
 
     @Inject
@@ -68,6 +69,6 @@ public class SecurityInterceptor {
         boolean hasRoles = identityManagement.hasRoles(roles);
 
         if (!hasRoles)
-            throw new UnauthorizedException("Not authorized!");
+            throw new AeroGearSecurityException(HttpStatus.CREDENTIAL_NOT_AUTHORIZED);
     }
 }

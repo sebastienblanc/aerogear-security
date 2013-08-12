@@ -16,7 +16,6 @@
  */
 package org.jboss.aerogear.security.exception;
 
-import org.jboss.resteasy.spi.UnauthorizedException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -46,7 +45,7 @@ public class HttpExceptionMapperTest {
 
     @Test
     public void testUnauthorizedResponse() throws Exception {
-        when(ejbException.getCausedByException()).thenReturn(new UnauthorizedException("Not authorized here"));
+        when(ejbException.getCausedByException()).thenReturn(new AeroGearSecurityException(HttpStatus.CREDENTIAL_NOT_AUTHORIZED));
         Response response = exceptionMapper.toResponse(ejbException);
         assertEquals(response.getStatus(), UNAUTHORIZED.getStatusCode());
     }
