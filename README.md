@@ -98,8 +98,16 @@ For more information about how to create a simple project with AeroGear Controll
             }
         } 
        
+## Are you feeling brave? Try from the snapshot releases!
 
-## Credits
+     <dependency>
+         <groupId>org.jboss.aerogear</groupId>
+         <artifactId>aerogear-security</artifactId>
+         <version>1.2.2-SNAPSHOT</version>
+         <scope>compile</scope>
+     </dependency>
+
+## References 
 
 * More detailed description of the Restful API can be found here: http://aerogear.org/docs/specs/aerogear-rest-api/.
 
