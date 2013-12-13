@@ -21,5 +21,6 @@ public interface TokenService {
 
     boolean isValid(String id);
 
-    void send(String email);
+    String send(String email);
 }
+
