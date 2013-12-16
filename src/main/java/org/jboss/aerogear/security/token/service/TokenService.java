@@ -16,11 +16,33 @@
  */
 package org.jboss.aerogear.security.token.service;
 
+/**
+ * <i>IdentityManagement</i> allows to manage a Token.
+ */
 public interface TokenService {
+
+    /**
+     * Destroys the Token.
+     *
+     * @param id id of the Token used to retrieve the Token.
+     */
     void destroy(String id);
 
+    /**
+     * Checks the validity of the Token based on the identifier passed as parameter.
+     * Usually, an id will be passed in order to be able to retrieve the Token.
+     *
+     * @param id of the Token used to retrieve the Token.
+     * @return
+     */
     boolean isValid(String id);
 
-    String send(String email);
+    /**
+     * Method to generate the Token. It's up to the implementer to use a decent encryption/hashing method
+     * to generate the Token.
+     *
+     * @return a String representing the token or an identifier of the Token.
+     */
+    String generate();
 }
 

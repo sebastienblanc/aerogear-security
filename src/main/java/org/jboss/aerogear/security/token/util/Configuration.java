@@ -7,6 +7,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Properties;
 
+/**
+ * Utility class for the Token handling containing configuration locations.
+ * Please note that the Class expects in META-INF/config.properties that contains your secret.
+ *
+ */
 public class Configuration {
 
 
@@ -26,11 +31,22 @@ public class Configuration {
         }
     }
 
+    /**
+     * Loads the {org.jboss.aerogear.security.token.filter.PasswordHandler} {FilterConfig} configuration.
+     *
+     * @param config
+     */
     public static void loadFilterConfig(FilterConfig config) {
         Configuration.applicationUrl = config.getInitParameter("url");
         Configuration.redirectPage = config.getInitParameter("redirect-page");
     }
 
+    /**
+     * Returns the an uri based on the Token ID and the base URL provided in the Web Descriptor
+     *
+     * @param id
+     * @return
+     */
     public static String uri(String id) {
 
         try {
@@ -40,10 +56,18 @@ public class Configuration {
         }
     }
 
+    /**
+     *
+     * @return a String representing the secret
+     */
     public static String getSecret() {
         return props.getProperty("config.secret");
     }
 
+    /**
+     * Returns the page to which the intercepted request has to be redirected if the Token is valid
+     * @return
+     */
     public static String getRedirectPage() {
         return redirectPage;
     }

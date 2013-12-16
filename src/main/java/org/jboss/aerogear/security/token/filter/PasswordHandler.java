@@ -26,6 +26,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * A filter that intercepts requests that matches the url-mapping defined in the web descriptor.
+ * This filter can be used for "token-based" flows, i.e like password reset link creation
+ * The filter does 2 checks :
+ *  - Checks if the token is valid by using the tokenId from the parameters
+ *  - Checks if the incoming method is a GET
+ * If these 2 checks pass, then the Filter redirects the Request to the URL provided by the Configuration object.
+ * Be sure to configure correctly your filter in the web.xml :
+ * <pre>
+ * {@code
+ * <filter>
+ *   <filter-name>PasswordHandler</filter-name>
+ *   <filter-class>org.jboss.aerogear.security.token.filter.PasswordHandler</filter-class>
+ *   <init-param>
+ *     <param-name>url</param-name>
+ *     <param-value>http://myhost.com/</param-value>
+ *   </init-param>
+ *   <init-param>
+ *     <param-name>redirect-page</param-name>
+ *     <param-value>reset/update.html</param-value>
+ *   </init-param>
+ * </filter>
+ * <filter-mapping>
+ *   <filter-name>PasswordHandler</filter-name>
+ *   <url-pattern>/reset/*</url-pattern>
+ *   <url-pattern>/forgot/*</url-pattern>
+ * </filter-mapping>
+ *}
+ * </pre>
+ *
+ */
 public class PasswordHandler implements Filter {
 
     public static final String TOKEN_ID_PARAM = "id";
@@ -59,7 +90,6 @@ public class PasswordHandler implements Filter {
 
         httpServletRequest.getRequestDispatcher(Configuration.getRedirectPage()).forward(httpServletRequest, httpServletResponse);
 
-        //TODO When submited token must be destroyed
     }
 
     @Override
