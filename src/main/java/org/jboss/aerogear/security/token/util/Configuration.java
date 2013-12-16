@@ -32,7 +32,7 @@ public class Configuration {
     }
 
     /**
-     * Loads the {org.jboss.aerogear.security.token.filter.PasswordHandler} {FilterConfig} configuration.
+     * Loads the {org.jboss.aerogear.security.web.filter.PasswordHandler} {FilterConfig} configuration.
      *
      * @param config
      */

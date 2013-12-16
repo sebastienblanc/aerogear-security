@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.aerogear.security.token.filter;
+package org.jboss.aerogear.security.web.filter;
 
 
 import org.jboss.aerogear.security.token.service.TokenService;
@@ -38,7 +38,7 @@ import java.io.IOException;
  * {@code
  * <filter>
  *   <filter-name>PasswordHandler</filter-name>
- *   <filter-class>org.jboss.aerogear.security.token.filter.PasswordHandler</filter-class>
+ *   <filter-class>org.jboss.aerogear.security.web.filter.PasswordHandler</filter-class>
  *   <init-param>
  *     <param-name>url</param-name>
  *     <param-value>http://myhost.com/</param-value>
